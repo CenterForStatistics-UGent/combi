@@ -6,6 +6,14 @@
 \usage{
 checkMonotonicity(modelObj, Dim)
 }
+\arguments{
+\item{modelObj}{The compIntegrate fit}
+
+\item{Dim}{The dimensions considered}
+}
+\value{
+A boolean matrix indicating monotonicity for every feature
+}
 \description{
 Check for monotonicity in compositional datasets fro given dimensions
 }

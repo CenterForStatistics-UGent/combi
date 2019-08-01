@@ -11,6 +11,7 @@
 #' @param Jac a jacobian matrix, pre-filled where possible
 #'
 #' @return A vector of length n, the estimates of the latent variables
+#' @importFrom nleqslv nleqslv
 estLatentVars = function(latentVars, lambdasLatent, constrained, fTol,...){
     out = if(constrained){
         nleqslv(x = c(latentVars, lambdasLatent), fn = derivLagrangianLatentVarsConstr,

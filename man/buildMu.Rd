@@ -6,6 +6,13 @@
 \usage{
 buildMu(offSet, latentVar, paramEsts, distribution, paramMatrix = FALSE)
 }
+\arguments{
+\item{offSet}{the offset matrix}
+
+\item{latentVar, paramEsts, distribution}{See}
+
+\item{paramMatrix}{A boolean, are feature parameters provided as matrix}
+}
 \description{
 A function to build the mu matrix
 }

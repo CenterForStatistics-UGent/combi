@@ -12,6 +12,25 @@ addLink(DIplot, links, Views, samples, variable = NULL, Dims = c(1, 2),
 \item{DIplot}{A list with ggplot object where the links are to be added, and data frames with coordinates}
 
 \item{links}{A matrix with two columns containing either feature names or approximate coordinates}
+
+\item{Views}{Indices or names of the views for which the links should be added}
+
+\item{samples}{Sample names or approximate sample coordinates}
+
+\item{variable}{Name of variable in environmental gradient for which link should be plotted}
+
+\item{Dims}{vector of length 2 referring to the model dimensions}
+
+\item{addLabel}{A boolean, should arrow with label be plotted?}
+
+\item{labPos}{The position of the label}
+
+\item{projColour}{The colour of the projection}
+
+\item{latentSize}{Size of the line from the origin to the latent variable dot}
+}
+\value{
+A ggplot object with the links added
 }
 \description{
 Add a link on a compositional plot

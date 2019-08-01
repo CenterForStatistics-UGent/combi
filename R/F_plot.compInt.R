@@ -1,6 +1,30 @@
 #' Make triplots or higher dimensional plots of the ordination object
-plot.modelDI = function(modelObj, Dim = c(1,2), samDf = NULL, samCol = NULL,
-                        featNum = 20L, featCols = c("darkblue", "darkgreen", "darkred", terrain.colors(5)),
+#' @param modelObj the fit
+#' @param Dim the dimensions to be plotted
+#' @param samDf a dataframe of sample variables
+#' @param samCol A variable name from samDf used to colour the samples
+#' @param featNum,varNum Integer, the number of features or variables to be plotted
+#' @param featCols Colours for the features
+#' @param manExpFactorTaxa,manExpFactorVar expansion factors to size all
+#' components to the same scale
+#' @param featSize,crossSize,varSize,samSize,strokeSize Size of the corresponding objects
+#' @param samColValues
+#' @param warnMonotonicity A boolean, should a warning be thrown when the
+#' feature proportions of compositional views do not all vary monotonically
+#' with all latent variables?
+#' @param returnCoords A boolean, should coordinates be returned, e.g. for use
+#'  in thrird party software
+#' @param squarePlot A boolean, should the axes be square? Strongly recommended
+#' @param featAlpha Controls the transparacny of the features
+#'
+#' @return A ggplot object containing the plot
+#'
+#' @export
+#' @import ggplot2
+#' @importFrom grDevices terrain.colors
+plot.compInt = function(modelObj, Dim = c(1,2), samDf = NULL, samCol = NULL,
+                        featNum = 20L, featCols = c("darkblue", "darkgreen",
+                                                    "darkred", terrain.colors(5)),
                         manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
                         manExpFactorVar = 0.975, varNum = nrow(modelObj$alphas),
                         varSize = 2.5, samColValues = NULL, samSize = 1.5,

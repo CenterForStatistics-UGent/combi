@@ -1,3 +1,4 @@
+#' Extract the influence on the estimation of the latent variable
 #' @param score The score matrix
 #' @param InvJac The inverse Jacobian
 #' @param i the sample index

@@ -11,6 +11,9 @@ checkMeanVarTrend(data, meanVarFit = "spline", returnTrend = FALSE,
 \item{data}{The n-by-p data matrix}
 
 \item{meanVarFit}{The type of mean variance fit}
+
+\item{returnTrend}{A boolean, should the estimated trend be returned or
+only plotted?}
 }
 \value{
 A plot object

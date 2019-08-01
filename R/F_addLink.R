@@ -1,7 +1,20 @@
 #' Add a link on a compositional plot
 #'@param DIplot A list with ggplot object where the links are to be added, and data frames with coordinates
 #'@param links A matrix with two columns containing either feature names or approximate coordinates
-addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2),  addLabel = FALSE,
+#'@param Views Indices or names of the views for which the links should be added
+#'@param samples Sample names or approximate sample coordinates
+#'@param variable Name of variable in environmental gradient for which link should be plotted
+#'@param Dims vector of length 2 referring to the model dimensions
+#'@param addLabel A boolean, should arrow with label be plotted?
+#'@param labPos The position of the label
+#'@param projColour The colour of the projection
+#'@param latentSize Size of the line from the origin to the latent variable dot
+#'
+#'@return A ggplot object with the links added
+#'
+#'@export
+#'@import ggplot2
+addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2), addLabel = FALSE,
 labPos = NULL, projColour = "grey", latentSize = 0.25) {
     dimNames = paste0("Dim", Dims)
     if(is.numeric(links)){
@@ -115,15 +128,15 @@ c(x1 = Dim1[1], x2 = Dim1[2], y1 = Dim2[1], y2 = Dim2[2])
             xLab = xLab * 2
             yLab = yLab * 2
         })
-        DIplot$plot = DIplot$plot + geom_segment(inherit.aes = FALSE,
-                                                   mapping = aes_string(x = "xLab",
-                                                                        y = "yLab", xend = "xend",
-                                                                        yend = "yend"), data = dfRed/2,
-                                                   arrow = arrow(length = unit(0.2,
-                                                                               "cm")), size = 0.25) + annotate("text",
-                                                                                                               col = "orange", label = "r~psi~s",
-                                                                                                               x = xLab, y = yLab, parse = TRUE,
-                                                                                                               size = 7)
+        # DIplot$plot = DIplot$plot + geom_segment(inherit.aes = FALSE,
+        #                                            mapping = aes_string(x = "xLab",
+        #                                                                 y = "yLab", xend = "xend",
+        #                                                                 yend = "yend"), data = dfRed/2,
+        #                                            arrow = arrow(length = unit(0.2,
+        #                                                                        "cm")), size = 0.25) + annotate("text",
+        #                                                                                                        col = "orange", label = "r~psi~s",
+        #                                                                                                        x = xLab, y = yLab, parse = TRUE,
+        #                                                                                                        size = 7)
     }
 
     DIplot$Plot

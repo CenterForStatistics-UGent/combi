@@ -1,4 +1,18 @@
 #' Evaluate the jacobian for estimating the feature parameters for one view
+#'
+#' @param latentVars
+#' @param data
+#' @param distribution
+#' @param paramEsts
+#' @param meanVarTrend
+#' @param offSet
+#' @param compositional
+#' @param indepModel
+#' @param m
+#' @param paramEstsLower
+#' @param minNumber
+#' @param allowMissingness
+#'
 #' @inherit estFeatureParams param
 #'
 #' @return The jacobian matrix

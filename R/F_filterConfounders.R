@@ -1,9 +1,18 @@
 #' Filter out the effect of known confounders
-#' @param indepModel
+#'
 #' @param data
 #' @param distribution
 #' @param link
 #' @param invLink
+#' @param confMat
+#' @param control
+#' @param meanVarTrend
+#' @param offSet
+#' @param numVar
+#' @param marginModel
+#' @param biasReduction
+#' @param allowMissingness
+#' @param maxItFilt
 #' @param compositional
 filterConfounders = function(confMat, data, distribution, link, invLink,
                              compositional, control, meanVarTrend, offSet,

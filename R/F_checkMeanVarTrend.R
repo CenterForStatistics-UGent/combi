@@ -2,9 +2,12 @@
 #'
 #' @param data The n-by-p data matrix
 #' @param meanVarFit The type of mean variance fit
+#' @param returnTrend A boolean, should the estimated trend be returned or
+#' only plotted?
 #'
 #' @return A plot object
-checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE, ...){
+checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE,
+                             ...){
     libSizes = rowSums(data)
     baseAbundances = colSums(data)/sum(data)
     data = data[libSizes>0, baseAbundances>0]

@@ -12,6 +12,7 @@
 #' \item{colOff}{The column offsets}
 #' \item{converged}{A logical flag, indicating whether the fit converged}
 #' \item{iter}{An integer, the number of iterations}
+#' @importFrom nleqslv nleqslv
 estIndepModel = function(data, distribution, compositional, maxIt, tol, link,
                          invLink, meanVarFit, newtonRaphson, dispFreq,...){
     converged = FALSE

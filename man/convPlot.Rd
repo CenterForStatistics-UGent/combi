@@ -20,6 +20,9 @@ convPlot(model, latent = is.null(View), nVars = Inf, Dim = 1,
 
 \item{size}{The line size}
 }
+\value{
+A ggplot object containing the convergence plot
+}
 \description{
 Plot the convegrence of the different parameter estimates in a line plot
 }

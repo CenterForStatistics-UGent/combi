@@ -11,6 +11,8 @@
 #' @param Jac a jacobian matrix, pre-filled where possible
 #'
 #' @importFrom parallel mclapply
+#' @importFrom nleqslv nleqslv
+#' @importFrom BB BBsolve
 #'
 #' @return A vector of length n, the estimates of the latent variables
 #'
@@ -21,7 +23,7 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
                                 distributions, offsets, nCores, m, JacFeatures,
                                 meanVarTrends, latentVars, numVars, control,
                                 weights, compositional, indepModels, fTol,
-                                newtonRaphson, allowMissingness, maxItFeat,...){
+                                allowMissingness, maxItFeat,...){
     #lapply(
     mclapply(mc.cores = nCores,
     seqSets, function(i){
@@ -34,7 +36,6 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
             sol = solve(JacFeatures[[i]], x)
             return(list(x = sol@x, conv = 1))
         } else {
-            # if(newtonRaphson[[i]]){
         out = try(nleqslv(x = c(paramEsts[[i]][m,], lambdasParams[[i]][
             seq_m(m, normal = compositional[[i]])]),
             fn = derivLagrangianFeatures, jac = deriv2LagrangianFeatures,

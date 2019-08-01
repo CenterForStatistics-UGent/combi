@@ -1,4 +1,7 @@
 #' A function to build the mu matrix
+#' @param offSet the offset matrix
+#' @param latentVar,paramEsts,distribution See
+#' @param paramMatrix A boolean, are feature parameters provided as matrix
 buildMu = function(offSet, latentVar, paramEsts, distribution,
                    paramMatrix = FALSE){
     centralMat  = if(paramMatrix)

@@ -19,6 +19,12 @@ buildCompMat(colMat, paramEsts, latentVar, m, norm = TRUE,
 \item{norm}{a boolean, should the composition matrix be normalized?}
 
 \item{id}{The vector of dimensions to consider}
+
+\item{subtractMax}{A boolean, should the maximum be substracted from every
+composition prior to exponentiation? Recommended for numerical stability}
+}
+\value{
+A matrix with compositions in the rows
 }
 \description{
 Build the composition matrix for a certain dimension m dimensions
