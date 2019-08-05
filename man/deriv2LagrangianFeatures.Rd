@@ -8,9 +8,6 @@ deriv2LagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
   paramEstsLower, mm, Jac, meanVarTrend, links, weights, compositional,
   indepModel, ...)
 }
-\arguments{
-\item{...}{arguments to the jacobian function, currently ignored}
-}
 \value{
 A vector of length n, the evaluation of the score functions of the latent variables
 }

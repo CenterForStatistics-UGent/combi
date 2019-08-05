@@ -3,6 +3,8 @@
 #' @param data
 #' @param mu
 #' @param meanVarTrend
+#' @param CompMat
+#' @param libSizes
 #'
 #' @return The helper matrix
 prepareScoreMat = function(data, mu, meanVarTrend, CompMat, libSizes){

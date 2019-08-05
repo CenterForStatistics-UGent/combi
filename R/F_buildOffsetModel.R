@@ -1,6 +1,6 @@
 #' Build a marginal offset matrix given a model
 #' @param modelObj a modelDI object
-#' @param The view for which to build the offset
+#' @param View The view for which to build the offset
 #'
 #' @return The offset matrix
 buildOffsetModel = function(modelObj, View){

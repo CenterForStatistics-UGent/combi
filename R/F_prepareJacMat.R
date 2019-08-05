@@ -1,9 +1,10 @@
 #' prepare the jacobian matrix
 #'
 #' @param mu the mean matrix
-#' @param trendEval evaluated mean-variance trend
-#' @param derivEval evaluated derivative of the mean-variance trend
 #' @param data the count matrix
+#' @param meanVarTrend
+#' @param CompMat
+#' @param libSizes
 #'
 #' @return the matrix which can be summed over
 prepareJacMat = function(mu, data, meanVarTrend, CompMat, libSizes){

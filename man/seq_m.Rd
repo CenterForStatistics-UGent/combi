@@ -7,11 +7,11 @@
 seq_m(y, normal = TRUE, nLambda1s = 1)
 }
 \arguments{
+\item{y}{an integer, the current dimension}
+
 \item{normal}{a logical, is there a normalization restriction?}
 
 \item{nLambda1s}{the number of centering restrictions}
-
-\item{m}{an integer, the current dimension}
 }
 \value{
 a vector containing the ranks of the current lagrangian multipliers

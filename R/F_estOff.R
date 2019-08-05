@@ -1,12 +1,20 @@
-#' Estimate the column parameters of the independence model
+#' Estimate the row/column parameters of the independence model
 #'
 #' @param data a list of data matrices with the same number of samples n in the rows.
 #' Also phyloseq objects are acceptable
 #' @param distribution a character string describing which distributional assumption should be used.
-#' @param rowOff,colOff current values for row and column offsets
 #' @param meanVarTrend The estimated mean-variance trend
 #' @param col A logical, should column offsets be estimated
 #' @param ... passed onto nleqslv
+#' @param rowOff
+#' @param colOff
+#' @param newtonRaphson A boolean, should Newton-Raphson be used to solve the
+#' estimating equations
+#' @param libSizes
+#'
+#' @return The estimated marginal parameters
+#'
+#' @importFrom BB dfsane
 estOff = function(data, distribution, rowOff, colOff, meanVarTrend, col,
                  newtonRaphson, libSizes,...){
     libSizes = exp(rowOff)

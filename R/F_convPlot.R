@@ -6,6 +6,8 @@
 #' @param View An integer, the view to be plotted (if latent  = FALSE)
 #' @param size The line size
 #'
+#' @importFrom reshape2 melt
+#'
 #' @return A ggplot object containing the convergence plot
 convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1, View = NULL,
                     size = 0.125){

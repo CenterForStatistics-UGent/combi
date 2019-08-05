@@ -7,6 +7,22 @@
 inflPlot(modelObj, plotType = "pointplot", pointFun = "sum",
   lineSize = 0.07, Dim = 1, ...)
 }
+\arguments{
+\item{modelObj}{The fitted data integration}
+
+\item{plotType}{The type of plot requested}
+
+\item{pointFun}{The function to calculate the summary measure to be plotted}
+
+\item{lineSize}{The line size}
+
+\item{Dim}{The dimension required}
+
+\item{...}{additional arguments passed on to the influence() function}
+}
+\value{
+A ggplot object
+}
 \description{
 A ggplot line plot showing the influences
 }

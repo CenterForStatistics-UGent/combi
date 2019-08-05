@@ -9,7 +9,8 @@ buildMu(offSet, latentVar, paramEsts, distribution, paramMatrix = FALSE)
 \arguments{
 \item{offSet}{the offset matrix}
 
-\item{latentVar, paramEsts, distribution}{See}
+\item{latentVar, paramEsts, distribution}{Latent variables,
+parameter estimates and distribution type}
 
 \item{paramMatrix}{A boolean, are feature parameters provided as matrix}
 }

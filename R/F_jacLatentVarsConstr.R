@@ -1,5 +1,6 @@
 #' Evaluate the jacobian for estimating the latent variable for one view for constrained ordination
-#' @inherit estLatentVars param
+#' @inherit estLatentVarsConstr param
+#' @importFrom tensor tensor
 #'
 #' @return The jacobian matrix
 jacLatentVarsConstr = function(latentVar, data, distribution, paramEsts, offSet,

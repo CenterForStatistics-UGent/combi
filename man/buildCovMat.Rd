@@ -7,9 +7,7 @@
 buildCovMat(datFrame)
 }
 \arguments{
-\item{covariates}{the covariates, as dataframe}
-
-\item{dat}{the phyloseq object
+\item{datFrame}{the dataframe with which the covariate matrix is to be built
 
 In this case we will 1) Include dummy's for every level of the
  categorical variable, and force them to sum to zero.

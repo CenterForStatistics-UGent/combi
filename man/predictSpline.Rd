@@ -4,8 +4,29 @@
 \alias{predictSpline}
 \title{A custom spline prediction function, extending linearly with a slope such that prediction never drops below first bisectant}
 \usage{
-predictSpline(fit, newdata, lowerSlope, lowerEval, linX, coefsQuad,
-  deriv = 0L, meanVarFit, minFit, new.knots, degree)
+predictSpline(fit, newdata, linX, coefsQuad, deriv = 0L, meanVarFit,
+  minFit, new.knots, degree)
+}
+\arguments{
+\item{fit}{The existing spline fit}
+
+\item{newdata}{points in which the spline needs to be evaluated}
+
+\item{linX}{The x at which the fit becomes linear and intersects the diagonal
+line}
+
+\item{coefsQuad}{parameters of a quadratic fit}
+
+\item{deriv}{An integer. Which derivative is required?}
+
+\item{meanVarFit}{A character string, indicating which type of mean variance
+fit is being used}
+
+\item{minFit}{The lower bound of the cubic fit}
+
+\item{new.knots}{The knots at which the spline is to be evaluated}
+
+\item{degree}{The degree of the polynomial fit}
 }
 \description{
 A custom spline prediction function, extending linearly with a slope such that prediction never drops below first bisectant

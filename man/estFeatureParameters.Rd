@@ -7,7 +7,7 @@
 estFeatureParameters(paramEsts, lambdasParams, seqSets, data,
   distributions, offsets, nCores, m, JacFeatures, meanVarTrends,
   latentVars, numVars, control, weights, compositional, indepModels, fTol,
-  newtonRaphson, allowMissingness, maxItFeat, ...)
+  allowMissingness, maxItFeat, ...)
 }
 \arguments{
 \item{paramEsts}{Current list of parameter estimates for the different views}
@@ -21,12 +21,6 @@ estFeatureParameters(paramEsts, lambdasParams, seqSets, data,
 \item{latentVars}{A vector of latent variables}
 
 \item{numVars}{The number of variables}
-
-\item{paramEstsLower}{The parameter estimates of the lower dimensions}
-
-\item{n, m}{The number of samples and dimensions, respectively}
-
-\item{Jac}{a jacobian matrix, pre-filled where possible}
 }
 \value{
 A vector of length n, the estimates of the latent variables

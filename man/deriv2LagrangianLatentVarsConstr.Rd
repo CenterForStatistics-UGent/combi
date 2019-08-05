@@ -5,7 +5,7 @@
 \title{The score function to estimate the latent variables}
 \usage{
 deriv2LagrangianLatentVarsConstr(x, data, distributions, offsets,
-  paramEsts, paramMats, numVars, latentVarsLower, n, m, Jac, numSets,
+  paramEsts, paramMats, numVars, latentVarsLower, nn, m, Jac, numSets,
   meanVarTrends, links, numCov, covMat, nLambda1s, varPosts, compositional,
   indepModels, ...)
 }
@@ -13,7 +13,7 @@ deriv2LagrangianLatentVarsConstr(x, data, distributions, offsets,
 \item{...}{arguments to the jacobian function, currently ignored}
 }
 \value{
-A vector of length n, the evaluation of the score functions of the latent variables
+A vector of length nn, the evaluation of the score functions of the latent variables
 }
 \description{
 The score function to estimate the latent variables

@@ -1,6 +1,6 @@
 #' A small auxiliary function for the indices of the lagrange multipliers
 #'
-#' @param m an integer, the current dimension
+#' @param y an integer, the current dimension
 #' @param nLambda1s the number of centering restrictions
 #' @param normal a logical, is there a normalization restriction?
 #'

@@ -11,9 +11,7 @@ prepareJacMat(mu, data, meanVarTrend, CompMat, libSizes)
 
 \item{data}{the count matrix}
 
-\item{trendEval}{evaluated mean-variance trend}
-
-\item{derivEval}{evaluated derivative of the mean-variance trend}
+\item{libSizes}{}
 }
 \value{
 the matrix which can be summed over

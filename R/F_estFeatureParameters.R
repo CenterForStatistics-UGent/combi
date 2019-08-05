@@ -5,14 +5,26 @@
 #' @param offsets A list of offset matrices
 #' @param paramEsts Current list of parameter estimates for the different views
 #' @param numVars The number of variables
+#' @param lambdasParams
+#' @param seqSets
+#' @param nCores
+#' @param m
+#' @param JacFeatures
+#' @param meanVarTrends
+#' @param control
+#' @param weights
+#' @param compositional
+#' @param indepModels
+#' @param fTol
+#' @param allowMissingness
+#' @param maxItFeat
+#' @param ...
 #' @param latentVars A vector of latent variables
-#' @param paramEstsLower The parameter estimates of the lower dimensions
-#' @param n,m The number of samples and dimensions, respectively
-#' @param Jac a jacobian matrix, pre-filled where possible
 #'
 #' @importFrom parallel mclapply
 #' @importFrom nleqslv nleqslv
 #' @importFrom BB BBsolve
+#' @importFrom stats rnorm
 #'
 #' @return A vector of length n, the estimates of the latent variables
 #'

@@ -1,7 +1,7 @@
 #' Evaluate the influence function
-#'
+#'@methods influence compInt
 #' @details Especially the influence of the different views on the latent variable or gradient estimation may be of interest
-influence.modelDI = function(modelObj, latent = is.null(View), Dim = 1, View = NULL){
+influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = NULL){
     with(modelObj, {
     if(latent){
         lambdaLatent = lambdasLatent[seq_m(Dim, normal = FALSE)]

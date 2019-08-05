@@ -1,14 +1,10 @@
 #' Estimate the latent variables
 #'
-#' @param data A list of data matrices
-#' @param distributions A character vector describing the distributions
-#' @param offsets A list of offset matrices
-#' @param paramEsts A list of parameter estimates for the different views
-#' @param numVars The number of variables
+#' @param lambdasLatent A vector of Lagrange multipliers
+#' @param constrained A boolean, is the ordination constrained?
+#' @param fTol The convergence tolerance
+#' @param ...
 #' @param latentVars A vector of latent variables
-#' @param latentVarsLower The latent variables of the lower dimensions
-#' @param n,m The number of samples and dimensions, respectively
-#' @param Jac a jacobian matrix, pre-filled where possible
 #'
 #' @return A vector of length n, the estimates of the latent variables
 #' @importFrom nleqslv nleqslv

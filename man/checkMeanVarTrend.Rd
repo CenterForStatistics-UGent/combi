@@ -14,6 +14,8 @@ checkMeanVarTrend(data, meanVarFit = "spline", returnTrend = FALSE,
 
 \item{returnTrend}{A boolean, should the estimated trend be returned or
 only plotted?}
+
+\item{...}{passed on to the estMeanVarTrend() function}
 }
 \value{
 A plot object

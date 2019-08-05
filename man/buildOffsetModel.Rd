@@ -9,7 +9,7 @@ buildOffsetModel(modelObj, View)
 \arguments{
 \item{modelObj}{a modelDI object}
 
-\item{The}{view for which to build the offset}
+\item{View}{The view for which to build the offset}
 }
 \value{
 The offset matrix

@@ -2,7 +2,7 @@
 % Please edit documentation in R/F_estOff.R
 \name{estOff}
 \alias{estOff}
-\title{Estimate the column parameters of the independence model}
+\title{Estimate the row/column parameters of the independence model}
 \usage{
 estOff(data, distribution, rowOff, colOff, meanVarTrend, col,
   newtonRaphson, libSizes, ...)
@@ -13,14 +13,20 @@ Also phyloseq objects are acceptable}
 
 \item{distribution}{a character string describing which distributional assumption should be used.}
 
-\item{rowOff, colOff}{current values for row and column offsets}
-
 \item{meanVarTrend}{The estimated mean-variance trend}
 
 \item{col}{A logical, should column offsets be estimated}
 
+\item{newtonRaphson}{A boolean, should Newton-Raphson be used to solve the
+estimating equations}
+
+\item{libSizes}{}
+
 \item{...}{passed onto nleqslv}
 }
+\value{
+The estimated marginal parameters
+}
 \description{
-Estimate the column parameters of the independence model
+Estimate the row/column parameters of the independence model
 }

@@ -1,7 +1,18 @@
 #' Estimate a column-wise mean-variance trend
+#'
 #' @param data the data matrix with n rows
 #' @param meanMat the estimated mean matrix
 #' @param plot A boolean, should the trend be plotted?
+#' @param baseAbundances
+#' @param libSizes
+#' @param meanVarFit
+#' @param degree
+#' @param compVector
+#' @param constraint
+#' @param ...
+#'
+#' @import cobs stats
+#' @importFrom alabama constrOptim.nl
 #'
 #' @return A list with components
 #' \item{meanVarTrend}{An smoothed trend function, that can map a mean on a variance}
@@ -109,15 +120,15 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
         idSmaller = logMeans < linX
         baa = means
         if(!deriv){
-            baa[!idSmaller] = exp(predictSpline(mvFit, logMeans[!idSmaller], lowerSlope, lowerEval,
+            baa[!idSmaller] = exp(predictSpline(mvFit, logMeans[!idSmaller],
                               linX, coefsQuad, meanVarFit = meanVarFit,
                               minFit = minFit, new.knots = new.knots,
                               degree = degree))
         } else{
-            baa[!idSmaller] = predictSpline(mvFit, logMeans[!idSmaller], lowerSlope, lowerEval, linX,
+            baa[!idSmaller] = predictSpline(mvFit, logMeans[!idSmaller], linX,
                          coefsQuad, deriv = deriv, meanVarFit = meanVarFit,
                          minFit = minFit, new.knots = new.knots, degree = degree)*
-                exp(predictSpline(mvFit, logMeans[!idSmaller], lowerSlope, lowerEval,
+                exp(predictSpline(mvFit, logMeans[!idSmaller],
                                   linX, coefsQuad, meanVarFit = meanVarFit,
                                   minFit = minFit, new.knots = new.knots,
                                   degree = degree))/means[!idSmaller]

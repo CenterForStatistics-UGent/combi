@@ -2,9 +2,9 @@
 #' @inherit estLatentVars param
 #' @param ... arguments to the jacobian function, currently ignored
 #'
-#' @return A vector of length n, the evaluation of the score functions of the latent variables
+#' @return A vector of length nn, the evaluation of the score functions of the latent variables
 deriv2LagrangianLatentVarsConstr = function(x, data, distributions, offsets, paramEsts, paramMats,
-                                     numVars, latentVarsLower, n, m, Jac,
+                                     numVars, latentVarsLower, nn, m, Jac,
                                      numSets, meanVarTrends, links, numCov,
                                      covMat, nLambda1s, varPosts,
                                      compositional, indepModels,...){

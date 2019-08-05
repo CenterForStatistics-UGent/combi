@@ -9,21 +9,11 @@ estLatentVars(latentVars, lambdasLatent, constrained, fTol, ...)
 \arguments{
 \item{latentVars}{A vector of latent variables}
 
-\item{data}{A list of data matrices}
+\item{lambdasLatent}{A vector of Lagrange multipliers}
 
-\item{distributions}{A character vector describing the distributions}
+\item{constrained}{A boolean, is the ordination constrained?}
 
-\item{offsets}{A list of offset matrices}
-
-\item{paramEsts}{A list of parameter estimates for the different views}
-
-\item{numVars}{The number of variables}
-
-\item{latentVarsLower}{The latent variables of the lower dimensions}
-
-\item{n, m}{The number of samples and dimensions, respectively}
-
-\item{Jac}{a jacobian matrix, pre-filled where possible}
+\item{fTol}{The convergence tolerance}
 }
 \value{
 A vector of length n, the estimates of the latent variables

@@ -4,6 +4,7 @@
 #' @param meanVarFit The type of mean variance fit
 #' @param returnTrend A boolean, should the estimated trend be returned or
 #' only plotted?
+#' @param ... passed on to the estMeanVarTrend() function
 #'
 #' @return A plot object
 checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE,

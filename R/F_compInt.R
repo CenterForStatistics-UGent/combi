@@ -1,10 +1,10 @@
-#' Estimate the model-based data integration method
+#' Perform model-based data integration
+#'
 #' @param data a list of data matrices with the same number of samples n in the rows.
 #' Also phyloseq objects are acceptable
 #' @param M the required dimension of the fit, a non-negative integer
 #' @param covariates a dataframe of n samples with sample-specific variables.
 #' @param distributions a character vector describing which distributional assumption should be used. See details.
-#' @param links A character vector with names of link functions
 #' @param compositional A logical vector with the same length as "data",
 #'  indicating if the datasets should be treated as compositional
 #' @param maxIt an integer, the maximum number of iterations
@@ -20,13 +20,40 @@
 #' @param prevCutOff a scalar, the prevalance cutoff for the trimming.
 #' @param record A boolean, should intermediate estimates be stored? Can be useful to check convergence
 #' @param fTol The tolerance for solving the estimating equations
+#' @param logTransformMicroArray A boolean, should the array data be logtransformed?
+#' @param nleq.control A list of arguments to the nleqslv function
+#' @param weights
+#' @param meanVarFit The type of mean variance fit, see details
+#' @param maxFeats The maximal number of features for a Newton-Raphson procedure
+#'  to be feasible
+#' @param dispFreq An integer, the period after which the variances should be
+#' reestimated
+#' @param allowMissingness A boolean, should NA values be allowed?
+#' @param biasReduction A boolean, should bias reduction be applied to allow for
+#' confounder correction in groups with all zeroes? Not guaranteed to work
+#' @param maxItFeat,maxItFilt Integers, the maximum allowed number of iterations
+#' in the estimation of the feature parametes and confounder parameters
+#' respectively
 #'
 #' @details Using more than one core is only implemented on Unix systems.
 #' Setting nCores > 1 on Windows will use a single core, with a warning.
 #' When the number of cores specified is larger than the number of views,
 #' nCores is silently set to the number of views.
-#' @return An object of class modelDI, describing the fit
-modelDI = function(data, M = 3L, covariates = NULL, distributions,
+#' meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
+#'  trend, "cubic" gives a third degree polynomial. Both converge to the
+#'  diagonal line with slope 1 for small means.
+#' @return An object of class compInt, describing the fit
+#' @alias compIntegrate
+#' @importFrom limma squeezeVar
+#' @importFrom vegan rda
+#' @importFrom parallel mclapply
+#' @export
+#' @examples
+#' data(hmp2)
+#' microVirDI = compInt(data = list(microPruneVir, virPrune),
+#' distributions = c("quasi", "quasi"), compositional = c(TRUE, TRUE),
+#' verbose = TRUE, nCores = 1, M = 2)
+compInt = function(data, M = 3L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformMicroArray = TRUE,
                    confounders = NULL, nleq.control = list(maxit = 1e3L, cndtol = 1e-16),
@@ -304,7 +331,7 @@ switch(weights[[i]],
         out
     }), f = cbind)
     if(constrained){
-        CCA = vegan::rda(X = concat, Y = covMat)$CCA
+        CCA = rda(X = concat, Y = covMat)$CCA
         # Redundancy analysis for starting values
         if (sum(!colnames(covMat) %in% CCA$alias) < M) {
             M = sum(!colnames(covMat) %in% CCA$alias)
@@ -417,7 +444,7 @@ switch(weights[[i]],
             lambdasParams[[i]][seq_m(m, nLambda1s = 1, normal = compositional[[i]] )] =
                 paramEstsTmp[[i]]$x[-seq_len(numVars[[i]])] #+ compositional[[i]]
             #Record convergence
-            paramConv[iter[[m]],i,m] = paramEstsTmp[[i]]$conv
+            if(recored) paramConv[iter[[m]],i,m] = paramEstsTmp[[i]]$conv
         };rm(tmp)
         ### Estimate nuissance parameters ###
         #if(verbose) cat("Estimating nuissance parameters ...\n")
@@ -532,6 +559,6 @@ switch(weights[[i]],
         rownames(latentRec) = rownames(latentVars)
         }
     }
-    class(out) = "modelDI"
+    class(out) = "compInt"
     return(out)
 }

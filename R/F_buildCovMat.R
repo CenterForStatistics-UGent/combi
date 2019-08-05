@@ -1,7 +1,6 @@
 #' A function to build the covariate matrix of the constraints
 #'
-#' @param covariates the covariates, as dataframe
-#' @param dat the phyloseq object
+#' @param datFrame the dataframe with which the covariate matrix is to be built
 #'
 #' In this case we will 1) Include dummy's for every level of the
 #'  categorical variable, and force them to sum to zero.
@@ -15,6 +14,7 @@
 #' \item{datFrame}{The dataframe used to construct the model matrix}
 #'
 #' @importFrom RCM checkAlias
+#' @import stats
 buildCovMat = function(datFrame) {
 
     logVec = vapply(FUN.VALUE = TRUE, datFrame, is.logical)
@@ -52,7 +52,7 @@ buildCovMat = function(datFrame) {
     nFactorLevels = nFactorLevels[covariatesNames]
     datFrame = datFrame[, covariatesNames, drop = FALSE]
     #Check for alias structures
-    RCM:::checkAlias(datFrame, covariatesNames)
+    RCM::checkAlias(datFrame, covariatesNames)
 
     if (any(vapply(FUN.VALUE = TRUE, datFrame, is.factor) & (nFactorLevels <
                                                              2))) {

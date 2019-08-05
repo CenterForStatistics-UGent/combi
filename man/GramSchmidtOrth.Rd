@@ -10,6 +10,13 @@ GramSchmidtOrth(a, b, weights = 1, norm = TRUE)
 \item{a}{the vector to be orthogonalized}
 
 \item{b}{the vector to be orthogonalized to}
+
+\item{weights}{weights vector}
+
+\item{norm}{a boolean, should the result be normalized?}
+}
+\value{
+The orthogonalized vector
 }
 \description{
 Gram schimdt orhtogonalize a with respect to b, and normalize

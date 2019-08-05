@@ -1,13 +1,11 @@
 #' Make triplots or higher dimensional plots of the ordination object
-#' @param modelObj the fit
+#'
+#' @param x the fit
+#' @param ... additional arguments, currently ignored
 #' @param Dim the dimensions to be plotted
 #' @param samDf a dataframe of sample variables
 #' @param samCol A variable name from samDf used to colour the samples
-#' @param featNum,varNum Integer, the number of features or variables to be plotted
 #' @param featCols Colours for the features
-#' @param manExpFactorTaxa,manExpFactorVar expansion factors to size all
-#' components to the same scale
-#' @param featSize,crossSize,varSize,samSize,strokeSize Size of the corresponding objects
 #' @param samColValues
 #' @param warnMonotonicity A boolean, should a warning be thrown when the
 #' feature proportions of compositional views do not all vary monotonically
@@ -16,28 +14,40 @@
 #'  in thrird party software
 #' @param squarePlot A boolean, should the axes be square? Strongly recommended
 #' @param featAlpha Controls the transparacny of the features
+#' @param featNum
+#' @param manExpFactorTaxa
+#' @param featSize
+#' @param crossSize
+#' @param manExpFactorVar
+#' @param varNum
+#' @param varSize
+#' @param samSize
+#' @param strokeSize
 #'
 #' @return A ggplot object containing the plot
+#'
+#' @method plot compInt
 #'
 #' @export
 #' @import ggplot2
 #' @importFrom grDevices terrain.colors
-plot.compInt = function(modelObj, Dim = c(1,2), samDf = NULL, samCol = NULL,
+#' @importFrom stats quantile
+plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         featNum = 20L, featCols = c("darkblue", "darkgreen",
                                                     "darkred", terrain.colors(5)),
                         manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
-                        manExpFactorVar = 0.975, varNum = nrow(modelObj$alphas),
+                        manExpFactorVar = 0.975, varNum = nrow(x$alphas),
                         varSize = 2.5, samColValues = NULL, samSize = 1.5,
                         strokeSize = 0.05, warnMonotonicity = FALSE,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5){
     #palette(rainbow(length(unique(samDf[[samCol]]))))
-    nViews = length(modelObj$data)
-    coords = extractCoords(modelObj, Dim)
+    nViews = length(x$data)
+    coords = extractCoords(x, Dim)
     latentData = coords$latentData; featureData = coords$featureData
     varData = coords$varData
 
     if(!is.null(samDf)){
-        latentData = data.frame(latentData, samDf[rownames(modelObj$latentVars),, drop = FALSE])
+        latentData = data.frame(latentData, samDf[rownames(x$latentVars),, drop = FALSE])
     }
 
     DimChar = paste0("Dim", Dim)
@@ -48,7 +58,7 @@ plot.compInt = function(modelObj, Dim = c(1,2), samDf = NULL, samCol = NULL,
 
     #### Views ####
     if(length(featNum)==1){featNum = rep(featNum, nViews)}
-    checkComp = checkMonotonicity(modelObj, Dim)
+    checkComp = checkMonotonicity(x, Dim)
     for(i in seq_len(nViews)){
         arrowLengths = rowSums(featureData[[i]][, DimChar]^2)
         featurePlot = arrowLengths >= quantile(arrowLengths, 1-min(1,featNum[i]/nrow(featureData[[i]])))
@@ -61,7 +71,7 @@ plot.compInt = function(modelObj, Dim = c(1,2), samDf = NULL, samCol = NULL,
         #Warn for non monotonicity in case of compositionality
         if(warnMonotonicity && !all(checkComp[[i]][,featurePlot])){
             checkMate = apply(checkComp[[i]][, featurePlot], c(1,2), all)
-warning("Features \n", paste(colnames(modelObj$data[[i]])[featurePlot][!apply(checkMate, 2 ,all)], collapse = "\n"),
+warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate, 2 ,all)], collapse = "\n"),
         "\nnot monotonous on this plot")
         }
         if(length(featCols[[i]])>1) featCols[[i]] = featCols[[i]][featurePlot]
@@ -71,10 +81,10 @@ warning("Features \n", paste(colnames(modelObj$data[[i]])[featurePlot][!apply(ch
     }
     # Views Legend, TO DO!
     #### Gradient ####
-    if(!is.null(modelObj$covariates)){
+    if(!is.null(x$covariates)){
 
         arrowLengthsVar = rowSums(varData[,DimChar]^2)
-        varPlot = arrowLengthsVar >= quantile(arrowLengthsVar, 1-varNum/nrow(modelObj$alphas))
+        varPlot = arrowLengthsVar >= quantile(arrowLengthsVar, 1-varNum/nrow(x$alphas))
         varData = varData[varPlot,]
         scalingFactorTmpVar = apply(latentData[, DimChar], 2, range)/
             apply(varData[,DimChar], 2, range)

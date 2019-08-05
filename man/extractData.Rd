@@ -8,6 +8,8 @@ extractData(data, logTransformMicroArray = TRUE)
 }
 \arguments{
 \item{data}{The list of data objects, either matrix, phyloseq or ExpressionSet objects}
+
+\item{logTransformMicroArray}{A boolean, should array data be logtransformed}
 }
 \value{
 the raw data matrices, samples in the rows

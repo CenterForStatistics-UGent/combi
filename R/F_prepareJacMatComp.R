@@ -1,4 +1,11 @@
 #' prepare the jacobian for the latent variabels compostional
+#'
+#' @param mu
+#' @param paramEsts
+#' @param CompMat0
+#' @param meanVarTrend
+#' @param data
+#' @param libSizes
 prepareJacMatComp = function(mu, paramEsts, CompMat0, meanVarTrend, data, libSizes){
 Sum = rowSums(CompMat0)
 CompMat = CompMat0/Sum

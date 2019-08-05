@@ -7,7 +7,7 @@
 prepareScoreMat(data, mu, meanVarTrend, CompMat, libSizes)
 }
 \arguments{
-\item{meanVarTrend}{}
+\item{libSizes}{}
 }
 \value{
 The helper matrix

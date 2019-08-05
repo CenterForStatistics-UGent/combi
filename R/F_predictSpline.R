@@ -18,15 +18,16 @@ predictSpline = function(fit, newdata, linX, coefsQuad, deriv = 0L,
         orderZ = sort.list(newdata)
     } else {
         idLinear = newdata < linX
-        idLower = newdata <  minFit
+        idLower = newdata < minFit
         idLowerNotLinear = idLower & !idLinear
-        out[idLowerNotLinear] = if(deriv) coefsQuad[2] + coefsQuad[1]*2*newdata[idLowerNotLinear] else
+        out[idLowerNotLinear] = if(deriv) coefsQuad[2] +
+            coefsQuad[1]*2*newdata[idLowerNotLinear] else
             polyHorner(coefsQuad, newdata[idLowerNotLinear])
     }
     n = length(newdata)
     #Call C routine directly for speed
- switch(meanVarFit,
-                           "spline" = .C("spline_value", new.knots, fit,
+ switch(meanVarFit, "spline" = .C("spline_value", PACKAGE = "cobs",
+                                  new.knots, fit,
                                          length(fit), degree + 1L,
                                          newdata[orderZ], n, deriv,
                                          y = double(n))$y[sort.list(orderZ)],

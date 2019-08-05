@@ -14,6 +14,8 @@ estMeanVarTrend(data, meanMat, baseAbundances, libSizes, plot = FALSE,
 \item{meanMat}{the estimated mean matrix}
 
 \item{plot}{A boolean, should the trend be plotted?}
+
+\item{...}{}
 }
 \value{
 A list with components

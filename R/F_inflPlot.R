@@ -1,6 +1,18 @@
 #' A ggplot line plot showing the influences
+#' @importFrom reshape2 melt
+#' @importFrom stats aggregate
+#'
+#' @param modelObj The fitted data integration
+#' @param plotType The type of plot requested
+#' @param pointFun The function to calculate the summary measure to be plotted
+#' @param lineSize The line size
+#' @param Dim The dimension required
+#' @param ... additional arguments passed on to the influence() function
+#'
+#' @return A ggplot object
+#' @export
 inflPlot = function(modelObj, plotType = "pointplot",
-                    pointFun = "sum", lineSize = 0.07, Dim = 1,...){
+                    pointFun = "sum", lineSize = 0.07, Dim = 1, ...){
     #if(length(modelObj$data) >2) "sum" else "mean"
     inflObj = influence(modelObj, Dim = Dim,...)
     #inflMat = with(inflObj, score * diag(InvJac)) #look only at direct effect, ignore coupling

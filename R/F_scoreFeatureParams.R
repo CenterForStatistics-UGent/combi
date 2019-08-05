@@ -25,9 +25,6 @@ scoreFeatureParams = function(x, data, distribution, offSet, latentVar,
         CompMat = buildCompMat(indepModel$colMat, rbind(paramEstsLower, x),
                                latentVar, m = mm, norm = TRUE, subtractMax = TRUE)
         mu = CompMat*indepModel$libSizes
-        # if(anyNA(mu)){
-        #     return(rep(1e16, length(x)))
-        # } #| any(is.infinite(mu))
         if(allowMissingness){
             isNA = is.na(data)
             data[isNA] = mu[isNA]

@@ -6,7 +6,7 @@
 \usage{
 jacFeatures(latentVars, data, distribution, paramEsts, meanVarTrend,
   offSet, compositional, indepModel, m, paramEstsLower,
-  minNumber = .Machine$double.eps^10, allowMissingness)
+  minNumber = .Machine$double.eps^10, allowMissingness, ...)
 }
 \value{
 The jacobian matrix

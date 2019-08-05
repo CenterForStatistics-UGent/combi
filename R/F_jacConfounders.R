@@ -1,4 +1,5 @@
 #' Jacobian when estimating confounder variables
+#' @inherit scoreConfounders param
 jacConfounders = function(confMat, data, distribution, x, meanVarTrend,
                        offSet){
     if(distribution == "gaussian"){
