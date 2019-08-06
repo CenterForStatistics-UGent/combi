@@ -22,7 +22,8 @@
 #' @param fTol The tolerance for solving the estimating equations
 #' @param logTransformMicroArray A boolean, should the array data be logtransformed?
 #' @param nleq.control A list of arguments to the nleqslv function
-#' @param weights
+#' @param weights A character string, either 'marginal' or 'uniform', indicating
+#' rrhow the feature parameters should be weighted in the normalization
 #' @param meanVarFit The type of mean variance fit, see details
 #' @param maxFeats The maximal number of features for a Newton-Raphson procedure
 #'  to be feasible
@@ -47,6 +48,7 @@
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda
 #' @importFrom parallel mclapply
+#' @importFrom stats sd
 #' @export
 #' @examples
 #' data(hmp2)
@@ -71,7 +73,9 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     if(M %in% c(0,1) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
     }
-    if(!all(sapply(c(length(data), length(distributions)), identical, length(compositional)))){
+    if(!all(vapply(FUN.VALUE = integer(1),
+                   c(length(data), length(distributions)),
+                   identical, length(compositional)))){
         stop("Make sure data, distribution, links and compositional have the same length")
     }
     if(length(data)==1){
@@ -81,10 +85,10 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     namesData = names(data)
     #Extract otu table from phyloseq objects
     data = extractData(data, logTransformMicroArray = logTransformMicroArray)
-    if(any(sapply(data, function(x){is.null(rownames(x))}))){
+    if(any(vapply(FUN.VALUE = TRUE, data, function(x){is.null(rownames(x))}))){
         stop("Make sure to provide sample names for all views!")
     }
-    if(any(sapply(data, anyNA)) & !allowMissingness){
+    if(any(vapply(FUN.VALUE = TRUE,data, anyNA)) & !allowMissingness){
         stop("Missing data present. To allow fit with missing data, set allowMissingness to TRUE")
     }
     zeroRows = apply(sapply(data, function(x){rowSums(x, na.rm = TRUE)==0}), 1, any)
@@ -313,6 +317,8 @@ switch(weights[[i]],
         #Convergence
         latentConv = matrix(nrow = maxIt, ncol =  M)
         paramConv = array(dim = c(maxIt, numSets, M))
+    } else {
+        latentConv = paramConv = alphaRec = paramRec = latentRec = NULL
     }
     if(allowMissingness){
         naIdList = lapply(data, is.na)
@@ -444,7 +450,7 @@ switch(weights[[i]],
             lambdasParams[[i]][seq_m(m, nLambda1s = 1, normal = compositional[[i]] )] =
                 paramEstsTmp[[i]]$x[-seq_len(numVars[[i]])] #+ compositional[[i]]
             #Record convergence
-            if(recored) paramConv[iter[[m]],i,m] = paramEstsTmp[[i]]$conv
+            if(record) paramConv[iter[[m]],i,m] = paramEstsTmp[[i]]$conv
         };rm(tmp)
         ### Estimate nuissance parameters ###
         #if(verbose) cat("Estimating nuissance parameters ...\n")
@@ -497,7 +503,7 @@ switch(weights[[i]],
                 latentVars[, m] = GramSchmidtOrth(latentVars[, m], latentVars[, m-1], norm = FALSE)
             } #Orthogonalize
         }
-        latentConv[iter[[m]],m] = latentVarsTmp$conv #Store convergence
+        if(record) latentConv[iter[[m]],m] = latentVarsTmp$conv #Store convergence
         # Store intermediates if necessary
         if(record){
             if(constrained){

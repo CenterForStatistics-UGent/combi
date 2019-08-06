@@ -23,9 +23,18 @@
 
 \item{samCol}{A variable name from samDf used to colour the samples}
 
+\item{featNum, varNum}{The number of features and variables to plot}
+
 \item{featCols}{Colours for the features}
 
-\item{strokeSize}{}
+\item{manExpFactorTaxa, manExpFactorVar}{Expansion factors for taxa and
+variables, normally calculated natively}
+
+\item{featSize, crossSize, varSize, samSize, strokeSize}{Size parameters for
+the feature dots, central cross, variable labels, sample dots and sample
+strokes}
+
+\item{samColValues}{Colours for the samples}
 
 \item{warnMonotonicity}{A boolean, should a warning be thrown when the
 feature proportions of compositional views do not all vary monotonically

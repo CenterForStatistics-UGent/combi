@@ -22,7 +22,7 @@ labPos = NULL, projColour = "grey", latentSize = 0.25) {
         if(ncol(links) != 4L){
             stop("Provide numeric links matrix with four columns: first x and y of one taxon and then another.")
         }
-        links1 = which.min(colSums((t(DIplot$featureData[[Views[1]]][,dimNames]) - links[,1:2])^2))
+        links1 = which.min(colSums((t(DIplot$featureData[[Views[1]]][,dimNames]) - links[,c(1,2)])^2))
         links2 = which.min(colSums((t(DIplot$featureData[[Views[2]]][,dimNames]) - links[,3:4])^2))
         # Closest to approximate coordinate
         linkNames = cbind((DIplot$featureData[[Views[1]]]$featNames)[links1],
@@ -58,7 +58,8 @@ labPos = NULL, projColour = "grey", latentSize = 0.25) {
         DIplot$varData[varName, dimNames]
     }
     linkMat = apply(linkNames, 1, function(ln){
-                tmp = unlist(sapply(seq_along(Views), function(i){
+                tmp = unlist(vapply(seq_along(Views), FUN.VALUE = numeric(2),
+                                    function(i){
                     DIplot$featureData[[Views[i]]][ln[i], dimNames]
                 }))
                 names(tmp) = c("x", "y", "xend", "yend")
@@ -86,12 +87,9 @@ labPos = NULL, projColour = "grey", latentSize = 0.25) {
     ## The slope of the samples
     sampleSlopes = sampleMat[,2]/sampleMat[,1]
     # The coordinates of the intercept between projection and sample
-    IntCoords = sapply(sampleSlopes, function(l){
+    IntCoords = vapply(sampleSlopes, FUN.VALUE = numeric(4), function(l){
         Dim1 = (unname(linkMat[ c("y", "yend"),]+1/l*linkMat[ c("x", "xend"),])-0)/(1/l + l)
         Dim2 = Dim1*l
-
-# Dim1 = -(l["intercept"] - cbind(0,sampleMat[,2]))/(1/l["slope"] + l["slope"])
-# Dim2 = Dim1*l["slope"] + l["intercept"]
 c(x1 = Dim1[1], x2 = Dim1[2], y1 = Dim2[1], y2 = Dim2[2])
     })
 

@@ -3,13 +3,13 @@
 #' @param data the data matrix with n rows
 #' @param meanMat the estimated mean matrix
 #' @param plot A boolean, should the trend be plotted?
-#' @param baseAbundances
-#' @param libSizes
-#' @param meanVarFit
-#' @param degree
-#' @param compVector
-#' @param constraint
-#' @param ...
+#' @param baseAbundances The baseline abundances
+#' @param libSizes Library sizes
+#' @param meanVarFit A character string describing the type of trend to be
+#'  fitted: either "spline" or "cubic"
+#' @param degree The degree of the spline
+#' @param constraint Constraint to the spline
+#' @param ... additional arguments passed on to the plot() function
 #'
 #' @import cobs stats
 #' @importFrom alabama constrOptim.nl
@@ -18,7 +18,7 @@
 #' \item{meanVarTrend}{An smoothed trend function, that can map a mean on a variance}
 #' \item{meanVarTrendDeriv}{A derivative function of this}
 estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
-                           plot = FALSE, meanVarFit, degree = 2L, compVector =FALSE,
+                           plot = FALSE, meanVarFit, degree = 2L,
                            constraint = "none",...){
     # # A vector of means
     # meanVec = colMeans(meanMat)

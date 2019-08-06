@@ -48,6 +48,9 @@ In the latter case each view has its own conditioning variables (or NULL).}
 
 \item{record}{A boolean, should intermediate estimates be stored? Can be useful to check convergence}
 
+\item{weights}{A character string, either 'marginal' or 'uniform', indicating
+rrhow the feature parameters should be weighted in the normalization}
+
 \item{fTol}{The tolerance for solving the estimating equations}
 
 \item{nCores}{The number of cores to be used in estimating the feature parameters of each view. See details.}

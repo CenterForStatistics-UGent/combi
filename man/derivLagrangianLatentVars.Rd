@@ -9,6 +9,18 @@ derivLagrangianLatentVars(x, data, distributions, offsets, paramEsts,
   latentVarsLower, compositional, indepModels, ...)
 }
 \arguments{
+\item{x}{The current estimates of the latent variables}
+
+\item{n}{The number of samples}
+
+\item{m}{The dimensions}
+
+\item{numSets}{The number of views}
+
+\item{latentVarsLower}{The parameter estimates of the lower dimensions}
+
+\item{compositional, links, indepModels, meanVarTrends, numVars, distributions, data, offsets, varPosts, paramMats, paramEsts}{Lists of inforamtion on all the views}
+
 \item{...}{arguments to the jacobian function, currently ignored}
 }
 \value{

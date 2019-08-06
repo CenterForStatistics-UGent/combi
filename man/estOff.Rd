@@ -8,10 +8,13 @@ estOff(data, distribution, rowOff, colOff, meanVarTrend, col,
   newtonRaphson, libSizes, ...)
 }
 \arguments{
-\item{data}{a list of data matrices with the same number of samples n in the rows.
-Also phyloseq objects are acceptable}
+\item{data}{a list of data matrices with the same number of samples n
+in the rows. Also phyloseq objects are acceptable}
 
-\item{distribution}{a character string describing which distributional assumption should be used.}
+\item{distribution}{a character string describing which distributional
+assumption should be used.}
+
+\item{rowOff, colOff}{current row and column offset estimates}
 
 \item{meanVarTrend}{The estimated mean-variance trend}
 
@@ -20,7 +23,7 @@ Also phyloseq objects are acceptable}
 \item{newtonRaphson}{A boolean, should Newton-Raphson be used to solve the
 estimating equations}
 
-\item{libSizes}{}
+\item{libSizes}{The library sizes, used to evaluate the mean-variance trend}
 
 \item{...}{passed onto nleqslv}
 }

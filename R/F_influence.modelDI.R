@@ -35,7 +35,7 @@ influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = N
                     rowMultiply(if(constrained) crossprod(covMat, prepMat) else prepMat, paramEsts[[i]][Dim,])
                 }
            }})) + (lambdaLatent[1] +
-                       if(Dim==1) 0 else c(latentVars[, seq_len(Dim-1), drop = FALSE] %*% lambdaLatent[-1]))#/sum(sapply(data, ncol))
+                       if(Dim==1) 0 else c(latentVars[, seq_len(Dim-1), drop = FALSE] %*% lambdaLatent[-1]))
     # Inverse Jacobian
         n = if(constrained) ncol(covMat) else nrow(data[[1]])
         Jacobian = buildEmptyJac(n = n, m = Dim,

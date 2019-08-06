@@ -9,8 +9,8 @@
 #' @importFrom reshape2 melt
 #'
 #' @return A ggplot object containing the convergence plot
-convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1, View = NULL,
-                    size = 0.125){
+convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1,
+                    View = NULL, size = 0.125){
     if(is.null(model$paramRec)){
         stop("Intermediate parameter estimates not recorded.
              Try rerunning with record = TRUE.\n")
@@ -35,10 +35,16 @@ abs(1-x[2]/x[1])
         1
     } else {
         rep(if(latent) model$latentConv[seq_len(model$iter[[Dim]]),Dim] else
-        model$paramConv[seq_len(model$iter[[Dim]]),View,Dim], each = sum(whichVars))}
-    moltDf$Colour = factor(labels = c("Yes", "Stalled", "No","Jacobian too\n ill-conditioned"),  sapply(moltDf$Colour, switch,
-                                "1" = "Yes", "2" = "Stalled", "3" ="Stalled", "5" = "Jacobian too\n ill-conditioned", "No"),
-                           levels = c("Yes", "Stalled", "Jacobian too\n ill-conditioned", "No"))
+        model$paramConv[seq_len(model$iter[[Dim]]),View,Dim],
+        each = sum(whichVars))}
+    moltDf$Colour = factor(labels = c("Yes", "Stalled", "No",
+                                      "Jacobian too\n ill-conditioned"),
+                           vapply(moltDf$Colour, FUN.VALUE = character(1),
+                                  switch, "1" = "Yes", "2" = "Stalled",
+                                  "3" ="Stalled",
+                                  "5" = "Jacobian too\n ill-conditioned", "No"),
+                           levels = c("Yes", "Stalled",
+                                      "Jacobian too\n ill-conditioned", "No"))
     gTitle = paste("Trace plots of", if(latent) {
         if(is.null(model$covariates))"latent variable estimates" else
             "gradient estimates"

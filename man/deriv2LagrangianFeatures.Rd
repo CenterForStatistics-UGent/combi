@@ -8,6 +8,17 @@ deriv2LagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
   paramEstsLower, mm, Jac, meanVarTrend, links, weights, compositional,
   indepModel, ...)
 }
+\arguments{
+\item{data}{A list of data matrices}
+
+\item{latentVars}{A vector of latent variables}
+
+\item{weights}{The normalization weights}
+
+\item{compositional}{A list of booleans indicating compositionality}
+
+\item{...}{Additional arguments passed on to the score and jacobian functions}
+}
 \value{
 A vector of length n, the evaluation of the score functions of the latent variables
 }

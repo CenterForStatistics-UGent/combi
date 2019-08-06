@@ -12,24 +12,53 @@ estFeatureParameters(paramEsts, lambdasParams, seqSets, data,
 \arguments{
 \item{paramEsts}{Current list of parameter estimates for the different views}
 
+\item{lambdasParams}{The lagrange multipliers}
+
+\item{seqSets}{A vector with view indices}
+
 \item{data}{A list of data matrices}
 
 \item{distributions}{A character vector describing the distributions}
 
 \item{offsets}{A list of offset matrices}
 
+\item{nCores}{The number of cores to use in multithreading}
+
+\item{m}{The dimension}
+
+\item{JacFeatures}{An empty Jacobian matrix}
+
+\item{meanVarTrends}{The mean-variance trends of the different views}
+
 \item{latentVars}{A vector of latent variables}
 
 \item{numVars}{The number of variables}
+
+\item{control}{A list of control arguments for the nleqslv function}
+
+\item{weights}{The normalization weights}
+
+\item{compositional}{A list of booleans indicating compositionality}
+
+\item{indepModels}{A list of independence model}
+
+\item{fTol}{A convergence tolerance}
+
+\item{allowMissingness}{A boolean indicating whether missing values are
+allowed}
+
+\item{maxItFeat}{An integer, the maximum number of iterations}
+
+\item{...}{Additional arguments passed on to the score and jacobian functions}
 }
 \value{
-A vector of length n, the estimates of the latent variables
+A vector with estimates of the feature parameters
 }
 \description{
 Estimate the feature parameters
 }
 \details{
 If forking is available on the OS and the number of cores specified
-  is larger than 1, this function mill multithread the estimation of the
+  is larger than 1, this function will multithread the estimation of the
   feature parameters for the different views.
 }

@@ -1,12 +1,12 @@
-#' The score function to estimate the latent variables
-#' @inherit estLatentVars param
+#' The jacobian function to estimate the latent variables
+#' @inheritParams derivLagrangianLatentVars
 #' @param ... arguments to the jacobian function, currently ignored
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables
 deriv2LagrangianLatentVars = function(x, data, distributions, offsets, paramEsts, paramMats,
                                      numVars, latentVarsLower, n, m, Jac,
                                      numSets, meanVarTrends, links, varPosts, indepModels, compositional,...){
-    sepJacs = sapply(seq_len(numSets), function(i){
+    sepJacs = vapply(seq_len(numSets), FUN.VALUE = numeric(n),function(i){
             jacLatentVars(data = data[[i]], distribution = distributions[[i]],
                         paramEsts = paramEsts[[i]], offSet = offsets[[i]], paramMats = paramMats[[i]],
                         latentVar = x[seq_len(n)], meanVarTrend = meanVarTrends[[i]],

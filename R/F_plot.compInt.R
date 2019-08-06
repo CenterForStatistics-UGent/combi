@@ -6,7 +6,7 @@
 #' @param samDf a dataframe of sample variables
 #' @param samCol A variable name from samDf used to colour the samples
 #' @param featCols Colours for the features
-#' @param samColValues
+#' @param samColValues Colours for the samples
 #' @param warnMonotonicity A boolean, should a warning be thrown when the
 #' feature proportions of compositional views do not all vary monotonically
 #' with all latent variables?
@@ -14,15 +14,12 @@
 #'  in thrird party software
 #' @param squarePlot A boolean, should the axes be square? Strongly recommended
 #' @param featAlpha Controls the transparacny of the features
-#' @param featNum
-#' @param manExpFactorTaxa
-#' @param featSize
-#' @param crossSize
-#' @param manExpFactorVar
-#' @param varNum
-#' @param varSize
-#' @param samSize
-#' @param strokeSize
+#' @param featNum,varNum The number of features and variables to plot
+#' @param manExpFactorTaxa,manExpFactorVar Expansion factors for taxa and
+#' variables, normally calculated natively
+#' @param featSize,crossSize,varSize,samSize,strokeSize Size parameters for
+#' the feature dots, central cross, variable labels, sample dots and sample
+#' strokes
 #'
 #' @return A ggplot object containing the plot
 #'

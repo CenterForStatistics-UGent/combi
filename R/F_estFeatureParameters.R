@@ -5,20 +5,21 @@
 #' @param offsets A list of offset matrices
 #' @param paramEsts Current list of parameter estimates for the different views
 #' @param numVars The number of variables
-#' @param lambdasParams
-#' @param seqSets
-#' @param nCores
-#' @param m
-#' @param JacFeatures
-#' @param meanVarTrends
-#' @param control
-#' @param weights
-#' @param compositional
-#' @param indepModels
-#' @param fTol
-#' @param allowMissingness
-#' @param maxItFeat
-#' @param ...
+#' @param lambdasParams The lagrange multipliers
+#' @param seqSets A vector with view indices
+#' @param nCores The number of cores to use in multithreading
+#' @param m The dimension
+#' @param JacFeatures An empty Jacobian matrix
+#' @param meanVarTrends The mean-variance trends of the different views
+#' @param control A list of control arguments for the nleqslv function
+#' @param weights The normalization weights
+#' @param compositional A list of booleans indicating compositionality
+#' @param indepModels A list of independence model
+#' @param fTol A convergence tolerance
+#' @param allowMissingness A boolean indicating whether missing values are
+#' allowed
+#' @param maxItFeat An integer, the maximum number of iterations
+#' @param ... Additional arguments passed on to the score and jacobian functions
 #' @param latentVars A vector of latent variables
 #'
 #' @importFrom parallel mclapply
@@ -26,10 +27,10 @@
 #' @importFrom BB BBsolve
 #' @importFrom stats rnorm
 #'
-#' @return A vector of length n, the estimates of the latent variables
+#' @return A vector with estimates of the feature parameters
 #'
 #' @details If forking is available on the OS and the number of cores specified
-#'   is larger than 1, this function mill multithread the estimation of the
+#'   is larger than 1, this function will multithread the estimation of the
 #'   feature parameters for the different views.
 estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
                                 distributions, offsets, nCores, m, JacFeatures,

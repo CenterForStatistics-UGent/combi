@@ -2,18 +2,50 @@
 % Please edit documentation in R/F_deriv2LagrangianLatentVars.R
 \name{deriv2LagrangianLatentVars}
 \alias{deriv2LagrangianLatentVars}
-\title{The score function to estimate the latent variables}
+\title{The jacobian function to estimate the latent variables}
 \usage{
 deriv2LagrangianLatentVars(x, data, distributions, offsets, paramEsts,
   paramMats, numVars, latentVarsLower, n, m, Jac, numSets, meanVarTrends,
   links, varPosts, indepModels, compositional, ...)
 }
 \arguments{
+\item{x}{The current estimates of the latent variables}
+
+\item{data}{Lists of inforamtion on all the views}
+
+\item{distributions}{Lists of inforamtion on all the views}
+
+\item{offsets}{Lists of inforamtion on all the views}
+
+\item{paramEsts}{Lists of inforamtion on all the views}
+
+\item{paramMats}{Lists of inforamtion on all the views}
+
+\item{numVars}{Lists of inforamtion on all the views}
+
+\item{latentVarsLower}{The parameter estimates of the lower dimensions}
+
+\item{n}{The number of samples}
+
+\item{m}{The dimensions}
+
+\item{numSets}{The number of views}
+
+\item{meanVarTrends}{Lists of inforamtion on all the views}
+
+\item{links}{Lists of inforamtion on all the views}
+
+\item{varPosts}{Lists of inforamtion on all the views}
+
+\item{indepModels}{Lists of inforamtion on all the views}
+
+\item{compositional}{Lists of inforamtion on all the views}
+
 \item{...}{arguments to the jacobian function, currently ignored}
 }
 \value{
 A vector of length n, the evaluation of the score functions of the latent variables
 }
 \description{
-The score function to estimate the latent variables
+The jacobian function to estimate the latent variables
 }

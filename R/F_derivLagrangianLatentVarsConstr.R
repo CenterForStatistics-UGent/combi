@@ -1,6 +1,15 @@
 #' The score function to estimate the latent variables
-#' @inherit estLatentVars param
 #' @param ... arguments to the jacobian function, currently ignored
+#' @param x The current estimates of the latent variables
+#' @param n The number of samples
+#' @param m The dimensions
+#' @param numSets The number of views
+#' @param latentVarsLower The parameter estimates of the lower dimensions
+#' @param compositional,links,indepModels,meanVarTrends,numVars,distributions,data,offsets,varPosts,paramMats,paramEsts
+#' Lists of inforamtion on all the views
+#' @param covMat The covariance matrix
+#' @param centMat A centering matrix
+#' @param nLambda1s The number of dummy variables
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables
 derivLagrangianLatentVarsConstr = function(x, data, distributions, offsets, paramEsts,
@@ -16,7 +25,8 @@ derivLagrangianLatentVarsConstr = function(x, data, distributions, offsets, para
 score = rowSums(
 vapply(seq_len(numSets), FUN.VALUE = alpha, function(i){
  c(scoreLatentVars(data = data[[i]], distribution = distributions[[i]],
-                 paramEsts = paramEsts[[i]], offSet = offsets[[i]], paramMats = paramMats[[i]],
+                 paramEsts = paramEsts[[i]], offSet = offsets[[i]],
+                 paramMats = paramMats[[i]],
                  latentVar = alpha, meanVarTrend = meanVarTrends[[i]],
                  nLambda1s = nLambda1s, constrained = TRUE, covMat = covMat,
                  varPosts = varPosts[[i]], compositional = compositional[[i]],

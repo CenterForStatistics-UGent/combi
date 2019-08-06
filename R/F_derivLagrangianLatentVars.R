@@ -1,6 +1,12 @@
 #' The score function to estimate the latent variables
-#' @inherit estLatentVars param
 #' @param ... arguments to the jacobian function, currently ignored
+#' @param x The current estimates of the latent variables
+#' @param n The number of samples
+#' @param m The dimensions
+#' @param numSets The number of views
+#' @param latentVarsLower The parameter estimates of the lower dimensions
+#' @param compositional,links,indepModels,meanVarTrends,numVars,distributions,data,offsets,varPosts,paramMats,paramEsts
+#' Lists of inforamtion on all the views
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables
 derivLagrangianLatentVars = function(x, data, distributions, offsets, paramEsts,

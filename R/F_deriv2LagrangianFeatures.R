@@ -1,7 +1,5 @@
 #' The score function to estimate the latent variables
-#' @inherit estFeatureParameters param
-#'
-#' @inherit derivLagrangianFeatures param
+#' @inheritParams estFeatureParameters
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables
 deriv2LagrangianFeatures = function(x, data, distribution, offSet, latentVars,
