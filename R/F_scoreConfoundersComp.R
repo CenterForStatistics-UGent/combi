@@ -1,4 +1,15 @@
 #' Score equations for conditioning under compositionality
+#'
+#' @param x
+#' @param confMat
+#' @param data
+#' @param meanVarTrend
+#' @param marginModel
+#' @param biasReduction
+#' @param allowMissingness
+#' @param subtractMax
+#'
+#' @return The evaluation of the estimating equations
 scoreConfoundersComp = function(x, confMat, data, meanVarTrend, marginModel,
                                 biasReduction, allowMissingness,
                                 subtractMax = TRUE){

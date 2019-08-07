@@ -11,6 +11,7 @@
 #' @param new.knots The knots at which the spline is to be evaluated
 #' @param degree The degree of the polynomial fit
 #'
+#'@return The evaluation of the spline, i.e. the predicted variance
 predictSpline = function(fit, newdata, linX, coefsQuad, deriv = 0L,
                          meanVarFit, minFit, new.knots, degree){
     out = newdata

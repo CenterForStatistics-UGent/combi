@@ -7,6 +7,12 @@
 scoreConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
   biasReduction, allowMissingness, subtractMax = TRUE)
 }
+\arguments{
+\item{subtractMax}{}
+}
+\value{
+The evaluation of the estimating equations
+}
 \description{
 Score equations for conditioning under compositionality
 }

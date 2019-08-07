@@ -6,6 +6,8 @@
 #' @param meanVarTrend
 #' @param data
 #' @param libSizes
+#'
+#' @return The empty jacobian matrix with entries maximally filled out
 prepareJacMatComp = function(mu, paramEsts, CompMat0, meanVarTrend, data, libSizes){
 Sum = rowSums(CompMat0)
 CompMat = CompMat0/Sum

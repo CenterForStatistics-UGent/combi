@@ -16,6 +16,6 @@ Suggests:
     rmarkdown,
     testthat
 VignetteBuilder: knitr
-biocViews: Metagenomics, DimensionReduction, Microbiome, Visualization
+biocViews: Metagenomics, DimensionReduction, Microbiome, Visualization, Regression
 BugReports: https://github.com/CenterForStatistics-UGent/RCM/issues
 URL: http://users.ugent.be/~shawinke/RCMmanual/

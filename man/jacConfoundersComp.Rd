@@ -7,6 +7,12 @@
 jacConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
   allowMissingness, biasReduction, subtractMax = TRUE)
 }
+\arguments{
+\item{allowMissingness}{}
+}
+\value{
+the jacobian matrix
+}
 \description{
 Jacobian for conditioning under compositionality
 }

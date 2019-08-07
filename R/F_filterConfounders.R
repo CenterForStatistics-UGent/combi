@@ -14,6 +14,8 @@
 #' @param allowMissingness
 #' @param maxItFilt
 #' @param compositional
+#'
+#' @return Parameter estimates accounting for the effects of the confounders
 filterConfounders = function(confMat, data, distribution, link, invLink,
                              compositional, control, meanVarTrend, offSet,
                              numVar, marginModel, biasReduction, allowMissingness,

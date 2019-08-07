@@ -73,6 +73,9 @@ in the estimation of the feature parametes and confounder parameters
 respectively}
 }
 \value{
+An object of the "compInt" class, containing all information on the
+data integration and fitting procedure
+
 An object of class compInt, describing the fit
 }
 \description{
@@ -89,7 +92,7 @@ meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
 }
 \examples{
 data(hmp2)
-microVirDI = compInt(data = list(microPruneVir, virPrune),
-distributions = c("quasi", "quasi"), compositional = c(TRUE, TRUE),
-verbose = TRUE, nCores = 1, M = 2)
+microVirDI = compInt(data = list("microbiome" = microPruneVir,
+"virome" = virPrune), distributions = c("quasi", "quasi"),
+compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
 }

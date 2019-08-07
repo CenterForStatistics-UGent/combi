@@ -1,6 +1,7 @@
 #' Jacobian for conditioning under compositionality
-#' @inherit scoreConfounders param
+#' @inheritParams scoreConfounders
 #' @importFrom tensor tensor
+#' @return the jacobian matrix
 jacConfoundersComp = function(x, confMat, data, meanVarTrend, marginModel,
                               allowMissingness, biasReduction, subtractMax = TRUE){
     parMat = matrix(x, ncol(confMat), ncol(data)-1)

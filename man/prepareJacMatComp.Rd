@@ -6,6 +6,12 @@
 \usage{
 prepareJacMatComp(mu, paramEsts, CompMat0, meanVarTrend, data, libSizes)
 }
+\arguments{
+\item{libSizes}{}
+}
+\value{
+The empty jacobian matrix with entries maximally filled out
+}
 \description{
 prepare the jacobian for the latent variabels compostional
 }

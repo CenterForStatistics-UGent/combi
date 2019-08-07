@@ -17,7 +17,7 @@ inflPlot = function(modelObj, plotType = "pointplot",
     inflObj = influence(modelObj, Dim = Dim,...)
     #inflMat = with(inflObj, score * diag(InvJac)) #look only at direct effect, ignore coupling
     inflMat = with(inflObj, InvJac %*% score)
-    numVars = sapply(modelObj$data, ncol)
+    numVars = vapply(FUN.VALUE = integer(1), modelObj$data, ncol)
     IDs = lapply(seq_along(numVars), function(i){
         (sum(numVars[seq_len(i-1)])+1):sum(numVars[seq_len(i)])
     })

@@ -7,6 +7,12 @@
 scoreConfounders(x, data, distribution, offSet, confMat, meanVarTrend,
   allowMissingness)
 }
+\arguments{
+\item{allowMissingness}{}
+}
+\value{
+The evaluation of the estimating equations
+}
 \description{
 Score functions for confounder variables
 }

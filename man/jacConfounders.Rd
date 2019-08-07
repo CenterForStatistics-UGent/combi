@@ -6,6 +6,9 @@
 \usage{
 jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet)
 }
+\value{
+the jacobian matrix
+}
 \description{
 Jacobian when estimating confounder variables
 }

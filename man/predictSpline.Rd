@@ -28,6 +28,9 @@ fit is being used}
 
 \item{degree}{The degree of the polynomial fit}
 }
+\value{
+The evaluation of the spline, i.e. the predicted variance
+}
 \description{
 A custom spline prediction function, extending linearly with a slope such that prediction never drops below first bisectant
 }

@@ -14,6 +14,9 @@ parameter estimates and distribution type}
 
 \item{paramMatrix}{A boolean, are feature parameters provided as matrix}
 }
+\value{
+The mean matrix
+}
 \description{
 A function to build the mu matrix
 }

@@ -8,6 +8,12 @@ filterConfounders(confMat, data, distribution, link, invLink,
   compositional, control, meanVarTrend, offSet, numVar, marginModel,
   biasReduction, allowMissingness, maxItFilt)
 }
+\arguments{
+\item{compositional}{}
+}
+\value{
+Parameter estimates accounting for the effects of the confounders
+}
 \description{
 Filter out the effect of known confounders
 }

@@ -36,6 +36,9 @@
 #' in the estimation of the feature parametes and confounder parameters
 #' respectively
 #'
+#' @return An object of the "compInt" class, containing all information on the
+#' data integration and fitting procedure
+#'
 #' @details Using more than one core is only implemented on Unix systems.
 #' Setting nCores > 1 on Windows will use a single core, with a warning.
 #' When the number of cores specified is larger than the number of views,
@@ -52,9 +55,9 @@
 #' @export
 #' @examples
 #' data(hmp2)
-#' microVirDI = compInt(data = list(microPruneVir, virPrune),
-#' distributions = c("quasi", "quasi"), compositional = c(TRUE, TRUE),
-#' verbose = TRUE, nCores = 1, M = 2)
+#' microVirDI = compInt(data = list("microbiome" = microPruneVir,
+#' "virome" = virPrune), distributions = c("quasi", "quasi"),
+#' compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
 compInt = function(data, M = 3L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformMicroArray = TRUE,
