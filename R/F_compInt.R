@@ -91,14 +91,16 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     if(any(vapply(FUN.VALUE = TRUE,data, anyNA)) & !allowMissingness){
         stop("Missing data present. To allow fit with missing data, set allowMissingness to TRUE")
     }
-    zeroRows = apply(sapply(data, function(x){rowSums(x, na.rm = TRUE)==0}), 1, any)
+    zeroRows = apply(vapply(data, FUN.VALUE = numeric(nrow(data[[1]])),
+                            function(x){rowSums(x, na.rm = TRUE)==0}), 1, any)
     if(any(zeroRows)){
         warning("Zero rows\n", paste(which(zeroRows), collapse = " ") ,
                 "\nfiltered out prior to fit", immediate. = TRUE)
     }
     data = lapply(data, function(x){x[!zeroRows,]})
     rowNames = lapply(data, function(x){sort(rownames(x))})
-    if(!all(sapply(rowNames[-1], FUN = identical, rowNames[[1]]))){
+    if(!all(vapply(FUN.VALUE = logical(1), rowNames[-1], FUN = identical,
+                   rowNames[[1]]))){
         if(allowMissingness){
         # Make sure at least some samples are shared
             if(length(Reduce(rowNames, f = intersect))==0){
@@ -136,7 +138,7 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
         switch(link, "identity" = identity, "log" = exp,
                "logit" = function(x){exp(x)/(1+exp(x))})
     })
-    links = sapply(links, match.fun) #Match the link functions
+    links = lapply(links, match.fun) #Match the link functions
     #Assign weighting schemes
     weights = if(is.null(weights)) ifelse(distributions %in%
                                               c("quasi"), "marginal", "uniform") else weights
@@ -220,8 +222,9 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
     })
     #All zero rows, but not all NAs
     zeroRowsIndep = apply(
-        sapply(data, function(x){rowSums(x, na.rm = TRUE)==0 & !apply(x,1, function(x) all(is.na(x)))}
-                                 ), 1, any)
+        vapply(data, FUN.VALUE = numeric(n),
+               function(x){rowSums(x, na.rm = TRUE)==0 &
+                       !apply(x,1, function(x) all(is.na(x)))}), 1, any)
     if(any(zeroRowsIndep)){
         warning("Zero rows\n", paste(which(zeroRowsIndep), collapse = " ") ,
                 "\nfiltered out after filtering features", immediate. = TRUE)
@@ -229,7 +232,7 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
     data = lapply(data, function(x){x[!zeroRowsIndep,]})
     names(data) = namesData
     n = nrow(data[[1]])
-    numVars = sapply(data, ncol) #Number of variables per view
+    numVars = vapply(FUN.VALUE = integer(1), data, ncol) #Number of variables per view
 
     IDs = lapply(seqSets, function(i){
         (sum(numVars[seq_len(i-1)])+1):sum(numVars[seq_len(i)])
@@ -265,7 +268,7 @@ switch(weights[[i]],
     })
 
     #### CONDITIONING ####
-    if(verbose && !all(sapply(confounders, is.null))){
+    if(verbose && !all(vapply(FUN.VALUE = logical(1), confounders, is.null))){
         cat("Conditioning on known confounders ...\n")}
     confVars = lapply(seqSets, function(i){
         if(!oneConfMat && is.null(confounders[[i]])){return(NULL)
@@ -518,8 +521,9 @@ switch(weights[[i]],
         # Change iterator
         iter[[m]] = iter[[m]] + 1
         # Check for convergence
-        converged[[m]] = all(sapply(seqSets, function(i){
-                sqrt(mean((1-paramEsts[[i]][m,]/paramEstsOld[[i]])^2)) < tol})) &&
+        converged[[m]] = all(vapply(seqSets, FUN.VALUE = logical(1),
+                                    function(i){
+            sqrt(mean((1-paramEsts[[i]][m,]/paramEstsOld[[i]])^2)) < tol})) &&
             (if(constrained) sqrt(mean((1-alphas[,m]/alphaOld)^2)) else
                 sqrt(mean((1-latentVars[,m]/latentVarsOld)^2))) < tol
         }
