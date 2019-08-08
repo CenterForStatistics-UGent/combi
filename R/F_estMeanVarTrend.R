@@ -11,7 +11,7 @@
 #' @param constraint Constraint to the spline
 #' @param ... additional arguments passed on to the plot() function
 #'
-#' @import cobs stats
+#' @import cobs stats graphics
 #' @importFrom alabama constrOptim.nl
 #'
 #' @return A list with components

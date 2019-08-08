@@ -47,7 +47,7 @@
 #'  trend, "cubic" gives a third degree polynomial. Both converge to the
 #'  diagonal line with slope 1 for small means.
 #' @return An object of class compInt, describing the fit
-#' @alias compIntegrate
+#' @aliases compIntegrate
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda
 #' @importFrom parallel mclapply

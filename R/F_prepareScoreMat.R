@@ -1,10 +1,6 @@
 #' Prepare a helper matrix for score function evaluation under quasi-likelihood
 #'
-#' @param data
-#' @param mu
-#' @param meanVarTrend
-#' @param CompMat
-#' @param libSizes
+#' @inheritParams prepareJacMat
 #'
 #' @return The helper matrix
 prepareScoreMat = function(data, mu, meanVarTrend, CompMat, libSizes){

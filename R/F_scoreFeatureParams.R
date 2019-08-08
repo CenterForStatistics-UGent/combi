@@ -1,8 +1,6 @@
 #' Evaluate the score functions for the estimation of the feature parameters for a
 #' single dataset
-#'
-#' @inherit estFeatureParams param
-#'
+#' @inheritParams estFeatureParameters
 #' @return A vector with evaluated score function
 scoreFeatureParams = function(x, data, distribution, offSet, latentVar,
                            meanVarTrend, mm, indepModel, compositional,

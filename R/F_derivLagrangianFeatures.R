@@ -1,5 +1,5 @@
 #' The score function to estimate the feature parameters
-#' @inheritParams estFeatureParamaters
+#' @inheritParams estFeatureParameters
 #' @param ... arguments to the jacobian function, currently ignored
 #'
 #' @return A vector with the evaluation of the score functions of the feature parameters

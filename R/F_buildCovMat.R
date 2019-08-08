@@ -52,13 +52,13 @@ buildCovMat = function(datFrame) {
     nFactorLevels = nFactorLevels[covariatesNames]
     datFrame = datFrame[, covariatesNames, drop = FALSE]
     #Check for alias structures
-    RCM::checkAlias(datFrame, covariatesNames)
+    checkAlias(datFrame, covariatesNames)
 
     if (any(vapply(FUN.VALUE = TRUE, datFrame, is.factor) & (nFactorLevels <
                                                              2))) {
         warning("The following variables were not included in the analyses
             because they are factors with only one level: \n",
-                paste(covariates[vapply(FUN.VALUE = TRUE, datFrame,
+                paste(covariatesNames[vapply(FUN.VALUE = TRUE, datFrame,
                                         is.factor) & (nFactorLevels < 2)], sep = " \n"),
                 immediate. = TRUE, call. = FALSE)
     }

@@ -53,3 +53,10 @@ A ggplot object containing the plot
 \description{
 Make triplots or higher dimensional plots of the ordination object
 }
+\examples{
+data(hmp2)
+microVirDI = compInt(data = list("microbiome" = microPruneVir,
+"virome" = virPrune), distributions = c("quasi", "quasi"),
+compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
+plot(microVirDI)
+}

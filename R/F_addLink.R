@@ -13,12 +13,22 @@
 #'@return A ggplot object with the links added
 #'
 #'@export
+#' @examples
+#' data(hmp2)
+#' microVirDI = compInt(data = list("microbiome" = microPruneVir,
+#' "virome" = virPrune), distributions = c("quasi", "quasi"),
+#' compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
+#' Plot = plot(microVirDI, returnCoords = TRUE) #Store the coordinates
+#' addLink(Plot, links = cbind("354259","12239"), Views = 1, samples = c(-0.2,-0.75))
 #'@import ggplot2
-addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2), addLabel = FALSE,
-labPos = NULL, projColour = "grey", latentSize = 0.25) {
+addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2),
+                   addLabel = FALSE, labPos = NULL, projColour = "grey",
+                   latentSize = 0.25) {
     dimNames = paste0("Dim", Dims)
+    if(length(Views) == 1L) {
+        Views = rep(Views, 2)
+    } else if(length(Views) != 2L){"Please provide two views indicators"}
     if(is.numeric(links)){
-        if(length(Views) != 2L){"Please provide two views indicators"}
         if(ncol(links) != 4L){
             stop("Provide numeric links matrix with four columns: first x and y of one taxon and then another.")
         }
@@ -33,7 +43,6 @@ labPos = NULL, projColour = "grey", latentSize = 0.25) {
         }
         linkNames = links
     }
-
     if (is.numeric(samples)) {
         samples = which.min(colSums((t(DIplot$latentData[, dimNames]) - samples)^2))
         # Closest to approximate coordinate
@@ -42,14 +51,14 @@ labPos = NULL, projColour = "grey", latentSize = 0.25) {
         sampleNames = samples
     }
 
-    # if (is.numeric(variable)) {
-    #     variable = which.min(colSums((t(DIplot$variables[,
-    #                                                       dimNames]) - species)^2))
-    #     # Closest to approximate coordinate
-    #     varName = rownames(DIplot$variables)[variable]
-    # } else {
-    #     varName = variable
-    # }
+    if (is.numeric(variable)) {
+        variable = which.min(colSums((t(DIplot$variables[,
+                                                          dimNames]) - species)^2))
+        # Closest to approximate coordinate
+        varName = rownames(DIplot$variables)[variable]
+    } else {
+        varName = variable
+    }
 
     #Exact coordinates
     sampleMat = if(is.null(variable)){
@@ -60,7 +69,7 @@ labPos = NULL, projColour = "grey", latentSize = 0.25) {
     linkMat = apply(linkNames, 1, function(ln){
                 tmp = unlist(vapply(seq_along(Views), FUN.VALUE = numeric(2),
                                     function(i){
-                    DIplot$featureData[[Views[i]]][ln[i], dimNames]
+                    unlist(DIplot$featureData[[Views[i]]][ln[i], dimNames])
                 }))
                 names(tmp) = c("x", "y", "xend", "yend")
                 tmp

@@ -9,6 +9,10 @@
 #' @importFrom Biobase exprs
 #' @importFrom phyloseq t
 #' @export
+#' @examples
+#' data(hmp2)
+#' matrixList = extractData(list("microbiome" = microPruneVir,
+#' "virome" = virPrune))
 extractData = function(data, logTransformMicroArray = TRUE){
     datNames = names(data)
     data = lapply(seq_along(data), function(View){

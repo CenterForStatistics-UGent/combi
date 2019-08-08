@@ -1,6 +1,6 @@
 #' Evaluate the jacobian for estimating the feature parameters for one view
 #'
-#' @inherit estFeatureParams param
+#' @inheritParams estFeatureParameters
 #'
 #' @return The jacobian matrix
 jacFeatures = function(latentVars, data, distribution, paramEsts, meanVarTrend,

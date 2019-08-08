@@ -10,6 +10,11 @@ scoreLatentVars(data, distribution, paramEsts, paramMats, offSet,
   varPosts, compositional, indepModel, mm, latentVarsLower,
   allowMissingness, ...)
 }
+\arguments{
+\item{constrained}{A boolean, is the ordination constrained?}
+
+\item{...}{additional arguments passed on to score and jacobian functions}
+}
 \value{
 A vector of length n, with evaluated score function
 }

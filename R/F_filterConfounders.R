@@ -1,19 +1,13 @@
 #' Filter out the effect of known confounders
 #'
-#' @param data
-#' @param distribution
-#' @param link
-#' @param invLink
-#' @param confMat
-#' @param control
-#' @param meanVarTrend
-#' @param offSet
-#' @param numVar
-#' @param marginModel
-#' @param biasReduction
-#' @param allowMissingness
-#' @param maxItFilt
-#' @param compositional
+#' @param data data matrix
+#' @param distribution,link,invLink,compositional,meanVarTrend,offSet,numVar,marginModel
+#' Characteristics of the view
+#' @param confMat A confounder design matrix
+#' @param control A list of control elements to the nleqslv function
+#' @param biasReduction A boolean, should bias reduction be applied
+#' @param allowMissingness A boolean, are missing values allowed?
+#' @param maxItFilt An integer, maximum number of iterations
 #'
 #' @return Parameter estimates accounting for the effects of the confounders
 filterConfounders = function(confMat, data, distribution, link, invLink,

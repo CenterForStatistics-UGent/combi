@@ -11,7 +11,11 @@ prepareJacMat(mu, data, meanVarTrend, CompMat, libSizes)
 
 \item{data}{the count matrix}
 
-\item{libSizes}{}
+\item{meanVarTrend}{The mean variance trend}
+
+\item{CompMat}{The compisition matrix}
+
+\item{libSizes}{The library sizes}
 }
 \value{
 the matrix which can be summed over

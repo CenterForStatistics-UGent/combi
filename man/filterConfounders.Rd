@@ -9,7 +9,19 @@ filterConfounders(confMat, data, distribution, link, invLink,
   biasReduction, allowMissingness, maxItFilt)
 }
 \arguments{
-\item{compositional}{}
+\item{confMat}{A confounder design matrix}
+
+\item{data}{data matrix}
+
+\item{distribution, link, invLink, compositional, meanVarTrend, offSet, numVar, marginModel}{Characteristics of the view}
+
+\item{control}{A list of control elements to the nleqslv function}
+
+\item{biasReduction}{A boolean, should bias reduction be applied}
+
+\item{allowMissingness}{A boolean, are missing values allowed?}
+
+\item{maxItFilt}{An integer, maximum number of iterations}
 }
 \value{
 Parameter estimates accounting for the effects of the confounders

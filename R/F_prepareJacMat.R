@@ -2,9 +2,9 @@
 #'
 #' @param mu the mean matrix
 #' @param data the count matrix
-#' @param meanVarTrend
-#' @param CompMat
-#' @param libSizes
+#' @param meanVarTrend The mean variance trend
+#' @param CompMat The compisition matrix
+#' @param libSizes The library sizes
 #'
 #' @return the matrix which can be summed over
 prepareJacMat = function(mu, data, meanVarTrend, CompMat, libSizes){

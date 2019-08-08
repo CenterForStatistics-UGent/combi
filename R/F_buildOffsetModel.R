@@ -1,9 +1,10 @@
 #' Build a marginal offset matrix given a model
 #' @param modelObj a modelDI object
 #' @param View The view for which to build the offset
+#' @param distributions,compositional belong to the view
 #'
 #' @return The offset matrix
-buildOffsetModel = function(modelObj, View){
+buildOffsetModel = function(modelObj, View, distributions, compositional){
 with(modelObj, {
     if(distributions[[View]]=="quasi"){
         expColMat = exp(indepModels[[View]]$colMat)

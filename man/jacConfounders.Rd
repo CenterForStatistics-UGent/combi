@@ -6,6 +6,15 @@
 \usage{
 jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet)
 }
+\arguments{
+\item{confMat}{confounder matrix}
+
+\item{data}{data}
+
+\item{x}{Confounder parameter estimates}
+
+\item{meanVarTrend}{mean variance trend}
+}
 \value{
 the jacobian matrix
 }

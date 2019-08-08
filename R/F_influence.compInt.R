@@ -1,6 +1,12 @@
 #' Evaluate the influence function
-#'@methods influence compInt
-#' @details Especially the influence of the different views on the latent variable or gradient estimation may be of interest
+#'@method influence compInt
+#' @details Especially the influence of the different views on the latent
+#' variable or gradient estimation may be of interest. The influence values are
+#' not all calculated. Rather, the score values and inverse jacobian are returned
+#' so they can easily be calculated
+#' @return A list with components
+#' \item{score}{The evaluation of the score function}
+#' \item{InvJac}{The inverted jacobian matrix}
 influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = NULL){
     with(modelObj, {
     if(latent){

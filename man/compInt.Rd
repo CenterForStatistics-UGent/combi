@@ -2,6 +2,7 @@
 % Please edit documentation in R/F_compInt.R
 \name{compInt}
 \alias{compInt}
+\alias{compIntegrate}
 \title{Perform model-based data integration}
 \usage{
 compInt(data, M = 3L, covariates = NULL, distributions, compositional,

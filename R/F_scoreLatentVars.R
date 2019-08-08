@@ -1,7 +1,7 @@
 #' Evaluate the score functions for the estimation of the latent variables for a
 #' single dataset
 #'
-#' @inherit estLatentVars param
+#' @inheritParams estLatentVars
 #'
 #' @return A vector of length n, with evaluated score function
 scoreLatentVars = function(data, distribution, paramEsts, paramMats, offSet, latentVar,

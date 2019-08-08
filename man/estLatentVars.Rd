@@ -14,6 +14,8 @@ estLatentVars(latentVars, lambdasLatent, constrained, fTol, ...)
 \item{constrained}{A boolean, is the ordination constrained?}
 
 \item{fTol}{The convergence tolerance}
+
+\item{...}{additional arguments passed on to score and jacobian functions}
 }
 \value{
 A vector of length n, the estimates of the latent variables

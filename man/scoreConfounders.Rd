@@ -8,7 +8,15 @@ scoreConfounders(x, data, distribution, offSet, confMat, meanVarTrend,
   allowMissingness)
 }
 \arguments{
-\item{allowMissingness}{}
+\item{x}{Confounder parameter estimates}
+
+\item{data}{data}
+
+\item{confMat}{confounder matrix}
+
+\item{meanVarTrend}{mean variance trend}
+
+\item{allowMissingness}{A boolean, are missing values allowed}
 }
 \value{
 The evaluation of the estimating equations

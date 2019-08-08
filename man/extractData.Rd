@@ -17,3 +17,8 @@ the raw data matrices, samples in the rows
 \description{
 Helper function to extract data matrix from phyloseq, expressionset objects etc. Also filers out all zero rows
 }
+\examples{
+data(hmp2)
+matrixList = extractData(list("microbiome" = microPruneVir,
+"virome" = virPrune))
+}

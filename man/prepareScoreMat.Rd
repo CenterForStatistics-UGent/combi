@@ -7,7 +7,15 @@
 prepareScoreMat(data, mu, meanVarTrend, CompMat, libSizes)
 }
 \arguments{
-\item{libSizes}{}
+\item{data}{the count matrix}
+
+\item{mu}{the mean matrix}
+
+\item{meanVarTrend}{The mean variance trend}
+
+\item{CompMat}{The compisition matrix}
+
+\item{libSizes}{The library sizes}
 }
 \value{
 The helper matrix

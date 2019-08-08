@@ -7,7 +7,17 @@
 prepareJacMatComp(mu, paramEsts, CompMat0, meanVarTrend, data, libSizes)
 }
 \arguments{
-\item{libSizes}{}
+\item{mu}{the mean matrix}
+
+\item{paramEsts}{Current parameter estimates}
+
+\item{CompMat0}{The compisition matrix}
+
+\item{meanVarTrend}{The mean variance trend}
+
+\item{data}{the count matrix}
+
+\item{libSizes}{The library sizesv}
 }
 \value{
 The empty jacobian matrix with entries maximally filled out

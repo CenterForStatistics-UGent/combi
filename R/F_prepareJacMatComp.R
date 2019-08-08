@@ -1,11 +1,11 @@
 #' prepare the jacobian for the latent variabels compostional
 #'
-#' @param mu
-#' @param paramEsts
-#' @param CompMat0
-#' @param meanVarTrend
-#' @param data
-#' @param libSizes
+#' @param mu the mean matrix
+#' @param data the count matrix
+#' @param meanVarTrend The mean variance trend
+#' @param CompMat0 The compisition matrix
+#' @param libSizes The library sizesv
+#' @param paramEsts Current parameter estimates
 #'
 #' @return The empty jacobian matrix with entries maximally filled out
 prepareJacMatComp = function(mu, paramEsts, CompMat0, meanVarTrend, data, libSizes){

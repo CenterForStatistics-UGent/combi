@@ -1,13 +1,6 @@
 #' Score functions for confounder variables
 #'
-#' @param x
-#' @param data
-#' @param distribution
-#' @param offSet
-#' @param confMat
-#' @param meanVarTrend
-#' @param allowMissingness
-#'
+#'@inheritParams scoreConfoundersComp
 #' @return The evaluation of the estimating equations
 scoreConfounders = function(x, data, distribution, offSet, confMat,
                               meanVarTrend, allowMissingness){

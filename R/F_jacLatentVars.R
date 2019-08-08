@@ -1,5 +1,5 @@
 #' Evaluate the jacobian for estimating the latent variable for one view
-#' @inherit estLatentVars param
+#' @inheritParams scoreLatentVars
 #'
 #' @return The jacobian matrix
 jacLatentVars = function(latentVar, data, distribution, paramEsts, paramMats, offSet,

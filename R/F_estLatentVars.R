@@ -3,7 +3,7 @@
 #' @param lambdasLatent A vector of Lagrange multipliers
 #' @param constrained A boolean, is the ordination constrained?
 #' @param fTol The convergence tolerance
-#' @param ...
+#' @param ... additional arguments passed on to score and jacobian functions
 #' @param latentVars A vector of latent variables
 #'
 #' @return A vector of length n, the estimates of the latent variables

@@ -4,12 +4,14 @@
 \alias{buildOffsetModel}
 \title{Build a marginal offset matrix given a model}
 \usage{
-buildOffsetModel(modelObj, View)
+buildOffsetModel(modelObj, View, distributions, compositional)
 }
 \arguments{
 \item{modelObj}{a modelDI object}
 
 \item{View}{The view for which to build the offset}
+
+\item{distributions, compositional}{belong to the view}
 }
 \value{
 The offset matrix

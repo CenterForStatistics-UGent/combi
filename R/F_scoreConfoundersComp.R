@@ -1,13 +1,14 @@
 #' Score equations for conditioning under compositionality
 #'
-#' @param x
-#' @param confMat
-#' @param data
-#' @param meanVarTrend
-#' @param marginModel
-#' @param biasReduction
-#' @param allowMissingness
-#' @param subtractMax
+#' @param x Confounder parameter estimates
+#' @param confMat confounder matrix
+#' @param data data
+#' @param meanVarTrend mean variance trend
+#' @param marginModel marginal models
+#' @param biasReduction A boolean, should a bias reduced estimation be applied?
+#' @param allowMissingness A boolean, are missing values allowed
+#' @param subtractMax A boolean, shuold the maximum be subtracted before softmax
+#' transformation? Recommended for numerical stability
 #'
 #' @return The evaluation of the estimating equations
 scoreConfoundersComp = function(x, confMat, data, meanVarTrend, marginModel,

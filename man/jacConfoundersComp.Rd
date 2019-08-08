@@ -8,7 +8,15 @@ jacConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
   allowMissingness, biasReduction, subtractMax = TRUE)
 }
 \arguments{
-\item{allowMissingness}{}
+\item{x}{Confounder parameter estimates}
+
+\item{confMat}{confounder matrix}
+
+\item{data}{data}
+
+\item{meanVarTrend}{mean variance trend}
+
+\item{allowMissingness}{A boolean, are missing values allowed}
 }
 \value{
 the jacobian matrix

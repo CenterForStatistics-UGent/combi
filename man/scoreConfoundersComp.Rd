@@ -8,7 +8,22 @@ scoreConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
   biasReduction, allowMissingness, subtractMax = TRUE)
 }
 \arguments{
-\item{subtractMax}{}
+\item{x}{Confounder parameter estimates}
+
+\item{confMat}{confounder matrix}
+
+\item{data}{data}
+
+\item{meanVarTrend}{mean variance trend}
+
+\item{marginModel}{marginal models}
+
+\item{biasReduction}{A boolean, should a bias reduced estimation be applied?}
+
+\item{allowMissingness}{A boolean, are missing values allowed}
+
+\item{subtractMax}{A boolean, shuold the maximum be subtracted before softmax
+transformation? Recommended for numerical stability}
 }
 \value{
 The evaluation of the estimating equations

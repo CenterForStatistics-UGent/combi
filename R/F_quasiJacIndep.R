@@ -1,5 +1,5 @@
 #' The jacobian for column offset estimation
-#' @inherit quasiScoreIndep param
+#' @inheritParams quasiScoreIndep
 #'
 #' @return the jacobian matrix
 quasiJacIndep = function(x, data, otherMargin, meanVarTrend, col, libSizes,...){

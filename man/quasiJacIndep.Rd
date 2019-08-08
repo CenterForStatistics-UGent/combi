@@ -6,6 +6,17 @@
 \usage{
 quasiJacIndep(x, data, otherMargin, meanVarTrend, col, libSizes, ...)
 }
+\arguments{
+\item{x}{the initial guess for the current margin}
+
+\item{data}{the data matrix}
+
+\item{otherMargin}{The other margin}
+
+\item{meanVarTrend}{the function describing the mean-variance trend}
+
+\item{col}{A logical, is the column being estimated?}
+}
 \value{
 the jacobian matrix
 }

@@ -8,6 +8,9 @@ jacLatentVars(latentVar, data, distribution, paramEsts, paramMats, offSet,
   meanVarTrend, n, varPosts, mm, indepModel, latentVarsLower,
   compositional, allowMissingness, ...)
 }
+\arguments{
+\item{...}{additional arguments passed on to score and jacobian functions}
+}
 \value{
 The jacobian matrix
 }
