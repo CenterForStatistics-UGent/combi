@@ -8,18 +8,18 @@ jacConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
   allowMissingness, biasReduction, subtractMax = TRUE)
 }
 \arguments{
-\item{x}{Confounder parameter estimates}
+\item{x}{the parameter estimates}
 
-\item{confMat}{confounder matrix}
+\item{confMat}{Characteristics of the views}
 
-\item{data}{data}
+\item{data}{Characteristics of the views}
 
-\item{meanVarTrend}{mean variance trend}
+\item{meanVarTrend}{Characteristics of the views}
 
 \item{marginModel, biasReduction, subtractMax}{The marginal mode, and booleans
 indicating bias reduction and maximum subtraction}
 
-\item{allowMissingness}{A boolean, are missing values allowed}
+\item{allowMissingness}{a boolean, should missing values be allowed}
 }
 \value{
 the jacobian matrix

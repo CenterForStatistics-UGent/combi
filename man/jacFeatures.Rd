@@ -13,7 +13,7 @@ jacFeatures(latentVars, data, distribution, paramEsts, meanVarTrend,
 
 \item{data}{A list of data matrices}
 
-\item{distribution, compositional, meanVarTrend, offSet, paramEsts, paramEstsLower}{Characteristics of each view}
+\item{distribution, compositional, meanVarTrend, offSet, paramEsts, paramEstsLower, indepModel}{Characteristics of each view}
 
 \item{m}{dimension}
 

@@ -14,17 +14,11 @@ deriv2LagrangianLatentVarsConstr(x, data, distributions, offsets,
 
 \item{data}{Lists of inforamtion on all the views}
 
-\item{distributions}{Lists of inforamtion on all the views}
-
-\item{offsets}{Characteristics of the views}
-
-\item{paramEsts}{Characteristics of the views}
-
-\item{paramMats}{Characteristics of the views}
-
-\item{numVars}{Characteristics of the views}
+\item{distributions, links, compositional, meanVarTrends, offsets, numVars, paramMats, paramEsts}{Characteristics of the view}
 
 \item{latentVarsLower}{The parameter estimates of the lower dimensions}
+
+\item{nn}{number of samples}
 
 \item{m}{integeres, number of samples and dimensions}
 
@@ -32,19 +26,17 @@ deriv2LagrangianLatentVarsConstr(x, data, distributions, offsets,
 
 \item{numSets}{Characteristics of the views}
 
-\item{meanVarTrends}{Characteristics of the views}
-
-\item{links}{Characteristics of the views}
-
 \item{numCov}{The number of covariates}
+
+\item{covMat}{the covariates matrix}
+
+\item{nLambda1s}{The number of centering restrictions}
 
 \item{varPosts}{Characteristics of the views}
 
 \item{indepModels}{Characteristics of the views}
 
 \item{...}{arguments to the jacobian function, currently ignored}
-
-\item{distribution, link, invLink, compositional, meanVarTrend, offSet, numVar, marginModel}{Characteristics of the view}
 }
 \value{
 A vector of length nn, the evaluation of the score functions of the latent variables

@@ -1,6 +1,10 @@
 #' Score functions for confounder variables
 #'
 #'@inheritParams scoreConfoundersComp
+#'@param data,distribution,offSet,confMat,meanVarTrend
+#' Characteristics of the views
+#' @param x the parameter estimates
+#' @param allowMissingness a boolean, should missing values be allowed
 #' @return The evaluation of the estimating equations
 scoreConfounders = function(x, data, distribution, offSet, confMat,
                               meanVarTrend, allowMissingness){

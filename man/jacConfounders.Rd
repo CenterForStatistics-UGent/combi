@@ -7,15 +7,15 @@
 jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet)
 }
 \arguments{
-\item{confMat}{confounder matrix}
+\item{confMat}{Characteristics of the views}
 
-\item{data}{data}
+\item{data}{Characteristics of the views}
 
 \item{distribution, offSet}{distribution and offset of the view}
 
-\item{x}{Confounder parameter estimates}
+\item{x}{the parameter estimates}
 
-\item{meanVarTrend}{mean variance trend}
+\item{meanVarTrend}{Characteristics of the views}
 }
 \value{
 the jacobian matrix

@@ -9,12 +9,15 @@ scoreFeatureParams(x, data, distribution, offSet, latentVar, meanVarTrend,
   mm, indepModel, compositional, paramEstsLower, allowMissingness, ...)
 }
 \arguments{
-\item{data}{A list of data matrices}
+\item{x}{the parameter estimates}
 
-\item{compositional}{A list of booleans indicating compositionality}
+\item{data, distribution, offSet, meanVarTrend, indepModel, compositional, paramEstsLower}{Characteristics of the views}
 
-\item{allowMissingness}{A boolean indicating whether missing values are
-allowed}
+\item{latentVar}{the latent variables}
+
+\item{mm}{the dimension}
+
+\item{allowMissingness}{a boolean, should missing values be allowed}
 
 \item{...}{Additional arguments passed on to the score and jacobian functions}
 }

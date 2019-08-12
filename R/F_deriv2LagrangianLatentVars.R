@@ -2,7 +2,7 @@
 #' @inheritParams derivLagrangianLatentVars
 #' @param Jac an empty jacobian matrix
 #' @param ... arguments to the jacobian function, currently ignored
-#' @param distribution,links,compositional,meanVarTrends,offsets,numVars,marginModel,numSets,paramMats,paramEsts,varPosts,indepModels
+#' @param distributions,links,compositional,meanVarTrends,offsets,numVars,numSets,paramMats,paramEsts,varPosts,indepModels
 #' Characteristics of the views
 #' @param n,m integeres, number of samples and dimensions
 #'

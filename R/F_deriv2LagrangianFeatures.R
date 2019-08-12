@@ -5,6 +5,8 @@
 #' @param x parameter estimates
 #' @param paramEstsLower lower dimension estimates
 #' @param indepModel the independence model
+#' @param mm the current dimension
+#' @param Jac a prefab jacobian
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables
 deriv2LagrangianFeatures = function(x, data, distribution, offSet, latentVars,

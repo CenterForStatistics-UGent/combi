@@ -9,6 +9,22 @@ jacLatentVars(latentVar, data, distribution, paramEsts, paramMats, offSet,
   compositional, allowMissingness, ...)
 }
 \arguments{
+\item{latentVar}{the latent variable estimates}
+
+\item{data}{#' Characteristics of the views}
+
+\item{distribution, compositional, meanVarTrend, offSet, paramEsts, paramMats, indepModel}{Characteristics of each view}
+
+\item{n}{the number of samples}
+
+\item{varPosts}{#' Characteristics of the views}
+
+\item{mm}{the current dimension}
+
+\item{latentVarsLower}{the lower dimensional latent variables}
+
+\item{allowMissingness}{a boolean, should missing values be allowed}
+
 \item{...}{additional arguments passed on to score and jacobian functions}
 }
 \value{

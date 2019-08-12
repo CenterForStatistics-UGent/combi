@@ -10,6 +10,7 @@
 #' @param covMat The covariance matrix
 #' @param centMat A centering matrix
 #' @param nLambda1s The number of dummy variables
+#' @param numCov The number of covariates
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables
 derivLagrangianLatentVarsConstr = function(x, data, distributions, offsets, paramEsts,

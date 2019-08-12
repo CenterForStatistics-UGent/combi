@@ -11,7 +11,19 @@ scoreLatentVars(data, distribution, paramEsts, paramMats, offSet,
   allowMissingness, ...)
 }
 \arguments{
-\item{constrained}{A boolean, is the ordination constrained?}
+\item{data, distribution, offSet, meanVarTrend, indepModel, varPosts, paramEsts, paramMats, compositional}{#' Characteristics of the views}
+
+\item{latentVar}{the latent variable estimates}
+
+\item{constrained}{a boolean, is this a constrained analysis}
+
+\item{covMat}{a matrix of constraining covariates}
+
+\item{mm}{the current dimension}
+
+\item{latentVarsLower}{the lower dimensional latent variables}
+
+\item{allowMissingness}{a boolean, should missing values be allowed}
 
 \item{...}{additional arguments passed on to score and jacobian functions}
 }

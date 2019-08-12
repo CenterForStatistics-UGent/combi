@@ -9,11 +9,15 @@ derivLagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
   ...)
 }
 \arguments{
+\item{x}{current parameter estimates}
+
 \item{data}{A list of data matrices}
 
-\item{distribution, link, invLink, compositional, meanVarTrend, offSet, numVar, marginModel}{Characteristics of the view}
+\item{distribution, compositional, meanVarTrend, offSet, numVar, indepModel, paramEstsLower}{Characteristics of the view}
 
 \item{latentVars}{A vector of latent variables}
+
+\item{mm}{the current dimension}
 
 \item{weights}{The normalization weights}
 

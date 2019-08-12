@@ -9,6 +9,16 @@ jacLatentVarsConstr(latentVar, data, distribution, paramEsts, offSet,
   latentVarsLower, ...)
 }
 \arguments{
+\item{latentVar}{current latent variable estimates}
+
+\item{distribution, compositional, meanVarTrend, offSet, paramEsts, indepModel, varPosts, data}{Characteristics of each view}
+
+\item{covMat}{the covariates matrix}
+
+\item{mm}{the dimension}
+
+\item{latentVarsLower}{latent variable estimates of lower dimensions}
+
 \item{...}{additional arguments passed on to score and jacobian functions}
 }
 \value{

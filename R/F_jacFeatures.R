@@ -1,7 +1,7 @@
 #' Evaluate the jacobian for estimating the feature parameters for one view
 #'
 #' @inheritParams estFeatureParameters
-#' @param distribution,compositional,meanVarTrend,offSet,paramEsts,paramEstsLower
+#' @param distribution,compositional,meanVarTrend,offSet,paramEsts,paramEstsLower,indepModel
 #' Characteristics of each view
 #' @param m dimension
 #' @param allowMissingness a boolean, are missing values allowed?

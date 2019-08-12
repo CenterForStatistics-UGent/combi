@@ -1,8 +1,10 @@
 #' The score function to estimate the feature parameters
 #' @inheritParams estFeatureParameters
 #' @param ... arguments to the jacobian function, currently ignored
-#' @param distribution,link,invLink,compositional,meanVarTrend,offSet,numVar,marginModel
+#' @param distribution,compositional,meanVarTrend,offSet,numVar,indepModel,paramEstsLower
 #' Characteristics of the view
+#' @param mm the current dimension
+#' @param x current parameter estimates
 #'
 #' @return A vector with the evaluation of the score functions of the feature parameters
 derivLagrangianFeatures = function(x, data, distribution, offSet, latentVars,

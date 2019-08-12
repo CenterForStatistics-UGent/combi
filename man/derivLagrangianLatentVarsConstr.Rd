@@ -22,6 +22,8 @@ derivLagrangianLatentVarsConstr(x, data, distributions, offsets, paramEsts,
 
 \item{covMat}{The covariance matrix}
 
+\item{numCov}{The number of covariates}
+
 \item{centMat}{A centering matrix}
 
 \item{nLambda1s}{The number of dummy variables}

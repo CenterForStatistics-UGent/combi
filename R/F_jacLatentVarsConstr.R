@@ -1,8 +1,13 @@
 #' Evaluate the jacobian for estimating the latent variable for one view for constrained ordination
 #' @inheritParams estLatentVars
 #' @importFrom tensor tensor
-#'
+#' @param distribution,compositional,meanVarTrend,offSet,paramEsts,indepModel,varPosts,data
+#' Characteristics of each view
 #' @return The jacobian matrix
+#' @param covMat the covariates matrix
+#' @param mm the dimension
+#' @param latentVar current latent variable estimates
+#' @param latentVarsLower latent variable estimates of lower dimensions
 jacLatentVarsConstr = function(latentVar, data, distribution, paramEsts, offSet,
                          meanVarTrend, numCov, covMat, varPosts, compositional, mm,
                          indepModel, latentVarsLower, ...){

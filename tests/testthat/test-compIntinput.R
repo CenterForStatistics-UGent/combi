@@ -1,8 +1,10 @@
 context("compIntegrate input")
 
-# test_that("RCM throws warnings for integer variables", {
-#  expect_warning(RCM(tmpPhy, covariates = c("Age","Diagnosis"), k = 1))
-# })
+data(hmp2)
+test_that("RCM throws warnings when ordination model is fitted", {
+ expect_warning(compInt(data = list("microbiome" = microPruneVir), distributions = "quasi",
+                            compositional = TRUE, verbose = TRUE, nCores = 1, M = 2))
+})
 #
 # test_that("RCM throws errors for wrong input type", {
 #   expect_error(RCM("Zeller", covariates = c("Diagnosis", "Country", "Gender"), k = 1))

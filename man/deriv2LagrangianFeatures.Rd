@@ -19,6 +19,10 @@ deriv2LagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
 
 \item{paramEstsLower}{lower dimension estimates}
 
+\item{mm}{the current dimension}
+
+\item{Jac}{a prefab jacobian}
+
 \item{weights}{The normalization weights}
 
 \item{indepModel}{the independence model}

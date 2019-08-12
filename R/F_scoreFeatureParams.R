@@ -2,6 +2,12 @@
 #' single dataset
 #' @inheritParams estFeatureParameters
 #' @return A vector with evaluated score function
+#'@param data,distribution,offSet,meanVarTrend,indepModel,compositional,paramEstsLower
+#' Characteristics of the views
+#' @param x the parameter estimates
+#' @param latentVar the latent variables
+#' @param mm the dimension
+#' @param allowMissingness a boolean, should missing values be allowed
 scoreFeatureParams = function(x, data, distribution, offSet, latentVar,
                            meanVarTrend, mm, indepModel, compositional,
                            paramEstsLower, allowMissingness, ...){
