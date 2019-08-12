@@ -23,3 +23,10 @@ A plot object
 \description{
 Quickly check if the mean variance trend provides a good fit
 }
+\examples{
+data(hmp2)
+par(mfrow = c(1,2))
+lapply(extractData(list("microbiome" = microPruneVir, "virome" = virPrune)),
+ checkMeanVarTrend)
+ par(mfrow = c(1,1))
+}

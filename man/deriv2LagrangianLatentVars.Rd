@@ -29,6 +29,8 @@ deriv2LagrangianLatentVars(x, data, distributions, offsets, paramEsts,
 
 \item{m}{The dimensions}
 
+\item{Jac}{an empty jacobian matrix}
+
 \item{numSets}{The number of views}
 
 \item{meanVarTrends}{Lists of inforamtion on all the views}

@@ -9,6 +9,7 @@
 }
 \value{
 A list with components
+
 \item{score}{The evaluation of the score function}
 \item{InvJac}{The inverted jacobian matrix}
 }

@@ -1,5 +1,6 @@
 #' The jacobian function to estimate the latent variables
 #' @inheritParams derivLagrangianLatentVars
+#' @param Jac an empty jacobian matrix
 #' @param ... arguments to the jacobian function, currently ignored
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables

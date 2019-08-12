@@ -8,6 +8,9 @@ jacLatentVarsConstr(latentVar, data, distribution, paramEsts, offSet,
   meanVarTrend, numCov, covMat, varPosts, compositional, mm, indepModel,
   latentVarsLower, ...)
 }
+\arguments{
+\item{...}{additional arguments passed on to score and jacobian functions}
+}
 \value{
 The jacobian matrix
 }

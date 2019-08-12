@@ -28,6 +28,8 @@ deriv2LagrangianLatentVarsConstr(x, data, distributions, offsets,
 
 \item{m}{The dimensions}
 
+\item{Jac}{an empty jacobian matrix}
+
 \item{numSets}{The number of views}
 
 \item{meanVarTrends}{Lists of inforamtion on all the views}

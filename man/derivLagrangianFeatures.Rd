@@ -9,6 +9,14 @@ derivLagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
   ...)
 }
 \arguments{
+\item{data}{A list of data matrices}
+
+\item{latentVars}{A vector of latent variables}
+
+\item{weights}{The normalization weights}
+
+\item{compositional}{A list of booleans indicating compositionality}
+
 \item{...}{arguments to the jacobian function, currently ignored}
 }
 \value{

@@ -5,6 +5,8 @@
 #' not all calculated. Rather, the score values and inverse jacobian are returned
 #' so they can easily be calculated
 #' @return A list with components
+#' @importFrom Matrix diag solve
+#' @return
 #' \item{score}{The evaluation of the score function}
 #' \item{InvJac}{The inverted jacobian matrix}
 influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = NULL){

@@ -8,6 +8,16 @@ single dataset}
 scoreFeatureParams(x, data, distribution, offSet, latentVar, meanVarTrend,
   mm, indepModel, compositional, paramEstsLower, allowMissingness, ...)
 }
+\arguments{
+\item{data}{A list of data matrices}
+
+\item{compositional}{A list of booleans indicating compositionality}
+
+\item{allowMissingness}{A boolean indicating whether missing values are
+allowed}
+
+\item{...}{Additional arguments passed on to the score and jacobian functions}
+}
 \value{
 A vector with evaluated score function
 }

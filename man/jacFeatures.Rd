@@ -8,6 +8,22 @@ jacFeatures(latentVars, data, distribution, paramEsts, meanVarTrend,
   offSet, compositional, indepModel, m, paramEstsLower,
   minNumber = .Machine$double.eps^10, allowMissingness, ...)
 }
+\arguments{
+\item{latentVars}{A vector of latent variables}
+
+\item{data}{A list of data matrices}
+
+\item{paramEsts}{Current list of parameter estimates for the different views}
+
+\item{compositional}{A list of booleans indicating compositionality}
+
+\item{m}{The dimension}
+
+\item{allowMissingness}{A boolean indicating whether missing values are
+allowed}
+
+\item{...}{Additional arguments passed on to the score and jacobian functions}
+}
 \value{
 The jacobian matrix
 }

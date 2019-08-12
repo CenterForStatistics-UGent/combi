@@ -7,6 +7,13 @@
 #' @param ... passed on to the estMeanVarTrend() function
 #'
 #' @return A plot object
+#' @export
+#' @examples
+#' data(hmp2)
+#' par(mfrow = c(1,2))
+#' lapply(extractData(list("microbiome" = microPruneVir, "virome" = virPrune)),
+#'  checkMeanVarTrend)
+#'  par(mfrow = c(1,1))
 checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE,
                              ...){
     libSizes = rowSums(data)
