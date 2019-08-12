@@ -11,6 +11,8 @@ jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet)
 
 \item{data}{data}
 
+\item{distribution, offSet}{distribution and offset of the view}
+
 \item{x}{Confounder parameter estimates}
 
 \item{meanVarTrend}{mean variance trend}

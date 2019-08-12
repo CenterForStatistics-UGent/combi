@@ -6,6 +6,11 @@
 #' @param compositional A logical indicating if the dataset should be treated as compositional
 #' @param maxIt an integer, the maximum number of iterations
 #' @param tol A small scalar, the convergence tolerance
+#' @param link,invLink link and inverse link function
+#' @param meanVarFit mean variance model
+#' @param newtonRaphson a boolean, should newton-raphson be used
+#' @param dispFreq An integer, frequency of dispersion estimation
+#' @param ... passed on to the estOff() function
 #'
 #' @return A list with elements
 #' \item{rowOff}{The row offsets}

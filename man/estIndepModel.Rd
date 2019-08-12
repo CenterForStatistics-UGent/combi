@@ -18,6 +18,16 @@ Also phyloseq objects are acceptable}
 \item{maxIt}{an integer, the maximum number of iterations}
 
 \item{tol}{A small scalar, the convergence tolerance}
+
+\item{link, invLink}{link and inverse link function}
+
+\item{meanVarFit}{mean variance model}
+
+\item{newtonRaphson}{a boolean, should newton-raphson be used}
+
+\item{dispFreq}{An integer, frequency of dispersion estimation}
+
+\item{...}{passed on to the estOff() function}
 }
 \value{
 A list with elements

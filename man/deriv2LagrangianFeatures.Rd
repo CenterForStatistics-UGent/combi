@@ -5,17 +5,23 @@
 \title{The score function to estimate the latent variables}
 \usage{
 deriv2LagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
-  paramEstsLower, mm, Jac, meanVarTrend, links, weights, compositional,
+  paramEstsLower, mm, Jac, meanVarTrend, weights, compositional,
   indepModel, ...)
 }
 \arguments{
+\item{x}{parameter estimates}
+
 \item{data}{A list of data matrices}
+
+\item{distribution, compositional, meanVarTrend, offSet, numVar}{Characteristics of the view}
 
 \item{latentVars}{A vector of latent variables}
 
+\item{paramEstsLower}{lower dimension estimates}
+
 \item{weights}{The normalization weights}
 
-\item{compositional}{A list of booleans indicating compositionality}
+\item{indepModel}{the independence model}
 
 \item{...}{Additional arguments passed on to the score and jacobian functions}
 }

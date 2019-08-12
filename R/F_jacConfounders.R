@@ -1,5 +1,6 @@
 #' Jacobian when estimating confounder variables
 #' @inheritParams scoreConfounders
+#' @param distribution,offSet distribution and offset of the view
 #' @return the jacobian matrix
 jacConfounders = function(confMat, data, distribution, x, meanVarTrend,
                        offSet){

@@ -1,4 +1,9 @@
 #' Evaluate the influence function
+#'
+#' @param modelObj The model object
+#' @param latent A boolean, should we look at latent variables? Throws an error otherwise
+#' @param Dim,View Integers, the dimension and views required
+#'
 #'@method influence compInt
 #' @details Especially the influence of the different views on the latent
 #' variable or gradient estimation may be of interest. The influence values are
@@ -60,6 +65,8 @@ influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = N
             paramMats = matrix(paramEsts[[i]][Dim,], byrow = TRUE, nrow(data[[i]]), ncol(data[[i]])))
         }))
     InvJac = solve(Jacobian)[seq_len(n), seq_len(n)]
+    } else {
+        stop("Only influence functions of latent variables are implemented currently!\n")
     }
     # Matrix of all influences becomes too large: return score and
     # inverse jacobian and calculate influences on demand

@@ -3,12 +3,11 @@
 \docType{data}
 \name{microPruneVir}
 \alias{microPruneVir}
-\title{Microbiomes and viromes of IBD patients and healthy controls}
-\format{Two phyloseq objects containing microbiome and virome data on IBD patients and healthy controls
+\title{Microbiomes of IBD patients and healthy controls}
+\format{A phyloseq object containing microbiome data on IBD patients and healthy controls
 \describe{
   \item{microPruneVir}{The microbiome dataset pruned for matches with the virome object}
-  \item{virPrune}{The virome dataset pruned for matches with the microbiome object}
-}}
+ }}
 \source{
 \url{https://www.ibdmdb.org/}
 }
@@ -16,7 +15,7 @@
 microPruneVir
 }
 \description{
-Microbiome and virome sequencing data of IBD patients and healthy controls,
+Microbiome sequencing data of IBD patients and healthy controls,
 together with baseline covariates
 }
 \keyword{datasets}

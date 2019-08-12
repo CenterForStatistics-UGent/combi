@@ -16,33 +16,35 @@ deriv2LagrangianLatentVarsConstr(x, data, distributions, offsets,
 
 \item{distributions}{Lists of inforamtion on all the views}
 
-\item{offsets}{Lists of inforamtion on all the views}
+\item{offsets}{Characteristics of the views}
 
-\item{paramEsts}{Lists of inforamtion on all the views}
+\item{paramEsts}{Characteristics of the views}
 
-\item{paramMats}{Lists of inforamtion on all the views}
+\item{paramMats}{Characteristics of the views}
 
-\item{numVars}{Lists of inforamtion on all the views}
+\item{numVars}{Characteristics of the views}
 
 \item{latentVarsLower}{The parameter estimates of the lower dimensions}
 
-\item{m}{The dimensions}
+\item{m}{integeres, number of samples and dimensions}
 
 \item{Jac}{an empty jacobian matrix}
 
-\item{numSets}{The number of views}
+\item{numSets}{Characteristics of the views}
 
-\item{meanVarTrends}{Lists of inforamtion on all the views}
+\item{meanVarTrends}{Characteristics of the views}
 
-\item{links}{Lists of inforamtion on all the views}
+\item{links}{Characteristics of the views}
 
-\item{varPosts}{Lists of inforamtion on all the views}
+\item{numCov}{The number of covariates}
 
-\item{compositional}{Lists of inforamtion on all the views}
+\item{varPosts}{Characteristics of the views}
 
-\item{indepModels}{Lists of inforamtion on all the views}
+\item{indepModels}{Characteristics of the views}
 
 \item{...}{arguments to the jacobian function, currently ignored}
+
+\item{distribution, link, invLink, compositional, meanVarTrend, offSet, numVar, marginModel}{Characteristics of the view}
 }
 \value{
 A vector of length nn, the evaluation of the score functions of the latent variables

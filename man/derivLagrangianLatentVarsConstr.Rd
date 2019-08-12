@@ -26,7 +26,7 @@ derivLagrangianLatentVarsConstr(x, data, distributions, offsets, paramEsts,
 
 \item{nLambda1s}{The number of dummy variables}
 
-\item{compositional, links, indepModels, meanVarTrends, numVars, distributions, data, offsets, varPosts, paramMats, paramEsts}{Lists of inforamtion on all the views}
+\item{compositional, links, indepModels, meanVarTrends, numVars, distributions, data, offsets, varPosts, paramMats, paramEsts}{Lists of information on all the views}
 
 \item{...}{arguments to the jacobian function, currently ignored}
 }

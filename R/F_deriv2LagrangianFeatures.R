@@ -1,10 +1,15 @@
 #' The score function to estimate the latent variables
 #' @inheritParams estFeatureParameters
+#' @param distribution,compositional,meanVarTrend,offSet,numVar
+#' Characteristics of the view
+#' @param x parameter estimates
+#' @param paramEstsLower lower dimension estimates
+#' @param indepModel the independence model
 #'
 #' @return A vector of length n, the evaluation of the score functions of the latent variables
 deriv2LagrangianFeatures = function(x, data, distribution, offSet, latentVars,
                                     numVar, paramEstsLower, mm, Jac,
-                                    meanVarTrend, links, weights, compositional,
+                                    meanVarTrend, weights, compositional,
                                     indepModel,...){
     Seq = seq_len(numVar)
     Jac[Seq, numVar + 2] = Jac[numVar + 2, Seq] = 2*x[Seq]*weights

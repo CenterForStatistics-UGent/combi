@@ -7,6 +7,13 @@
 \method{influence}{compInt}(modelObj, latent = is.null(View), Dim = 1,
   View = NULL)
 }
+\arguments{
+\item{modelObj}{The model object}
+
+\item{latent}{A boolean, should we look at latent variables? Throws an error otherwise}
+
+\item{Dim, View}{Integers, the dimension and views required}
+}
 \value{
 A list with components
 

@@ -2,6 +2,8 @@
 #' @inheritParams scoreConfounders
 #' @importFrom tensor tensor
 #' @return the jacobian matrix
+#' @param marginModel,biasReduction,subtractMax The marginal mode, and booleans
+#' indicating bias reduction and maximum subtraction
 jacConfoundersComp = function(x, confMat, data, meanVarTrend, marginModel,
                               allowMissingness, biasReduction, subtractMax = TRUE){
     parMat = matrix(x, ncol(confMat), ncol(data)-1)

@@ -2,6 +2,9 @@
 #' @inheritParams deriv2LagrangianLatentVars
 #' @param Jac an empty jacobian matrix
 #' @param ... arguments to the jacobian function, currently ignored
+#' @param distribution,link,invLink,compositional,meanVarTrend,offSet,numVar,marginModel
+#' Characteristics of the view
+#' @param numCov The number of covariates
 #'
 #' @return A vector of length nn, the evaluation of the score functions of the latent variables
 deriv2LagrangianLatentVarsConstr = function(x, data, distributions, offsets, paramEsts, paramMats,

@@ -15,35 +15,15 @@ deriv2LagrangianLatentVars(x, data, distributions, offsets, paramEsts,
 
 \item{distributions}{Lists of inforamtion on all the views}
 
-\item{offsets}{Lists of inforamtion on all the views}
-
-\item{paramEsts}{Lists of inforamtion on all the views}
-
-\item{paramMats}{Lists of inforamtion on all the views}
-
-\item{numVars}{Lists of inforamtion on all the views}
-
 \item{latentVarsLower}{The parameter estimates of the lower dimensions}
 
-\item{n}{The number of samples}
-
-\item{m}{The dimensions}
+\item{n, m}{integeres, number of samples and dimensions}
 
 \item{Jac}{an empty jacobian matrix}
 
-\item{numSets}{The number of views}
-
-\item{meanVarTrends}{Lists of inforamtion on all the views}
-
-\item{links}{Lists of inforamtion on all the views}
-
-\item{varPosts}{Lists of inforamtion on all the views}
-
-\item{indepModels}{Lists of inforamtion on all the views}
-
-\item{compositional}{Lists of inforamtion on all the views}
-
 \item{...}{arguments to the jacobian function, currently ignored}
+
+\item{distribution, links, compositional, meanVarTrends, offsets, numVars, marginModel, numSets, paramMats, paramEsts, varPosts, indepModels}{Characteristics of the views}
 }
 \value{
 A vector of length n, the evaluation of the score functions of the latent variables

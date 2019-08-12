@@ -16,6 +16,10 @@ quasiJacIndep(x, data, otherMargin, meanVarTrend, col, libSizes, ...)
 \item{meanVarTrend}{the function describing the mean-variance trend}
 
 \item{col}{A logical, is the column being estimated?}
+
+\item{libSizes}{The library sizes}
+
+\item{...}{passed on to prepareJacMat}
 }
 \value{
 the jacobian matrix

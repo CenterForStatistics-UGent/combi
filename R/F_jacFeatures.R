@@ -1,11 +1,15 @@
 #' Evaluate the jacobian for estimating the feature parameters for one view
 #'
 #' @inheritParams estFeatureParameters
+#' @param distribution,compositional,meanVarTrend,offSet,paramEsts,paramEstsLower
+#' Characteristics of each view
+#' @param m dimension
+#' @param allowMissingness a boolean, are missing values allowed?
 #'
 #' @return The jacobian matrix
 jacFeatures = function(latentVars, data, distribution, paramEsts, meanVarTrend,
                        offSet, compositional, indepModel, m, paramEstsLower,
-                       minNumber = .Machine$double.eps^10, allowMissingness, ...){
+                       allowMissingness, ...){
     if(distribution == "gaussian"){
         -sum(latentVars[,m]^2)
     } else if(distribution == "quasi"){
@@ -22,8 +26,6 @@ jacFeatures = function(latentVars, data, distribution, paramEsts, meanVarTrend,
             }
             BB = Sum - CompMat0
             meanEval = meanVarTrend(CompMat, outerProd = FALSE)*indepModel$libSizes
-            # meanEvalSq = meanEval^2
-            # meanEvalSq[meanEvalSq < minNumber] = minNumber
             dMudBeta =  mu*BB*latentVars[,m]/Sum
             #Prepare some matrices
             foo1 = (CompMat0-BB)*mu*

@@ -5,6 +5,8 @@
 #' @param meanVarTrend the function describing the mean-variance trend
 #' @param otherMargin The other margin
 #' @param col A logical, is the column being estimated?
+#' @param libSizes The library sizes
+#' @param ... passed on to prepareJacMat
 #'
 #' @return the evaluated estimating equation
 quasiScoreIndep = function(x, data, otherMargin, meanVarTrend, col, libSizes, ...){

@@ -16,6 +16,9 @@ jacConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
 
 \item{meanVarTrend}{mean variance trend}
 
+\item{marginModel, biasReduction, subtractMax}{The marginal mode, and booleans
+indicating bias reduction and maximum subtraction}
+
 \item{allowMissingness}{A boolean, are missing values allowed}
 }
 \value{
