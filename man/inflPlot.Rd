@@ -5,12 +5,13 @@
 \title{A ggplot line plot showing the influences}
 \usage{
 inflPlot(modelObj, plotType = "pointplot", pointFun = "sum",
-  lineSize = 0.07, Dim = 1, ...)
+  lineSize = 0.07, Dim = 1,
+  samples = seq_len(nrow(modelObj$latentVars)), ...)
 }
 \arguments{
 \item{modelObj}{The fitted data integration}
 
-\item{plotType}{The type of plot requested}
+\item{plotType}{The type of plot requested, see details}
 
 \item{pointFun}{The function to calculate the summary measure to be plotted}
 
@@ -25,6 +26,13 @@ A ggplot object
 }
 \description{
 A ggplot line plot showing the influences
+}
+\details{
+The options for plotType are: "pointPlot": Dot plot of total influence
+ per view and sample, "boxplot": plot boxplot of influence of all
+  observations per view and sample, "boxplotSingle": boxplot of log absolute
+   total influence per view, "lineplot": line plot of total influence
+ per view and sample. In the pointplot, dots crosses represent parameter estimates
 }
 \examples{
 data(hmp2)

@@ -3,11 +3,17 @@
 #' @importFrom stats aggregate
 #'
 #' @param modelObj The fitted data integration
-#' @param plotType The type of plot requested
+#' @param plotType The type of plot requested, see details
 #' @param pointFun The function to calculate the summary measure to be plotted
 #' @param lineSize The line size
 #' @param Dim The dimension required
 #' @param ... additional arguments passed on to the influence() function
+#'
+#' @details The options for plotType are: "pointPlot": Dot plot of total influence
+#'  per view and sample, "boxplot": plot boxplot of influence of all
+#'   observations per view and sample, "boxplotSingle": boxplot of log absolute
+#'    total influence per view, "lineplot": line plot of total influence
+#'  per view and sample. In the pointplot, dots crosses represent parameter estimates
 #'
 #' @return A ggplot object
 #' @export
@@ -18,16 +24,19 @@
 #' compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
 #' inflPlot(microVirDI)
 inflPlot = function(modelObj, plotType = "pointplot",
-                    pointFun = "sum", lineSize = 0.07, Dim = 1, ...){
+                    pointFun = "sum", lineSize = 0.07, Dim = 1,
+                    samples = seq_len(nrow(modelObj$latentVars)),...){
     #if(length(modelObj$data) >2) "sum" else "mean"
+    if(!plotType %in% c("lineplot", "pointplot", "boxplot","boxplotSingle")){
+        stop("plotType not recognized, see details!")
+    }
     inflObj = influence(modelObj, Dim = Dim,...)
-    #inflMat = with(inflObj, score * diag(InvJac)) #look only at direct effect, ignore coupling
-    inflMat = with(inflObj, InvJac %*% score)
+    inflMat = as.matrix(with(inflObj, InvJac %*% score))[samples,,drop = FALSE]
     numVars = vapply(FUN.VALUE = integer(1), modelObj$data, ncol)
     IDs = lapply(seq_along(numVars), function(i){
         (sum(numVars[seq_len(i-1)])+1):sum(numVars[seq_len(i)])
     })
-    rownames(inflMat) = rownames(modelObj$latentVars)
+    rownames(inflMat) = rownames(modelObj$latentVars)[samples]
     moltInflMat = melt(as.matrix(inflMat))
     names(moltInflMat) = c("LatentVariable", "Features", "Influence")
     #A vector with the views
@@ -58,7 +67,7 @@ inflPlot = function(modelObj, plotType = "pointplot",
     aggMoltInfl = aggregate(data = moltInflMat,
                            Influence ~ View + LatentVariable, FUN = pointFun)
     latentDf = data.frame(LatentVariable = factor(rownames(inflMat)),
-                          value = modelObj$latentVars[,Dim])
+                          value = modelObj$latentVars[samples,Dim])
     #Scale to fit window
     latentDf$value = latentDf$value*1.1*max(abs(aggMoltInfl$Influence)/max(abs(latentDf$value)))
     Plot = ggplot(data = aggMoltInfl, aes_string(y = "Influence", x = "LatentVariable")) +
