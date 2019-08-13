@@ -8,6 +8,7 @@
 #' @param mm the dimension
 #' @param latentVar current latent variable estimates
 #' @param latentVarsLower latent variable estimates of lower dimensions
+#' @param numCov the number of covariates
 jacLatentVarsConstr = function(latentVar, data, distribution, paramEsts, offSet,
                          meanVarTrend, numCov, covMat, varPosts, compositional, mm,
                          indepModel, latentVarsLower, ...){
@@ -32,7 +33,7 @@ jacLatentVarsConstr = function(latentVar, data, distribution, paramEsts, offSet,
         colSums(tensor(vapply(seq_len(numCov),
                               FUN.VALUE = tmpMat, function(x) {
                                   covMat[, x] * tmpMat
-                              }), covMat, 1, 1)) #Look above?
+                              }), covMat, 1, 1))
     } else if(distribution == "binomial"){
 
     }

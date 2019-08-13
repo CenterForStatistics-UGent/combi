@@ -13,6 +13,8 @@ jacLatentVarsConstr(latentVar, data, distribution, paramEsts, offSet,
 
 \item{distribution, compositional, meanVarTrend, offSet, paramEsts, indepModel, varPosts, data}{Characteristics of each view}
 
+\item{numCov}{the number of covariates}
+
 \item{covMat}{the covariates matrix}
 
 \item{mm}{the dimension}
