@@ -94,7 +94,7 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     if(any(vapply(FUN.VALUE = TRUE,data, anyNA)) & !allowMissingness){
         stop("Missing data present. To allow fit with missing data, set allowMissingness to TRUE")
     }
-    zeroRows = apply(vapply(data, FUN.VALUE = numeric(nrow(data[[1]])),
+    zeroRows = apply(vapply(data, FUN.VALUE = logical(nrow(data[[1]])),
                             function(x){rowSums(x, na.rm = TRUE)==0}), 1, any)
     if(any(zeroRows)){
         warning("Zero rows\n", paste(which(zeroRows), collapse = " ") ,
@@ -225,7 +225,7 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
     })
     #All zero rows, but not all NAs
     zeroRowsIndep = apply(
-        vapply(data, FUN.VALUE = numeric(n),
+        vapply(data, FUN.VALUE = logical(n),
                function(x){rowSums(x, na.rm = TRUE)==0 &
                        !apply(x,1, function(x) all(is.na(x)))}), 1, any)
     if(any(zeroRowsIndep)){
