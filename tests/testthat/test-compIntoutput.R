@@ -1,4 +1,4 @@
-context("RCM output")
+context("compIntegrate output")
 
 # test_that("RCM returns element of class RCM", {
 #   expect_is(RCM(tmpPhy, k = 1), "RCM")

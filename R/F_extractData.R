@@ -5,9 +5,8 @@
 #'
 #' @return the raw data matrices, samples in the rows
 #'
-#' @importFrom phyloseq taxa_are_rows otu_table
+#' @importFrom phyloseq taxa_are_rows otu_table t
 #' @importFrom Biobase exprs
-#' @importFrom phyloseq t
 #' @export
 #' @examples
 #' data(hmp2)

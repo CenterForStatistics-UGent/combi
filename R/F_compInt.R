@@ -524,7 +524,7 @@ switch(weights[[i]],
         # Change iterator
         iter[[m]] = iter[[m]] + 1
         # Check for convergence
-        converged[[m]] = all(vapply(seqSets, FUN.VALUE = double(1),
+        converged[[m]] = all(vapply(seqSets, FUN.VALUE = logical(1),
                                     function(i){
             sqrt(mean((1-paramEsts[[i]][m,]/paramEstsOld[[i]])^2)) < tol})) &&
             (if(constrained) sqrt(mean((1-alphas[,m]/alphaOld)^2)) else
