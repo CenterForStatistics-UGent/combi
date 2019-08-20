@@ -158,7 +158,7 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     #Build confounder matrices
     oneConfMat = length(confounders) == 1 #Single confounder matrix for all views?
     confounders = lapply(seqSets, function(i){if(is.null(confounders[[i]])) NULL else
-        data.frame(confounders[[i]])[!zeroRows,,drop =FALSE]}) #Coerce to data frames
+        data.frame(confounders[[i]])[!zeroRows,,drop = FALSE]}) #Coerce to data frames
     confMats = lapply(confounders, buildConfMat)
     #Build covariate matrix
     constrained = !is.null(covariates)
