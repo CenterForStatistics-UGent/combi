@@ -73,7 +73,7 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     }
     nCores = min(nCores, length(data)) # No point in using more cores than views
     #Perform checks
-    if(M %in% c(0,1) | (as.integer(M)!=M)){
+    if(M %in% c(0L,1L) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
     }
     #if(length(distributions)==1) distributions = rep(distributions, length(data))
@@ -84,7 +84,8 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
         stop("Make sure data, distribution, links and compositional have the same length")
     }
     if(length(data)==1){
-        warning("Please provide at least two views for data integration!\nNow fitting an ordination model.",
+        warning("Please provide at least two views for data integration!
+                Now fitting an ordination model.",
                 immediate. = TRUE)}
     if(is.null(names(data))) names(data) = paste0("View", seq_along(data))
     namesData = names(data)
@@ -93,16 +94,9 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     if(any(vapply(FUN.VALUE = TRUE, data, function(x){is.null(rownames(x))}))){
         stop("Make sure to provide sample names for all views!")
     }
-    if(any(vapply(FUN.VALUE = TRUE,data, anyNA)) & !allowMissingness){
+    if(any(vapply(FUN.VALUE = TRUE, data, anyNA)) & !allowMissingness){
         stop("Missing data present. To allow fit with missing data, set allowMissingness to TRUE")
     }
-    zeroRows = apply(vapply(data, FUN.VALUE = logical(nrow(data[[1]])),
-                            function(x){rowSums(x, na.rm = TRUE)==0}), 1, any)
-    if(any(zeroRows)){
-        warning("Zero rows\n", paste(which(zeroRows), collapse = " ") ,
-                "\nfiltered out prior to fit", immediate. = TRUE)
-    }
-    data = lapply(data, function(x){x[!zeroRows,]})
     rowNames = lapply(data, function(x){sort(rownames(x))})
     if(!all(vapply(FUN.VALUE = logical(1), rowNames[-1], FUN = identical,
                    rowNames[[1]]))){
@@ -128,6 +122,13 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
             }
     }
     n = nrow(data[[1]]) #Total number of samples
+    zeroRows = apply(vapply(data, FUN.VALUE = logical(nrow(data[[1]])),
+                            function(x){rowSums(x, na.rm = TRUE)==0}), 1, any)
+    if(any(zeroRows)){
+        warning("Zero rows\n", paste(which(zeroRows), collapse = " ") ,
+                "\nfiltered out prior to fit", immediate. = TRUE)
+    }
+    data = lapply(data, function(x){x[!zeroRows,]})
     if(!is.null(confounders) && !length(confounders) %in% c(1,length(data))){
         stop("Please provide a single confounder matrix or as many as you provide views!\n")
     }
