@@ -76,6 +76,8 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     if(M %in% c(0,1) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
     }
+    if(length(distributions)==1) distributions = rep(distributions, length(data))
+    if(length(compositional)==1) compositional = rep(compositional, length(data))
     if(!all(vapply(FUN.VALUE = integer(1),
                    c(length(data), length(distributions)),
                    identical, length(compositional)))){
