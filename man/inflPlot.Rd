@@ -19,6 +19,8 @@ inflPlot(modelObj, plotType = "pointplot", pointFun = "sum",
 
 \item{Dim}{The dimension required}
 
+\item{samples}{index vector of which samples to be plotted}
+
 \item{...}{additional arguments passed on to the influence() function}
 }
 \value{

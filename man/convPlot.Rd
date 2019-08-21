@@ -26,3 +26,10 @@ A ggplot object containing the convergence plot
 \description{
 Plot the convegrence of the different parameter estimates in a line plot
 }
+\examples{
+data(hmp2)
+microVirDI = compInt(data = list("microbiome" = microPruneVir,
+"virome" = virPrune), distributions = c("quasi", "quasi"),
+compositional = c(TRUE, TRUE), M = 2)
+convPlot(microVirDI)
+}

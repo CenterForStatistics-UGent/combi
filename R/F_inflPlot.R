@@ -7,6 +7,7 @@
 #' @param pointFun The function to calculate the summary measure to be plotted
 #' @param lineSize The line size
 #' @param Dim The dimension required
+#' @param samples index vector of which samples to be plotted
 #' @param ... additional arguments passed on to the influence() function
 #'
 #' @details The options for plotType are: "pointPlot": Dot plot of total influence
