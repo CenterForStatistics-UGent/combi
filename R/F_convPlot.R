@@ -9,6 +9,13 @@
 #' @importFrom reshape2 melt
 #'
 #' @return A ggplot object containing the convergence plot
+#' @export
+#' @examples
+#' data(hmp2)
+#' microVirDI = compInt(data = list("microbiome" = microPruneVir,
+#' "virome" = virPrune), distributions = c("quasi", "quasi"),
+#' compositional = c(TRUE, TRUE), M = 2)
+#' convPlot(microVirDI)
 convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1,
                     View = NULL, size = 0.125){
     if(is.null(model$paramRec)){
