@@ -5,7 +5,7 @@
 #'
 #' @return A vector of length n, with evaluated score function
 #' @param data,distribution,offSet,meanVarTrend,indepModel,varPosts,paramEsts,paramMats,compositional
-#' #' Characteristics of the views
+#' Characteristics of the views
 #' @param latentVar the latent variable estimates
 #' @param covMat a matrix of constraining covariates
 #' @param constrained a boolean, is this a constrained analysis

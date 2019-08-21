@@ -24,11 +24,18 @@
 #' "virome" = virPrune), distributions = c("quasi", "quasi"),
 #' compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
 #' inflPlot(microVirDI)
-inflPlot = function(modelObj, plotType = "pointplot",
+#' microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
+#' "virome" = virPrune), distributions = c("quasi", "quasi"),
+#' compositional = c(TRUE, TRUE), M = 2,
+#' covariates = hmp2samVar[, c( "Occupation",
+#' "Education.Level", "diagnosis","Ileum","sex", "race")])
+#' inflPlot(microVirDIconstr)
+inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
+                                                "pointplot", "boxplot"),
                     pointFun = "sum", lineSize = 0.07, Dim = 1,
-                    samples = seq_len(nrow(modelObj$latentVars)),...){
+                    samples = seq_len(nrow(modelObj$latentVars)), ...){
     #if(length(modelObj$data) >2) "sum" else "mean"
-    if(!plotType %in% c("lineplot", "pointplot", "boxplot","boxplotSingle")){
+    if(!plotType %in% c("lineplot", "pointplot", "boxplot", "boxplotSingle")){
         stop("plotType not recognized, see details!")
     }
     inflObj = influence(modelObj, Dim = Dim,...)

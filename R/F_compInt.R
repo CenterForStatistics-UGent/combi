@@ -127,8 +127,8 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     if(any(zeroRows)){
         warning("Zero rows\n", paste(which(zeroRows), collapse = " ") ,
                 "\nfiltered out prior to fit", immediate. = TRUE)
+        data = lapply(data, function(x){x[!zeroRows,]})
     }
-    data = lapply(data, function(x){x[!zeroRows,]})
     if(!is.null(confounders) && !length(confounders) %in% c(1,length(data))){
         stop("Please provide a single confounder matrix or as many as you provide views!\n")
     }
@@ -227,15 +227,20 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
         return(data[[i]])
     })
     #All zero rows, but not all NAs
+    n = nrow(data[[1]])
     zeroRowsIndep = apply(
         vapply(data, FUN.VALUE = logical(n),
                function(x){rowSums(x, na.rm = TRUE)==0 &
                        !apply(x,1, function(x) all(is.na(x)))}), 1, any)
     if(any(zeroRowsIndep)){
-        warning("Zero rows\n", paste(which(zeroRowsIndep), collapse = " ") ,
+        message("Zero rows\n", paste(which(zeroRowsIndep), collapse = " ") ,
                 "\nfiltered out after filtering features", immediate. = TRUE)
     }
     data = lapply(data, function(x){x[!zeroRowsIndep,]})
+    if(constrained) {
+        covMat = covMat[!zeroRowsIndep,]
+        covariates = covariates[!zeroRowsIndep,]
+    }
     names(data) = namesData
     n = nrow(data[[1]])
     numVars = vapply(FUN.VALUE = integer(1), data, ncol) #Number of variables per view

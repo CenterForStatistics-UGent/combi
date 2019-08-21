@@ -11,13 +11,13 @@ jacLatentVars(latentVar, data, distribution, paramEsts, paramMats, offSet,
 \arguments{
 \item{latentVar}{the latent variable estimates}
 
-\item{data}{#' Characteristics of the views}
+\item{data}{Characteristics of the views}
 
 \item{distribution, compositional, meanVarTrend, offSet, paramEsts, paramMats, indepModel}{Characteristics of each view}
 
 \item{n}{the number of samples}
 
-\item{varPosts}{#' Characteristics of the views}
+\item{varPosts}{Characteristics of the views}
 
 \item{mm}{the current dimension}
 
@@ -28,7 +28,7 @@ jacLatentVars(latentVar, data, distribution, paramEsts, paramMats, offSet,
 \item{...}{additional arguments passed on to score and jacobian functions}
 }
 \value{
-The jacobian matrix
+The diagonal of the jacobian matrix
 }
 \description{
 Evaluate the jacobian for estimating the latent variable for one view

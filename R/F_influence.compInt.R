@@ -18,6 +18,7 @@ influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = 
     if(samples){
         lambdaLatent = lambdasLatent[seq_m(Dim, normal = FALSE)]
         constrained = !is.null(covariates)
+        if(constrained) covMat = buildCovMat(covariates)$covModelMat
         #Find the normalization lagrange mutliplier?
         score = Reduce(f = cbind, lapply(seq_along(data), function(i){
             if(distributions[[i]] == "gaussian"){
@@ -49,18 +50,33 @@ influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = 
     # Inverse Jacobian
         n = if(constrained) ncol(covMat) else nrow(data[[1]])
         Jacobian = buildEmptyJac(n = n, m = Dim,
-                                 lower = if(constrained) alphas else latentVars, nLambda1s = if(constrained) nrow(centMat) else 1,
+                                 lower = if(constrained) alphas else latentVars,
+                                 nLambda1s = if(constrained) nrow(centMat) else 1,
                                  normal = constrained, centMat = centMat)
-    diag(Jacobian)[seq_len(n)] = rowSums(vapply(seq_along(data), FUN.VALUE = double(n), function(i){
-        (if(constrained) jacLatentVarsConstr else jacLatentVars)(data = data[[i]], distribution = distributions[[i]],
-            paramEsts = paramEsts[[i]], offSet = buildOffsetModel(modelObj, i),
-            latentVar = latentVars[, Dim], meanVarTrend = meanVarTrends[[Dim]][[i]],
-            varPosts = varPosts[[i]], mm = Dim,
-            latentVarsLower = latentVars[, seq_len(Dim-1)], compositional = compositional[[i]],
-            indepModel = indepModels[[i]], constrained = !is.null(covariates), n = n,
-            allowMissingness = modelObj$allowMissingness,
-            paramMats = matrix(paramEsts[[i]][Dim,], byrow = TRUE, nrow(data[[i]]), ncol(data[[i]])))
-        }))
+        if(constrained){
+            Jacobian[seq_len(n),seq_len(n)] = rowSums(dims = 2, vapply(seq_along(data), FUN.VALUE = diag(seq_len(n)), function(i){
+                jacLatentVarsConstr(data = data[[i]], distribution = distributions[[i]],
+                                    paramEsts = paramEsts[[i]], offSet = buildOffsetModel(modelObj, i),
+                                    latentVar = latentVars[, Dim], meanVarTrend = meanVarTrends[[Dim]][[i]],
+                                    varPosts = varPosts[[i]], mm = Dim, covMat = covMat,
+                                    latentVarsLower = latentVars[, seq_len(Dim-1)], compositional = compositional[[i]],
+                                    indepModel = indepModels[[i]], n = n,
+                                    allowMissingness = modelObj$allowMissingness,
+                                    paramMats = matrix(paramEsts[[i]][Dim,], byrow = TRUE, nrow(data[[i]]), ncol(data[[i]])))
+            }))
+        } else {
+            diag(Jacobian)[seq_len(n)] = rowSums(vapply(seq_along(data), FUN.VALUE = double(n), function(i){
+                jacLatentVars(data = data[[i]], distribution = distributions[[i]],
+                              paramEsts = paramEsts[[i]], offSet = buildOffsetModel(modelObj, i),
+                              latentVar = latentVars[, Dim], meanVarTrend = meanVarTrends[[Dim]][[i]],
+                              varPosts = varPosts[[i]], mm = Dim,
+                              latentVarsLower = latentVars[, seq_len(Dim-1)], compositional = compositional[[i]],
+                              indepModel = indepModels[[i]], n = n,
+                              allowMissingness = modelObj$allowMissingness,
+                              paramMats = matrix(paramEsts[[i]][Dim,], byrow = TRUE, nrow(data[[i]]), ncol(data[[i]])))
+            }))
+        }
+
     InvJac = solve(Jacobian)[seq_len(n), seq_len(n)]
     } else {
         stop("Only influence functions of sample variables are implemented currently!\n")

@@ -11,7 +11,7 @@ scoreLatentVars(data, distribution, paramEsts, paramMats, offSet,
   allowMissingness, ...)
 }
 \arguments{
-\item{data, distribution, offSet, meanVarTrend, indepModel, varPosts, paramEsts, paramMats, compositional}{#' Characteristics of the views}
+\item{data, distribution, offSet, meanVarTrend, indepModel, varPosts, paramEsts, paramMats, compositional}{Characteristics of the views}
 
 \item{latentVar}{the latent variable estimates}
 

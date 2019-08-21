@@ -11,8 +11,7 @@
 "microPruneVir"
 #' Viromes of IBD patients and healthy controls
 #'
-#' Virome sequencing data of IBD patients and healthy controls,
-#' together with baseline covariates
+#' Virome sequencing data of IBD patients and healthy controls
 #'
 #' @format A phyloseq object containing virome data on IBD patients and healthy controls
 #' \describe{
@@ -20,3 +19,13 @@
 #' }
 #' @source \url{https://www.ibdmdb.org/}
 "virPrune"
+#' Baseline sample variables of IBD patients
+#'
+#' Baseline covariates of IBD patients and healthy controls,
+#'
+#' @format A dataframe with sample variables
+#' \describe{
+#'   \item{hmp2samVar}{Sample variables matching the microbiome and virome datasets}
+#' }
+#' @source \url{https://www.ibdmdb.org/}
+"hmp2samVar"

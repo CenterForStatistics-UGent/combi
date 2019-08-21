@@ -15,7 +15,6 @@
 virPrune
 }
 \description{
-Virome sequencing data of IBD patients and healthy controls,
-together with baseline covariates
+Virome sequencing data of IBD patients and healthy controls
 }
 \keyword{datasets}
