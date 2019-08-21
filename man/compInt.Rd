@@ -96,4 +96,9 @@ data(hmp2)
 microVirDI = compInt(data = list("microbiome" = microPruneVir,
 "virome" = virPrune), distributions = c("quasi", "quasi"),
 compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
+microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
+"virome" = virPrune), distributions = c("quasi", "quasi"),
+compositional = c(TRUE, TRUE), M = 2,
+covariates = hmp2samVar[, c("Occupation", "Education.Level", "diagnosis",
+"Ileum","sex", "race")], verbose = TRUE)
 }

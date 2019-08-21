@@ -33,18 +33,21 @@
 inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
                                                 "pointplot", "boxplot"),
                     pointFun = "sum", lineSize = 0.07, Dim = 1,
-                    samples = seq_len(nrow(modelObj$latentVars)), ...){
+                    samples = seq_len(nrow(if(is.null(modelObj$covariates))
+                        modelObj$latentVars else modelObj$alphas)), ...){
     #if(length(modelObj$data) >2) "sum" else "mean"
     if(!plotType %in% c("lineplot", "pointplot", "boxplot", "boxplotSingle")){
         stop("plotType not recognized, see details!")
     }
+    constrained = !is.null(modelObj$covariates)
     inflObj = influence(modelObj, Dim = Dim,...)
     inflMat = as.matrix(with(inflObj, InvJac %*% score))[samples,,drop = FALSE]
     numVars = vapply(FUN.VALUE = integer(1), modelObj$data, ncol)
     IDs = lapply(seq_along(numVars), function(i){
         (sum(numVars[seq_len(i-1)])+1):sum(numVars[seq_len(i)])
     })
-    rownames(inflMat) = rownames(modelObj$latentVars)[samples]
+    rownames(inflMat) = (if(constrained) rownames(modelObj$alphas) else
+        rownames(modelObj$latentVars))[samples]
     moltInflMat = melt(as.matrix(inflMat))
     names(moltInflMat) = c("LatentVariable", "Features", "Influence")
     #A vector with the views
@@ -89,6 +92,7 @@ inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
     }
     Plot = Plot + theme_bw() + theme(axis.text.x = element_text(angle = 90)) +
         ggtitle(paste("Dimension", Dim))
-    if(plotType != "boxplotSingle") Plot = Plot +  xlab("Latent variable")
+    if(plotType != "boxplotSingle") Plot = Plot +
+        xlab(if(constrained) "Environmental variable" else "Latent variable")
     Plot
     }

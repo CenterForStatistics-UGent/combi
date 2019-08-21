@@ -49,9 +49,10 @@ influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = 
                        if(Dim==1) 0 else c(latentVars[, seq_len(Dim-1), drop = FALSE] %*% lambdaLatent[-1]))
     # Inverse Jacobian
         n = if(constrained) ncol(covMat) else nrow(data[[1]])
+        nLambda1s = if(constrained) nrow(centMat) else 1
         Jacobian = buildEmptyJac(n = n, m = Dim,
                                  lower = if(constrained) alphas else latentVars,
-                                 nLambda1s = if(constrained) nrow(centMat) else 1,
+                                 nLambda1s = nLambda1s,
                                  normal = constrained, centMat = centMat)
         if(constrained){
             Jacobian[seq_len(n),seq_len(n)] = rowSums(dims = 2, vapply(seq_along(data), FUN.VALUE = diag(double(n)), function(i){
@@ -64,6 +65,9 @@ influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = 
                                     allowMissingness = modelObj$allowMissingness,
                                     paramMats = matrix(paramEsts[[i]][Dim,], byrow = TRUE, nrow(data[[i]]), ncol(data[[i]])))
             }))
+            numCov = ncol(covMat)
+            Jacobian[seq_len(numCov), numCov+1+nLambda1s] = Jacobian[numCov+1+nLambda1s, seq_len(numCov)] =
+                2*alphas[seq_len(numCov), Dim]
         } else {
             diag(Jacobian)[seq_len(n)] = rowSums(vapply(seq_along(data), FUN.VALUE = double(n), function(i){
                 jacLatentVars(data = data[[i]], distribution = distributions[[i]],
