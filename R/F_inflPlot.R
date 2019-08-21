@@ -28,7 +28,7 @@
 #' "virome" = virPrune), distributions = c("quasi", "quasi"),
 #' compositional = c(TRUE, TRUE), M = 2,
 #' covariates = hmp2samVar[, c( "Occupation",
-#' "Education.Level", "diagnosis","Ileum","sex", "race")])
+#' "Education.Level", "diagnosis","Ileum","sex", "race")], verbose = TRUE)
 #' inflPlot(microVirDIconstr)
 inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
                                                 "pointplot", "boxplot"),

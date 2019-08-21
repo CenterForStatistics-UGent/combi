@@ -128,6 +128,8 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
         warning("Zero rows\n", paste(which(zeroRows), collapse = " ") ,
                 "\nfiltered out prior to fit", immediate. = TRUE)
         data = lapply(data, function(x){x[!zeroRows,]})
+        covariates = covariates[!zeroRows,]
+        confounders = confounders[!zeroRows,]
     }
     if(!is.null(confounders) && !length(confounders) %in% c(1,length(data))){
         stop("Please provide a single confounder matrix or as many as you provide views!\n")
@@ -170,14 +172,38 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     } else {
         stop("Provide mean-variance trend vector of length one or equal to number of datasets!\n")
     }
+    # Prune count data, also using the confounders if needed
+    data = lapply(seq_along(data), function(i){
+        if(distributions[[i]] == "quasi"){
+                data[[i]] = data[[i]][, colMeans(data[[i]]==0, na.rm = TRUE) <= prevCutOff &
+                                        colSums(data[[i]], na.rm = TRUE) >= (n * minFraction)]
+            if(!oneConfMat && !is.null(confounders[[i]]) && !biasReduction){
+            data[[i]] = trimOnConfounders(data = data[[i]], prevCutOff = prevCutOff,
+                                       minFraction = minFraction, n = n,
+confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
+            }
+        }
+        return(data[[i]])
+    })
+    #All zero rows, but not all NAs
+    n = nrow(data[[1]])
+    zeroRowsIndep = apply(
+        vapply(data, FUN.VALUE = logical(n),
+               function(x){rowSums(x, na.rm = TRUE)==0 &
+                       !apply(x,1, function(x) all(is.na(x)))}), 1, any)
+    if(any(zeroRowsIndep)){
+        message("Zero rows\n", paste(which(zeroRowsIndep), collapse = " ") ,
+                "\nfiltered out after filtering features")
+    }
+    data = lapply(data, function(x){x[!zeroRowsIndep,]})
     if (constrained) {
         if(!is.data.frame(covariates)){
             stop("Please provide covariate matrix as a dataframe")
         }
-        covariates = covariates[!zeroRows,]
+        covariates = droplevels(covariates[!zeroRowsIndep,])#Drop unused levels
         tmp = buildCovMat(covariates)
         covMat = tmp$covModelMat
-         numCov = ncol(covMat)
+        numCov = ncol(covMat)
         # Already prepare the matrix that defines the
         # equations for centering the coefficients of the
         # dummy variables
@@ -212,35 +238,6 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
         covModelMat = centMat = NULL
     }
     nLambda1s = if(constrained) nrow(centMat) else 1
-
-    # Prune count data, also using the confounders if needed
-    data = lapply(seq_along(data), function(i){
-        if(distributions[[i]] == "quasi"){
-                data[[i]] = data[[i]][, colMeans(data[[i]]==0, na.rm = TRUE) <= prevCutOff &
-                                        colSums(data[[i]], na.rm = TRUE) >= (n * minFraction)]
-            if(!oneConfMat && !is.null(confounders[[i]]) && !biasReduction){
-            data[[i]] = trimOnConfounders(data = data[[i]], prevCutOff = prevCutOff,
-                                       minFraction = minFraction, n = n,
-confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
-            }
-        }
-        return(data[[i]])
-    })
-    #All zero rows, but not all NAs
-    n = nrow(data[[1]])
-    zeroRowsIndep = apply(
-        vapply(data, FUN.VALUE = logical(n),
-               function(x){rowSums(x, na.rm = TRUE)==0 &
-                       !apply(x,1, function(x) all(is.na(x)))}), 1, any)
-    if(any(zeroRowsIndep)){
-        message("Zero rows\n", paste(which(zeroRowsIndep), collapse = " ") ,
-                "\nfiltered out after filtering features", immediate. = TRUE)
-    }
-    data = lapply(data, function(x){x[!zeroRowsIndep,]})
-    if(constrained) {
-        covMat = covMat[!zeroRowsIndep,]
-        covariates = covariates[!zeroRowsIndep,]
-    }
     names(data) = namesData
     n = nrow(data[[1]])
     numVars = vapply(FUN.VALUE = integer(1), data, ncol) #Number of variables per view

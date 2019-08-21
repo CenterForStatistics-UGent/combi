@@ -54,7 +54,7 @@ influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = 
                                  nLambda1s = if(constrained) nrow(centMat) else 1,
                                  normal = constrained, centMat = centMat)
         if(constrained){
-            Jacobian[seq_len(n),seq_len(n)] = rowSums(dims = 2, vapply(seq_along(data), FUN.VALUE = diag(seq_len(n)), function(i){
+            Jacobian[seq_len(n),seq_len(n)] = rowSums(dims = 2, vapply(seq_along(data), FUN.VALUE = diag(double(n)), function(i){
                 jacLatentVarsConstr(data = data[[i]], distribution = distributions[[i]],
                                     paramEsts = paramEsts[[i]], offSet = buildOffsetModel(modelObj, i),
                                     latentVar = latentVars[, Dim], meanVarTrend = meanVarTrends[[Dim]][[i]],
