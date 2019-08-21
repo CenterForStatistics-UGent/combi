@@ -21,8 +21,8 @@ influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = 
         #Find the normalization lagrange mutliplier?
         score = Reduce(f = cbind, lapply(seq_along(data), function(i){
             if(distributions[[i]] == "gaussian"){
-                mu = buildMu(offSet = buildOffsetModel(modelObj, i), latentVar = if(constrained)
-                    c(covMat %*% latentVars[,Dim]) else latentVars[,Dim],
+                mu = buildMu(offSet = buildOffsetModel(modelObj, i),
+                             latentVar = latentVars[,Dim],
                     paramEsts = paramEsts[[i]][Dim,], distributions[[i]])
                 rowMultiply(if(constrained) crossprod(covMat, data[[i]] - mu) else
                     data[[i]] - mu, paramEsts[[i]][Dim,]/varPosts[[i]])

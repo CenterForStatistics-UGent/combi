@@ -559,7 +559,8 @@ switch(weights[[i]],
                paramConv = paramConv, data = data, compositional = compositional,
                meanVarTrends = meanVarTrends, distributions = distributions,
                confVars = confVars, confMats = confMats, marginModels = marginModels,
-               newtonRaphson = newtonRaphson, allowMissingness = allowMissingness)
+               newtonRaphson = newtonRaphson, allowMissingness = allowMissingness,
+               centMat = centMat)
     if(record){
         out$paramRec = lapply(seqSets, function(i){
             tmp = paramRec[[i]][,,seq_len(max(iter))]
