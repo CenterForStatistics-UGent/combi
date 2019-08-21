@@ -9,12 +9,10 @@ test_that("compIntegrate throws error for wrong input type", {
     expect_error(compInt(data = microPruneVir, distributions = "quasi",
                            compositional = TRUE, nCores = 1, M = 2))
 })
-#
 # test_that("RCM throws errors when only one covariate with one level supplied", {
 #   expect_error(RCM(Zeller, covariates = "Age", k = 1))
 # })
-#
-n  = 50;p = 100
+n  = 50; p = 100
 tmpMat  = matrix(rnbinom(n*p, mu = 5, size = 1),n,p)
 test_that("compIntegrate throws errors when no row names provided", {
     expect_error(
@@ -35,7 +33,7 @@ test_that("compIntegrate throws errors when NAs present in data matrix", {
 
 test_that("compIntegrate runs when NAs present in data matrix
           and allowMissingess = TRUE", {
-    expect_type(
+    expect_s3_class(
         compInt(list(tmpMat2), distributions = "quasi",
                          compositional = TRUE, allowMissingness = TRUE),
         "compInt"

@@ -1,22 +1,21 @@
 #' Evaluate the influence function
 #'
 #' @param modelObj The model object
-#' @param latent A boolean, should we look at latent variables? Throws an error otherwise
+#' @param samples A boolean, should we look at sample variables? Throws an error otherwise
 #' @param Dim,View Integers, the dimension and views required
 #'
-#'@method influence compInt
+#' @method influence compInt
 #' @details Especially the influence of the different views on the latent
 #' variable or gradient estimation may be of interest. The influence values are
 #' not all calculated. Rather, the score values and inverse jacobian are returned
 #' so they can easily be calculated
-#' @return A list with components
 #' @importFrom Matrix diag solve
-#' @return
+#' @return A list with components
 #' \item{score}{The evaluation of the score function}
 #' \item{InvJac}{The inverted jacobian matrix}
-influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = NULL){
+influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = NULL){
     with(modelObj, {
-    if(latent){
+    if(samples){
         lambdaLatent = lambdasLatent[seq_m(Dim, normal = FALSE)]
         constrained = !is.null(covariates)
         #Find the normalization lagrange mutliplier?
@@ -31,9 +30,7 @@ influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = N
                 if(compositional[[i]]){
                     CompMat = buildCompMat(indepModels[[i]]$colMat,
                                            paramEsts[[i]],
-                                           latentVar = if(constrained)
-                                               covMat %*% latentVars else
-                                                   latentVars, m = Dim,
+                                           latentVar = latentVars, m = Dim,
                                            norm = TRUE)
                     mu = CompMat * indepModels[[i]]$libSizes
                     tmpMat = CompMat*(data[[i]]-mu)/meanVarTrends[[Dim]][[i]](CompMat, outerProd = FALSE)*
@@ -66,7 +63,7 @@ influence.compInt = function(modelObj, latent = is.null(View), Dim = 1, View = N
         }))
     InvJac = solve(Jacobian)[seq_len(n), seq_len(n)]
     } else {
-        stop("Only influence functions of latent variables are implemented currently!\n")
+        stop("Only influence functions of sample variables are implemented currently!\n")
     }
     # Matrix of all influences becomes too large: return score and
     # inverse jacobian and calculate influences on demand

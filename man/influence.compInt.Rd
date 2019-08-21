@@ -4,19 +4,18 @@
 \alias{influence.compInt}
 \title{Evaluate the influence function}
 \usage{
-\method{influence}{compInt}(modelObj, latent = is.null(View), Dim = 1,
+\method{influence}{compInt}(modelObj, samples = is.null(View), Dim = 1,
   View = NULL)
 }
 \arguments{
 \item{modelObj}{The model object}
 
-\item{latent}{A boolean, should we look at latent variables? Throws an error otherwise}
+\item{samples}{A boolean, should we look at sample variables? Throws an error otherwise}
 
 \item{Dim, View}{Integers, the dimension and views required}
 }
 \value{
 A list with components
-
 \item{score}{The evaluation of the score function}
 \item{InvJac}{The inverted jacobian matrix}
 }
