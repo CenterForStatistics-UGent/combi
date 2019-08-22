@@ -46,7 +46,7 @@ inflPlot(microVirDI)
 microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
 "virome" = virPrune), distributions = c("quasi", "quasi"),
 compositional = c(TRUE, TRUE), M = 2,
-covariates = hmp2samVar[, c( "Occupation",
+covariates = hmp2samVar[, c("Occupation",
 "Education.Level", "diagnosis","Ileum","sex", "race")], verbose = TRUE)
 inflPlot(microVirDIconstr)
 }

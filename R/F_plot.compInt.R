@@ -57,7 +57,7 @@ plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
     #### Latent variables ####
     Plot = ggplot(aes_string(x = DimChar[1], y = DimChar[2], fill = samCol), data = latentData) +
         geom_point(size = samSize, shape = 21, stroke = strokeSize) + theme_bw() +
-        if(!is.null(samColValues)) scale_fill_manual(values = samColValues)
+        if(!is.null(samColValues)) scale_fill_manual(values = samColValues, name = samColour)
 
     #### Views ####
     if(length(featNum)==1){featNum = rep(featNum, nViews)}
@@ -105,7 +105,8 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
     if(squarePlot){
         Plot = Plot + coord_fixed()
     } else {
-        warning("Plot not square!\n This may be misleading and is not recommended!")
+        warning("Plot not square!\n This may be misleading and is not recommended!
+                See squarePlot parameter")
     }
     ## TO DO: add colour code for the views
     if(returnCoords){

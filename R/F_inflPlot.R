@@ -27,7 +27,7 @@
 #' microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
 #' "virome" = virPrune), distributions = c("quasi", "quasi"),
 #' compositional = c(TRUE, TRUE), M = 2,
-#' covariates = hmp2samVar[, c( "Occupation",
+#' covariates = hmp2samVar[, c("Occupation",
 #' "Education.Level", "diagnosis","Ileum","sex", "race")], verbose = TRUE)
 #' inflPlot(microVirDIconstr)
 inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
@@ -78,7 +78,8 @@ inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
     aggMoltInfl = aggregate(data = moltInflMat,
                            Influence ~ View + LatentVariable, FUN = pointFun)
     latentDf = data.frame(LatentVariable = factor(rownames(inflMat)),
-                          value = modelObj$latentVars[samples,Dim])
+                          value = if(constrained) modelObj$alphas[samples,Dim] else
+                              modelObj$latentVars[samples,Dim])
     #Scale to fit window
     latentDf$value = latentDf$value*1.1*max(abs(aggMoltInfl$Influence)/max(abs(latentDf$value)))
     Plot = ggplot(data = aggMoltInfl, aes_string(y = "Influence", x = "LatentVariable")) +
