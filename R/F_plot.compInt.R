@@ -1,4 +1,4 @@
-#' Make triplots or higher dimensional plots of the ordination object
+#' Make multiplots of the data integration object
 #'
 #' @param x the fit
 #' @param ... additional arguments, currently ignored

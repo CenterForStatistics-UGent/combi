@@ -83,6 +83,8 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
     }
     #if(length(distributions)==1) distributions = rep(distributions, length(data))
     #if(length(compositional)==1) compositional = rep(compositional, length(data))
+    if(!is.logical(compositional)) stop("'compositional' should be a logical vector!")
+    if(!is.character(compositional)) stop("'distributions' should be a character vector!")
     if(!all(vapply(FUN.VALUE = integer(1),
                    c(length(data), length(distributions)),
                    identical, length(compositional)))){
