@@ -20,6 +20,7 @@
 #' @param featSize,crossSize,varSize,samSize,strokeSize Size parameters for
 #' the feature dots, central cross, variable labels, sample dots and sample
 #' strokes
+#' @param xInd,yInd x and y indentations
 #'
 #' @return A ggplot object containing the plot
 #'
@@ -42,7 +43,8 @@ plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         manExpFactorVar = 0.975, varNum = nrow(x$alphas),
                         varSize = 2.5, samColValues = NULL, samSize = 1.5,
                         strokeSize = 0.05, warnMonotonicity = FALSE,
-                        returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5){
+                        returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
+                        xInd = 0, yInd = 0){
     #palette(rainbow(length(unique(samDf[[samCol]]))))
     nViews = length(x$data)
     coords = extractCoords(x, Dim)
@@ -109,6 +111,7 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
                 See squarePlot parameter")
     }
     ## TO DO: add colour code for the views
+    Plot = indentPlot(Plot, xInd = xInd, yInd = yInd) #Indentation
     if(returnCoords){
         return(list(Plot = Plot, latentData = latentData, featureData = featureData,
                varData = varData))

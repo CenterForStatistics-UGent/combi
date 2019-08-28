@@ -2,7 +2,7 @@
 % Please edit documentation in R/F_plot.compInt.R
 \name{plot.compInt}
 \alias{plot.compInt}
-\title{Make triplots or higher dimensional plots of the ordination object}
+\title{Make multiplots of the data integration object}
 \usage{
 \method{plot}{compInt}(x, ..., Dim = c(1, 2), samDf = NULL,
   samCol = NULL, featNum = 20L, featCols = c("darkblue", "darkgreen",
@@ -10,7 +10,8 @@
   featSize = 2.5, crossSize = 4, manExpFactorVar = 0.975,
   varNum = nrow(x$alphas), varSize = 2.5, samColValues = NULL,
   samSize = 1.5, strokeSize = 0.05, warnMonotonicity = FALSE,
-  returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5)
+  returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
+  xInd = 0, yInd = 0)
 }
 \arguments{
 \item{x}{the fit}
@@ -46,12 +47,14 @@ in thrird party software}
 \item{squarePlot}{A boolean, should the axes be square? Strongly recommended}
 
 \item{featAlpha}{Controls the transparacny of the features}
+
+\item{xInd, yInd}{x and y indentations}
 }
 \value{
 A ggplot object containing the plot
 }
 \description{
-Make triplots or higher dimensional plots of the ordination object
+Make multiplots of the data integration object
 }
 \examples{
 data(hmp2)
