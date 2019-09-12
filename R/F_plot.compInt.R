@@ -21,6 +21,7 @@
 #' the feature dots, central cross, variable labels, sample dots and sample
 #' strokes
 #' @param xInd,yInd x and y indentations
+#' @param checkOverlap A boolean, should overlapping labels be omitted?
 #'
 #' @return A ggplot object containing the plot
 #'
@@ -44,7 +45,7 @@ plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         varSize = 2.5, samColValues = NULL, samSize = 1.5,
                         strokeSize = 0.05, warnMonotonicity = FALSE,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
-                        xInd = 0, yInd = 0){
+                        xInd = 0, yInd = 0, checkOverlap = FALSE){
     #palette(rainbow(length(unique(samDf[[samCol]]))))
     nViews = length(x$data)
     coords = extractCoords(x, Dim)
@@ -82,7 +83,7 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
         if(length(featCols[[i]])>1) featCols[[i]] = featCols[[i]][featurePlot]
         Plot = Plot + geom_text(aes_string(x = DimChar[1], y = DimChar[2], label = "featNames"),
                     inherit.aes = FALSE, data = featureData[[i]],
-                    col = featCols[[i]], size = featSize, alpha = featAlpha)
+                    col = featCols[[i]], size = featSize, alpha = featAlpha, checkOverlap = checkOverlap)
     }
     # Views Legend, TO DO!
     #### Gradient ####

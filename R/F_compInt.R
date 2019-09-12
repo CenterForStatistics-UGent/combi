@@ -96,7 +96,7 @@ compInt = function(data, M = 3L, covariates = NULL, distributions,
                 immediate. = TRUE)}
     if(is.null(names(data))) names(data) = paste0("View", seq_along(data))
     namesData = names(data)
-    #Extract otu table from phyloseq objects
+    #Extract otu table from phyloseq objects6
     data = extractData(data, logTransformMicroArray = logTransformMicroArray)
     if(any(vapply(FUN.VALUE = TRUE, data, function(x){is.null(rownames(x))}))){
         stop("Make sure to provide sample names for all views!")
