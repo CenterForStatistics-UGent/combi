@@ -76,8 +76,6 @@ respectively}
 \value{
 An object of the "compInt" class, containing all information on the
 data integration and fitting procedure
-
-An object of class compInt, describing the fit
 }
 \description{
 Perform model-based data integration
@@ -90,6 +88,7 @@ nCores is silently set to the number of views.
 meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
  trend, "cubic" gives a third degree polynomial. Both converge to the
  diagonal line with slope 1 for small means.
+ Distribution can be either "quasi" for quasi likelihood or "gaussian" for Gaussian data
 }
 \examples{
 data(hmp2)

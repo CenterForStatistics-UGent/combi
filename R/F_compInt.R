@@ -46,7 +46,7 @@
 #' meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
 #'  trend, "cubic" gives a third degree polynomial. Both converge to the
 #'  diagonal line with slope 1 for small means.
-#' @return An object of class compInt, describing the fit
+#'  Distribution can be either "quasi" for quasi likelihood or "gaussian" for Gaussian data
 #' @aliases compIntegrate
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda

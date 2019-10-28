@@ -5,6 +5,7 @@
 #' @param Dim the dimensions to be plotted
 #' @param samDf a dataframe of sample variables
 #' @param samCol A variable name from samDf used to colour the samples
+#' @param samShape A variable name from samDf used to shape the samples
 #' @param featCols Colours for the features
 #' @param samColValues Colours for the samples
 #' @param warnMonotonicity A boolean, should a warning be thrown when the
@@ -24,7 +25,6 @@
 #' @param checkOverlap A boolean, should overlapping labels be omitted?
 #'
 #' @return A ggplot object containing the plot
-#'
 #' @method plot compInt
 #'
 #' @export
@@ -38,8 +38,9 @@
 #' compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
 #' plot(microVirDI)
 plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
-                        featNum = 20L, featCols = c("darkblue", "darkgreen",
-                                                    "darkred", terrain.colors(5)),
+                        samShape = NULL, featNum = 20L,
+                        featCols = c("darkblue", "darkgreen", "darkred",
+                                     terrain.colors(5)),
                         manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
                         manExpFactorVar = 0.975, varNum = nrow(x$alphas),
                         varSize = 2.5, samColValues = NULL, samSize = 1.5,
@@ -57,15 +58,26 @@ plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
     }
 
     DimChar = paste0("Dim", Dim)
+    if(!is.null(samShape)){
+        if(is.factor(samDf$samShape) | is.character(is.factor(samDf$samShape)))
+            stop("Shape must be a discrete variable!\n")
+    }
     #### Latent variables ####
-    Plot = ggplot(aes_string(x = DimChar[1], y = DimChar[2], fill = samCol), data = latentData) +
-        geom_point(size = samSize, shape = 21, stroke = strokeSize) + theme_bw() +
-        if(!is.null(samColValues)) scale_fill_manual(values = samColValues, name = samColour)
+    Plot = ggplot(aes_string(x = DimChar[1], y = DimChar[2], fill = samCol, shape = samShape), data = latentData) +
+        theme_bw() +
+        (if(!is.null(samColValues)) scale_fill_manual(values = samColValues, name = samCol))
+    if(!is.null(samShape)) {
+        Plot = Plot + scale_shape_discrete(name = samShape) +
+             geom_point(size = samSize)}
+    else {
+        Plot = Plot+ geom_point(size = samSize, shape = 21, stroke = strokeSize)
+}
 
     #### Views ####
     if(length(featNum)==1){featNum = rep(featNum, nViews)}
     checkComp = checkMonotonicity(x, Dim)
     for(i in seq_len(nViews)){
+        if(featNum[i]==0) break
         arrowLengths = rowSums(featureData[[i]][, DimChar]^2)
         featurePlot = arrowLengths >= quantile(arrowLengths, 1-min(1,featNum[i]/nrow(featureData[[i]])))
         featureData[[i]] = featureData[[i]][featurePlot,]
@@ -83,7 +95,8 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
         if(length(featCols[[i]])>1) featCols[[i]] = featCols[[i]][featurePlot]
         Plot = Plot + geom_text(aes_string(x = DimChar[1], y = DimChar[2], label = "featNames"),
                     inherit.aes = FALSE, data = featureData[[i]],
-                    col = featCols[[i]], size = featSize, alpha = featAlpha, checkOverlap = checkOverlap)
+                    col = featCols[[i]], size = featSize, alpha = featAlpha,
+                    check_overlap = checkOverlap)
     }
     # Views Legend, TO DO!
     #### Gradient ####

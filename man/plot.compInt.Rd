@@ -5,13 +5,13 @@
 \title{Make multiplots of the data integration object}
 \usage{
 \method{plot}{compInt}(x, ..., Dim = c(1, 2), samDf = NULL,
-  samCol = NULL, featNum = 20L, featCols = c("darkblue", "darkgreen",
-  "darkred", terrain.colors(5)), manExpFactorTaxa = 0.975,
-  featSize = 2.5, crossSize = 4, manExpFactorVar = 0.975,
-  varNum = nrow(x$alphas), varSize = 2.5, samColValues = NULL,
-  samSize = 1.5, strokeSize = 0.05, warnMonotonicity = FALSE,
-  returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
-  xInd = 0, yInd = 0)
+  samCol = NULL, samShape = NULL, featNum = 20L,
+  featCols = c("darkblue", "darkgreen", "darkred", terrain.colors(5)),
+  manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
+  manExpFactorVar = 0.975, varNum = nrow(x$alphas), varSize = 2.5,
+  samColValues = NULL, samSize = 1.5, strokeSize = 0.05,
+  warnMonotonicity = FALSE, returnCoords = FALSE, squarePlot = TRUE,
+  featAlpha = 0.5, xInd = 0, yInd = 0, checkOverlap = FALSE)
 }
 \arguments{
 \item{x}{the fit}
@@ -23,6 +23,8 @@
 \item{samDf}{a dataframe of sample variables}
 
 \item{samCol}{A variable name from samDf used to colour the samples}
+
+\item{samShape}{A variable name from samDf used to shape the samples}
 
 \item{featNum, varNum}{The number of features and variables to plot}
 
@@ -49,6 +51,8 @@ in thrird party software}
 \item{featAlpha}{Controls the transparacny of the features}
 
 \item{xInd, yInd}{x and y indentations}
+
+\item{checkOverlap}{A boolean, should overlapping labels be omitted?}
 }
 \value{
 A ggplot object containing the plot
