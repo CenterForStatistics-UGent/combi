@@ -16,9 +16,9 @@ vignette: >
 
 # Introduction
 
-# Publication
+<!-- # Publication -->
 
-The underlying method of the compIntegrate package is described in detail in the following article: 
+<!-- The underlying method of the compIntegrate package is described in detail in the following article:  -->
 
 # Installation
 
@@ -39,7 +39,7 @@ library(BiocManager)
 install("compIntegrate", update = FALSE)
 ```
 
-```{r loadRCMpackage}
+```{r loadcompIntpackage}
 suppressPackageStartupMessages(library(compIntegrate))
 cat("compIntegrate package version", 
     as.character(packageVersion("compIntegrate")), "\n")

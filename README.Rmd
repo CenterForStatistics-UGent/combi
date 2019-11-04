@@ -4,13 +4,9 @@ output: github_document
 
 # Manual for the use of the compIntegrate package
 
-## Publication
-
-The underlying method of the RCM package is described in detail in the following article: ["A unified framework for unconstrained and constrained ordination of microbiome read count data"](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0205474).
-
 ## Install and load packages
 
-This repo contains R-code to fit and plot the RC(M)-models augmented with the negative binomial. The basic usage is demonstrated here, for more advanced examples see the [RCM manual](http://users.ugent.be/~shawinke/RCMmanual) and the help pages of _RCM()_, *RCM_NB()*, and _plot.RCM()_ functions.
+This repo contains R-code to fit and plot the mode-based integration models for compositional omics data. The basic usage is demonstrated here.
 
 The package can be installed from BioConductor and loaded using the following commands:
 
@@ -28,5 +24,58 @@ Alternatively, the latest version can be installed directly from this GitHub rep
 
 ```{r installRCMpackage, eval = FALSE}
 library(devtools)
-install_github("CenterForStatistics-UGent/RCM")
+install_github("CenterForStatistics-UGent/compIntegrate")
+```
+
+## Unconstrained integration
+
+For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature should be supplied
+
+```{r unconstr}
+data(hmp2)
+microVirDI = compInt(data = list("microbiome" = microPruneVir,
+"virome" = virPrune), 
+distributions = c("quasi", "quasi"),
+ compositional = c(TRUE, TRUE))
+```
+
+A simple plot function is available for the result, for samples and shapes, a data frame should also be supplied
+
+```{r simplePlot}
+plot(microVirDI)
+```
+
+```{r colourPlot}
+plot(microVirDI, samDf = hmp2samVar, samCol = "diagnosis")
+```
+
+## Constrained integration
+
+For a constrained ordination also a data frame of sample variables should be supplied
+
+```{r constr}
+microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
+ "virome" = virPrune), 
+ distributions = c("quasi", "quasi"),
+ compositional = c(TRUE, TRUE), 
+ covariates = hmp2samVar[, c("diagnosis",
+ "biopsy_location", "sex")])
+```
+
+```{r colourPlotConstr}
+plot(microVirDIconstr, samDf = hmp2samVar, samCol = "diagnosis")
+```
+
+## Diagnostics
+
+Convergence of the iterative algorithm can be assessed as follows:
+
+```{r convPlot}
+convPlot(microVirDI)
+```
+
+Influence of the different views can be investigated through
+
+```{r inflPlot}
+inflPlot(microVirDI, samples = 1:20, plotType = "boxplot")
 ```
