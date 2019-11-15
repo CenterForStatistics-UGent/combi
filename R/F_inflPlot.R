@@ -19,17 +19,18 @@
 #' @return A ggplot object
 #' @export
 #' @examples
-#' data(hmp2)
-#' microVirDI = compInt(data = list("microbiome" = microPruneVir,
-#' "virome" = virPrune), distributions = c("quasi", "quasi"),
-#' compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
-#' inflPlot(microVirDI)
-#' microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
-#' "virome" = virPrune), distributions = c("quasi", "quasi"),
-#' compositional = c(TRUE, TRUE), M = 2,
-#' covariates = hmp2samVar[, c("Occupation",
-#' "Education.Level", "diagnosis","Ileum","sex", "race")], verbose = TRUE)
-#' inflPlot(microVirDIconstr)
+#' data(Zhang)
+#' microMetaboInt = compInt(
+#' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#' logTransformGaussian = FALSE, verbose = TRUE)
+#' inlfPlot(microMetaboInt)
+#' #Constrained
+#' microMetaboIntConstr = compInt(
+#'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
+#' inflPlot(microMetaboIntConstr)
 inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
                                                 "pointplot", "boxplot"),
                     pointFun = "sum", lineSize = 0.07, Dim = 1,

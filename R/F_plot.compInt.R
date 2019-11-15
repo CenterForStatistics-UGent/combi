@@ -33,12 +33,20 @@
 #' @importFrom grDevices terrain.colors
 #' @importFrom stats quantile
 #' @examples
-#' data(hmp2)
-#' microVirDI = compInt(data = list("microbiome" = microPruneVir,
-#' "virome" = virPrune), distributions = c("quasi", "quasi"),
-#' compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
-#' plot(microVirDI)
-#' plot(microVirDI, samDf = hmp2samVar, samCol = "diagnosis")
+#' data(Zhang)
+#' #Unconstrained
+#' microMetaboInt = compInt(
+#' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#' logTransformGaussian = FALSE, verbose = TRUE)
+#' plot(microMetaboInt)
+#' plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
+#' #Constrained
+#' microMetaboIntConstr = compInt(
+#'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
+#' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX)
 plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         samShape = NULL, featNum = 20L,
                         featCols = c("darkblue", "darkgreen", "darkred",

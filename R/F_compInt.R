@@ -4,23 +4,28 @@
 #' Also phyloseq objects are acceptable
 #' @param M the required dimension of the fit, a non-negative integer
 #' @param covariates a dataframe of n samples with sample-specific variables.
-#' @param distributions a character vector describing which distributional assumption should be used. See details.
+#' @param distributions a character vector describing which distributional
+#' assumption should be used. See details.
 #' @param compositional A logical vector with the same length as "data",
 #'  indicating if the datasets should be treated as compositional
 #' @param maxIt an integer, the maximum number of iterations
 #' @param tol A small scalar, the convergence tolerance
 #' @param verbose Logical. Should verbose output be printed to the console?
-#' @param nCores The number of cores to be used in estimating the feature parameters of each view. See details.
-#' @param confounders A dataframe or a list of dataframes with the same length as data.
+#' @param nCores The number of cores to be used in estimating the feature
+#' parameters of each view. See details.
+#' @param confounders A dataframe or a list of dataframes with the same
+#' length as data.
 #'  In the former case the same dataframe is used for conditioning,
 #'  In the latter case each view has its own conditioning variables (or NULL).
 #' @param minFraction a scalar, each taxon's total abundance
 #' should equal at least the number of samples n times minFraction,
 #'   otherwise it is trimmed.
 #' @param prevCutOff a scalar, the prevalance cutoff for the trimming.
-#' @param record A boolean, should intermediate estimates be stored? Can be useful to check convergence
+#' @param record A boolean, should intermediate estimates be stored?
+#' Can be useful to check convergence
 #' @param fTol The tolerance for solving the estimating equations
-#' @param logTransformGaussian A boolean, should the array data be logtransformed?
+#' @param logTransformGaussian A boolean, should the gaussian data be
+#' logtransformed, i.e. are they log-normal?
 #' @param nleq.control A list of arguments to the nleqslv function
 #' @param weights A character string, either 'marginal' or 'uniform', indicating
 #' rrhow the feature parameters should be weighted in the normalization
@@ -46,7 +51,8 @@
 #' meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
 #'  trend, "cubic" gives a third degree polynomial. Both converge to the
 #'  diagonal line with slope 1 for small means.
-#'  Distribution can be either "quasi" for quasi likelihood or "gaussian" for Gaussian data
+#'  Distribution can be either "quasi" for quasi likelihood or "gaussian" for
+#'   Gaussian data
 #' @aliases compIntegrate
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda
@@ -54,15 +60,17 @@
 #' @importFrom stats sd
 #' @export
 #' @examples
-#' data(hmp2)
-#' microVirDI = compInt(data = list("microbiome" = microPruneVir,
-#' "virome" = virPrune), distributions = c("quasi", "quasi"),
-#' compositional = c(TRUE, TRUE), verbose = TRUE)
-#' microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
-#' "virome" = virPrune), distributions = c("quasi", "quasi"),
-#' compositional = c(TRUE, TRUE),
-#' covariates = hmp2samVar[, c("diagnosis","biopsy_location","sex")],
-#' verbose = TRUE)
+#' data(Zhang)
+#' #Unconstrained
+#' microMetaboInt = compInt(
+#' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#' logTransformGaussian = FALSE, verbose = TRUE)
+#' #Constrained
+#' microMetaboIntConstr = compInt(
+#'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
 compInt = function(data, M = 2L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformGaussian = TRUE,

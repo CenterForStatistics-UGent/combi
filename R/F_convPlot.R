@@ -11,11 +11,12 @@
 #' @return A ggplot object containing the convergence plot
 #' @export
 #' @examples
-#' data(hmp2)
-#' microVirDI = compInt(data = list("microbiome" = microPruneVir,
-#' "virome" = virPrune), distributions = c("quasi", "quasi"),
-#' compositional = c(TRUE, TRUE), M = 2)
-#' convPlot(microVirDI)
+#' data(Zhang)
+#' microMetaboInt = compInt(
+#' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#' logTransformGaussian = FALSE, verbose = TRUE)
+#' convPlot(microMetaboInt)
 convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1,
                     View = NULL, size = 0.125){
     if(is.null(model$paramRec)){
