@@ -13,6 +13,8 @@ scoreConfounders(x, data, distribution, offSet, confMat, meanVarTrend,
 \item{data, distribution, offSet, confMat, meanVarTrend}{Characteristics of the views}
 
 \item{allowMissingness}{a boolean, should missing values be allowed}
+
+\item{libSizes, CompMat}{Library sizes and relative abunance}
 }
 \value{
 The evaluation of the estimating equations

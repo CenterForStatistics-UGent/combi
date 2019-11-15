@@ -18,6 +18,8 @@ jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet,
 
 \item{meanVarTrend}{Characteristics of the views}
 
+\item{libSizes, CompMat}{Library sizes and relative abunance}
+
 \item{allowMissingness}{a boolean, should missing values be allowed}
 }
 \value{
