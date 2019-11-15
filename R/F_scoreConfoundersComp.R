@@ -23,9 +23,6 @@ scoreConfoundersComp = function(x, confMat, data, meanVarTrend, marginModel,
     Sum = rowSums(CompMat0)
     CompMat = CompMat0/Sum
     mu = CompMat*exp(marginModel$rowOff)
-    # if(anyNA(mu)){
-    #     return(rep(1e16, length(x)))
-    # }
     if(allowMissingness){
         isNA = is.na(data)
         data[isNA] = mu[isNA]

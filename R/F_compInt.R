@@ -17,6 +17,9 @@
 #' length as data.
 #'  In the former case the same dataframe is used for conditioning,
 #'  In the latter case each view has its own conditioning variables (or NULL).
+#' @param compositionalConf A logical vector with the same length as "data",
+#'  indicating if the datasets should be treated as compositional when
+#'  correcting for confounders. Numerical problems may occur when set to TRUE
 #' @param minFraction a scalar, each taxon's total abundance
 #' should equal at least the number of samples n times minFraction,
 #'   otherwise it is trimmed.
@@ -37,9 +40,8 @@
 #' @param allowMissingness A boolean, should NA values be allowed?
 #' @param biasReduction A boolean, should bias reduction be applied to allow for
 #' confounder correction in groups with all zeroes? Not guaranteed to work
-#' @param maxItFeat,maxItFilt Integers, the maximum allowed number of iterations
-#' in the estimation of the feature parametes and confounder parameters
-#' respectively
+#' @param maxItFeat Integers, the maximum allowed number of iterations
+#' in the estimation of the feature parameters
 #'
 #' @return An object of the "compInt" class, containing all information on the
 #' data integration and fitting procedure
@@ -74,11 +76,11 @@
 compInt = function(data, M = 2L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformGaussian = TRUE,
-                   confounders = NULL, nleq.control = list(maxit = 1e3L, cndtol = 1e-16),
+                   confounders = NULL, compositionalConf = rep(FALSE, length(data)),
+                   nleq.control = list(maxit = 1e3L, cndtol = 1e-16),
                    record = TRUE, weights = NULL, fTol = 1e-5, nCores = 1,
                    meanVarFit = "spline", maxFeats = 2e3, dispFreq = 10L,
-                   allowMissingness = FALSE, biasReduction = TRUE, maxItFeat = 2e1L,
-                   maxItFilt = 50L){
+                   allowMissingness = FALSE, biasReduction = TRUE, maxItFeat = 2e1L){
     #Switch off multithreading on windows
     if(.Platform$OS.type == "windows" && nCores>1){
         message("Forking not supported on Windows machine!\nUsing only one core.")
@@ -92,9 +94,10 @@ compInt = function(data, M = 2L, covariates = NULL, distributions,
     #if(length(distributions)==1) distributions = rep(distributions, length(data))
     #if(length(compositional)==1) compositional = rep(compositional, length(data))
     if(!is.logical(compositional)) stop("'compositional' should be a logical vector!")
+    if(!is.logical(compositionalConf)) stop("'compositionalConf' should be a logical vector!")
     if(!is.character(distributions)) stop("'distributions' should be a character vector!")
     if(!all(vapply(FUN.VALUE = integer(1),
-                   c(length(data), length(distributions)),
+                   c(length(data), length(distributions), length(compositionalConf)),
                    identical, length(compositional)))){
         stop("Make sure data, distribution, links and compositional have the same length")
     }
@@ -297,12 +300,13 @@ switch(weights[[i]],
         if(!oneConfMat && is.null(confounders[[i]])){return(NULL)
             } else {filterConfounders(offSet = offsets[[i]], data = data[[i]],
                               distribution = distributions[[i]], link = links[[i]],
-                              compositional = compositional[[i]], invLink = invLinks[[i]],
+                              compositional = compositionalConf[[i]],
+                              invLink = invLinks[[i]],
                               confMat = confMats[[if(length(confounders)>1) i else 1]]$confModelMat,
                               meanVarTrend = meanVarTrends[[i]], numVar = numVars[[i]],
                               control = nleq.control, marginModel = marginModels[[i]],
-                              allowMissingness = allowMissingness, biasReduction = biasReduction,
-                              maxItFilt = maxItFilt)
+                              allowMissingness = allowMissingness,
+                              biasReduction = biasReduction)
             }
         })
     #Prepare a list of independence models
