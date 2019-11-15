@@ -8,10 +8,11 @@
 compInt(data, M = 2L, covariates = NULL, distributions, compositional,
   maxIt = 300L, tol = 0.001, verbose = FALSE, prevCutOff = 0.95,
   minFraction = 0.1, logTransformGaussian = TRUE, confounders = NULL,
+  compositionalConf = rep(FALSE, length(data)),
   nleq.control = list(maxit = 1000L, cndtol = 1e-16), record = TRUE,
   weights = NULL, fTol = 1e-05, nCores = 1, meanVarFit = "spline",
   maxFeats = 2000, dispFreq = 10L, allowMissingness = FALSE,
-  biasReduction = TRUE, maxItFeat = 20L, maxItFilt = 50L)
+  biasReduction = TRUE, maxItFeat = 20L)
 }
 \arguments{
 \item{data}{a list of data matrices with the same number of samples n in the rows.
@@ -47,6 +48,10 @@ length as data.
  In the former case the same dataframe is used for conditioning,
  In the latter case each view has its own conditioning variables (or NULL).}
 
+\item{compositionalConf}{A logical vector with the same length as "data",
+indicating if the datasets should be treated as compositional when
+correcting for confounders. Numerical problems may occur when set to TRUE}
+
 \item{nleq.control}{A list of arguments to the nleqslv function}
 
 \item{record}{A boolean, should intermediate estimates be stored?
@@ -73,9 +78,8 @@ reestimated}
 \item{biasReduction}{A boolean, should bias reduction be applied to allow for
 confounder correction in groups with all zeroes? Not guaranteed to work}
 
-\item{maxItFeat, maxItFilt}{Integers, the maximum allowed number of iterations
-in the estimation of the feature parametes and confounder parameters
-respectively}
+\item{maxItFeat}{Integers, the maximum allowed number of iterations
+in the estimation of the feature parameters}
 }
 \value{
 An object of the "compInt" class, containing all information on the

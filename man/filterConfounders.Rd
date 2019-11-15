@@ -6,7 +6,7 @@
 \usage{
 filterConfounders(confMat, data, distribution, link, invLink,
   compositional, control, meanVarTrend, offSet, numVar, marginModel,
-  biasReduction, allowMissingness, maxItFilt)
+  biasReduction, allowMissingness)
 }
 \arguments{
 \item{confMat}{A confounder design matrix}
@@ -20,8 +20,6 @@ filterConfounders(confMat, data, distribution, link, invLink,
 \item{biasReduction}{A boolean, should bias reduction be applied}
 
 \item{allowMissingness}{A boolean, are missing values allowed?}
-
-\item{maxItFilt}{An integer, maximum number of iterations}
 }
 \value{
 Parameter estimates accounting for the effects of the confounders

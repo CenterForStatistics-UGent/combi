@@ -4,7 +4,8 @@
 \alias{jacConfounders}
 \title{Jacobian when estimating confounder variables}
 \usage{
-jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet)
+jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet,
+  CompMat, libSizes, allowMissingness)
 }
 \arguments{
 \item{confMat}{Characteristics of the views}
@@ -16,6 +17,8 @@ jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet)
 \item{x}{the parameter estimates}
 
 \item{meanVarTrend}{Characteristics of the views}
+
+\item{allowMissingness}{a boolean, should missing values be allowed}
 }
 \value{
 the jacobian matrix
