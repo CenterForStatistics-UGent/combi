@@ -20,7 +20,7 @@
 #' @param prevCutOff a scalar, the prevalance cutoff for the trimming.
 #' @param record A boolean, should intermediate estimates be stored? Can be useful to check convergence
 #' @param fTol The tolerance for solving the estimating equations
-#' @param logTransformMicroArray A boolean, should the array data be logtransformed?
+#' @param logTransformGaussian A boolean, should the array data be logtransformed?
 #' @param nleq.control A list of arguments to the nleqslv function
 #' @param weights A character string, either 'marginal' or 'uniform', indicating
 #' rrhow the feature parameters should be weighted in the normalization
@@ -65,7 +65,7 @@
 #' verbose = TRUE)
 compInt = function(data, M = 2L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
-                   prevCutOff = 0.95, minFraction = 0.1, logTransformMicroArray = TRUE,
+                   prevCutOff = 0.95, minFraction = 0.1, logTransformGaussian = TRUE,
                    confounders = NULL, nleq.control = list(maxit = 1e3L, cndtol = 1e-16),
                    record = TRUE, weights = NULL, fTol = 1e-5, nCores = 1,
                    meanVarFit = "spline", maxFeats = 2e3, dispFreq = 10L,
@@ -97,7 +97,7 @@ compInt = function(data, M = 2L, covariates = NULL, distributions,
     if(is.null(names(data))) names(data) = paste0("View", seq_along(data))
     namesData = names(data)
     #Extract otu table from phyloseq objects6
-    data = extractData(data, logTransformMicroArray = logTransformMicroArray)
+    data = extractData(data, logTransformGaussian = logTransformGaussian)
     if(any(vapply(FUN.VALUE = TRUE, data, function(x){is.null(rownames(x))}))){
         stop("Make sure to provide sample names for all views!")
     }
