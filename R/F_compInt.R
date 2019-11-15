@@ -351,12 +351,16 @@ switch(weights[[i]],
     }
 
     ### STARTING VALUES ###
-    # Find starting values through svd on concatenated datasets, normalized as well as possible
+    # Find starting values through svd on concatenated datasets,
+    #normalized as well as possible
     concat = Reduce(lapply(seqSets, function(i){
         rawResiduals = data[[i]]-offsets[[i]]
-        out = switch(distributions[[i]], "gaussian" = rowMultiply(rawResiduals, 1/apply(rawResiduals, 2, sd)),
-               "quasi" = rawResiduals/sqrt(meanVarTrends[[i]](invLinks[[i]](marginModels[[i]]$colOff),
-                                                              invLinks[[i]](marginModels[[i]]$rowOff))))
+        out = switch(distributions[[i]],
+                     "gaussian" = rowMultiply(rawResiduals,
+                                              1/apply(rawResiduals, 2, sd)),
+                     "quasi" = rawResiduals/sqrt(meanVarTrends[[i]](
+                         invLinks[[i]](marginModels[[i]]$colOff),
+                         invLinks[[i]](marginModels[[i]]$rowOff))))
         if(allowMissingness){
             out[naIdList[[i]]] = 0
         }
@@ -411,22 +415,26 @@ switch(weights[[i]],
             offsets = lapply(seqSets, function(i){
                 if(compositional[[i]]){
                   indepModels[[i]]$libSizes*
-                        buildCompMat(indepModels[[i]]$colMat, paramEsts[[i]], latentVars, m-1)
+                        buildCompMat(indepModels[[i]]$colMat,
+                                     paramEsts[[i]], latentVars, m-1)
                 } else {
                 buildMu(offSet = offsets[[i]], latentVar = latentVars[,m-1],
-                        paramEsts = paramEsts[[i]][m-1,], distribution = distributions[[i]])
+                        paramEsts = paramEsts[[i]][m-1,],
+                        distribution = distributions[[i]])
                 }
             })
         }
         #Prepare the jacobians
                 ## Latent variables
         emptyJacLatent = buildEmptyJac(n = if(constrained) numCov else n, m = m,
-                          lower = if(constrained) alphas else latentVars, nLambda1s = nLambda1s,
+                          lower = if(constrained) alphas else latentVars,
+                          nLambda1s = nLambda1s,
                           normal = constrained, centMat = centMat)
                 ## Feature parameters
         emptyFeatureJacs = lapply(seqSets, function(i){
             buildEmptyJac(numVars[[i]], m = m, lower = t(paramEsts[[i]]),
-                          normal = compositional[[i]], weights = weightsList[[i]],
+                          normal = compositional[[i]],
+                          weights = weightsList[[i]],
                           distribution = distributions[[i]])})
         while(iter[[m]] <= maxIt && !converged[[m]]){
 
@@ -454,13 +462,16 @@ switch(weights[[i]],
         paramEstsTmp = estFeatureParameters(data = data, distributions = distributions,
                                             offsets = offsets, paramEsts = paramEsts,
                                             latentVars = latentVars, m = m,
-                                            numVars = numVars, meanVarTrends = meanVarTrends[[m]],
+                                            numVars = numVars,
+                                            meanVarTrends = meanVarTrends[[m]],
                                             lambdasParams = lambdasParams,
-                                            JacFeatures = emptyFeatureJacs, seqSets = seqSets,
+                                            JacFeatures = emptyFeatureJacs,
+                                            seqSets = seqSets,
                                             control = nleq.control, nCores = nCores,
                                             weights = weightsList, compositional = compositional,
                                             indepModels = indepModels, fTol = fTol,
-                                            newtonRaphson = newtonRaphson, allowMissingness = allowMissingness,
+                                            newtonRaphson = newtonRaphson,
+                                            allowMissingness = allowMissingness,
                                             maxItFeat = maxItFeat)
         for (i in seqSets){
             #Enforce restrictions to stabilize algorithm
@@ -474,13 +485,14 @@ switch(weights[[i]],
             } #Orthogonalize
             paramEsts[[i]][m,] = tmp/sqrt(sum(tmp^2*weightsList[[i]])) #Scale
             lambdasParams[[i]][seq_m(m, nLambda1s = 1, normal = compositional[[i]] )] =
-                paramEstsTmp[[i]]$x[-seq_len(numVars[[i]])] #+ compositional[[i]]
+                paramEstsTmp[[i]]$x[-seq_len(numVars[[i]])]
             #Record convergence
             if(record) paramConv[iter[[m]],i,m] = paramEstsTmp[[i]]$conv
         };rm(tmp)
         ### Estimate nuissance parameters ###
         #if(verbose) cat("Estimating nuissance parameters ...\n")
-        #For each dimension, re-estimate the posterior standard deviation using limma, if applicable
+        #For each dimension, re-estimate the posterior standard deviation
+        #using limma, if applicable
         varPosts = lapply(seqSets, function(i){
             if(distributions[[i]] == "gaussian"){
                 varEst = colSums(na.rm = TRUE, (data[[i]] - offsets[[i]] -
@@ -499,14 +511,16 @@ switch(weights[[i]],
         #nleq.control$trace = TRUE
         latentVarsTmp = estLatentVars(data = data,
                             distributions = distributions,
-                            offsets = offsets, paramEsts = paramEsts, paramMats = paramMats,
+                            offsets = offsets, paramEsts = paramEsts,
+                            paramMats = paramMats,
                             latentVars = (if(constrained) alphas else latentVars)[, m],
                             latentVarsLower = (if(constrained) alphas else latentVars)[,
                                                 seq_len(m-1), drop = FALSE],
                             n = n, m = m, numSets = numSets, numVars = numVars,
                             meanVarTrends = meanVarTrends[[m]], links = links,
                             lambdasLatent = lambdasLatent[
-                                          seq_m(m, normal = constrained, nLambda1s = nLambda1s)],
+                                          seq_m(m, normal = constrained,
+                                                nLambda1s = nLambda1s)],
                             Jac = as.matrix(emptyJacLatent),
                             control = nleq.control, covMat = covMat,
                             numCov = numCov, centMat = centMat, nLambda1s = nLambda1s,
@@ -526,7 +540,8 @@ switch(weights[[i]],
             latentVars[, m] = latentVarsTmp$x[seq_len(n)] -
                 mean(latentVarsTmp$x[seq_len(n)]) #Enforce centering for stability
             if(m>1){
-                latentVars[, m] = GramSchmidtOrth(latentVars[, m], latentVars[, m-1], norm = FALSE)
+                latentVars[, m] = GramSchmidtOrth(latentVars[, m],
+                                                  latentVars[, m-1], norm = FALSE)
             } #Orthogonalize
         }
         if(record) latentConv[iter[[m]],m] = latentVarsTmp$conv #Store convergence

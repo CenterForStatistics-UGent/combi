@@ -4,12 +4,12 @@
 \alias{extractData}
 \title{Helper function to extract data matrix from phyloseq, expressionset objects etc. Also filers out all zero rows}
 \usage{
-extractData(data, logTransformMicroArray = TRUE)
+extractData(data, logTransformGaussian = TRUE)
 }
 \arguments{
 \item{data}{The list of data objects, either matrix, phyloseq or ExpressionSet objects}
 
-\item{logTransformMicroArray}{A boolean, should array data be logtransformed}
+\item{logTransformGaussian}{A boolean, should array data be logtransformed}
 }
 \value{
 the raw data matrices, samples in the rows

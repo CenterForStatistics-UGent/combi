@@ -27,8 +27,8 @@ This package implements a novel data integration model for sample-wise integrati
 The package can be installed and loaded using the following commands:
 
 ```{r load-packages, warning=FALSE, message=FALSE, echo=FALSE}
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE,
-                      warning = FALSE, message = FALSE, echo = TRUE, eval = TRUE, 
+knitr::opts_chunk$set(cache = FALSE, autodep = TRUE, warning = FALSE, 
+                      message = FALSE, echo = TRUE, eval = TRUE, 
                       tidy = TRUE, fig.width = 9, fig.height = 6, purl = TRUE, 
                       fig.show = "hold", cache.lazy = FALSE)
 palStore = palette()
@@ -41,7 +41,7 @@ library(BiocManager)
 install("compIntegrate", update = FALSE)
 ```
 
-```{r install, eval = FALSE}
+```{r installDevtools, eval = FALSE}
 library(devtools)
 install_github("CenterForStatistics-UGent/compIntegrate")
 ```
@@ -57,21 +57,21 @@ cat("compIntegrate package version",
 For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature (TRUE/FALSE) should be supplied
 
 ```{r unconstr}
-data(hmp2)
-microVirDI = compInt(data = list("microbiome" = microPruneVir,
-"virome" = virPrune), 
-distributions = c("quasi", "quasi"),
- compositional = c(TRUE, TRUE))
+data(Zhang)
+microMetaboInt = compInt(
+ list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+ distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+ logTransformGaussian = FALSE)
 ```
 
 A simple plot function is available for the result, for samples and shapes, a data frame should also be supplied
 
 ```{r simplePlot}
-plot(microVirDI)
+plot(microMetaboInt)
 ```
 
 ```{r colourPlot}
-plot(microVirDI, samDf = hmp2samVar, samCol = "diagnosis")
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 ```
 
 ## Constrained integration
@@ -79,16 +79,14 @@ plot(microVirDI, samDf = hmp2samVar, samCol = "diagnosis")
 For a constrained ordination also a data frame of sample variables should be supplied
 
 ```{r constr}
-microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
- "virome" = virPrune), 
- distributions = c("quasi", "quasi"),
- compositional = c(TRUE, TRUE), 
- covariates = hmp2samVar[, c("diagnosis",
- "biopsy_location", "sex")])
+microMetaboIntConstr = compInt(
+     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+     logTransformGaussian = FALSE, covariates = zhangMetavars)
 ```
 
 ```{r colourPlotConstr}
-plot(microVirDIconstr, samDf = hmp2samVar, samCol = "diagnosis")
+plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 ```
 
 ## Diagnostics
@@ -96,13 +94,13 @@ plot(microVirDIconstr, samDf = hmp2samVar, samCol = "diagnosis")
 Convergence of the iterative algorithm can be assessed as follows:
 
 ```{r convPlot}
-convPlot(microVirDI)
+convPlot(microMetaboInt)
 ```
 
 Influence of the different views can be investigated through
 
 ```{r inflPlot}
-inflPlot(microVirDI, samples = 1:20, plotType = "boxplot")
+inflPlot(microMetaboInt, samples = 1:20, plotType = "boxplot")
 ```
 
 # Session info

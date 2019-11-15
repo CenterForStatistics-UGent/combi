@@ -1,17 +1,14 @@
 context("compIntegrate input")
 
-data(hmp2)
+data(Zhang)
 test_that("compIntegrate throws warnings when ordination model is fitted", {
- expect_warning(compInt(data = list("microbiome" = microPruneVir), distributions = "quasi",
+ expect_warning(compInt(data = list("microbiome" = zhangMicrobio), distributions = "quasi",
                             compositional = TRUE, nCores = 1, M = 2))
 })
 test_that("compIntegrate throws error for wrong input type", {
-    expect_error(compInt(data = microPruneVir, distributions = "quasi",
+    expect_error(compInt(data = zhangMicrobio, distributions = "quasi",
                            compositional = TRUE, nCores = 1, M = 2))
 })
-# test_that("RCM throws errors when only one covariate with one level supplied", {
-#   expect_error(RCM(Zeller, covariates = "Age", k = 1))
-# })
 n  = 50; p = 100
 tmpMat  = matrix(rnbinom(n*p, mu = 5, size = 1),n,p)
 test_that("compIntegrate throws errors when no row names provided", {

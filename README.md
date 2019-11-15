@@ -34,31 +34,23 @@ Unconstrained integration
 For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature should be supplied.
 
 ``` r
-data(hmp2)
-microVirDI = compInt(data = list("microbiome" = microPruneVir,
-"virome" = virPrune), 
-distributions = c("quasi", "quasi"),
- compositional = c(TRUE, TRUE))
+data(Zhang)
+microMetaboInt = compInt(
+ list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+ distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+ logTransformGaussian = FALSE)
 ```
-
-    ## Warning in compInt(data = list(microbiome = microPruneVir, virome = virPrune), : Zero rows
-    ## 5 6 7 11 16 23 35 51 64 70
-    ## filtered out prior to fit
-
-    ## Zero rows
-    ## 9 23 25 34
-    ## filtered out after filtering features
 
 A simple plot function is available for the result, for samples and shapes, a data frame should also be supplied
 
 ``` r
-plot(microVirDI)
+plot(microMetaboInt)
 ```
 
 ![](README_files/figure-markdown_github/simplePlot-1.png)
 
 ``` r
-plot(microVirDI, samDf = hmp2samVar, samCol = "diagnosis")
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 ```
 
 ![](README_files/figure-markdown_github/colourPlot-1.png)
@@ -69,26 +61,16 @@ Constrained integration
 For a constrained ordination also a data frame of sample variables should be supplied
 
 ``` r
-microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
- "virome" = virPrune), 
- distributions = c("quasi", "quasi"),
- compositional = c(TRUE, TRUE), 
- covariates = hmp2samVar[, c("diagnosis",
- "biopsy_location", "sex")])
+microMetaboIntConstr = compInt(
+     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+     logTransformGaussian = FALSE, covariates = zhangMetavars)
 ```
 
-    ## Warning in compInt(data = list(microbiome = microPruneVir, virome = virPrune), : Zero rows
-    ## 5 6 7 11 16 23 35 51 64 70
-    ## filtered out prior to fit
-
-    ## Zero rows
-    ## 9 23 25 34
-    ## filtered out after filtering features
-
-    ## Warning in buildCovMat(covariates): Factors with only one level dropped!
+    ## Warning in buildCovMat(covariates): Integer values treated as numeric!
 
 ``` r
-plot(microVirDIconstr, samDf = hmp2samVar, samCol = "diagnosis")
+plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 ```
 
 ![](README_files/figure-markdown_github/colourPlotConstr-1.png)
@@ -99,7 +81,7 @@ Diagnostics
 Convergence of the iterative algorithm can be assessed as follows:
 
 ``` r
-convPlot(microVirDI)
+convPlot(microMetaboInt)
 ```
 
 ![](README_files/figure-markdown_github/convPlot-1.png)
@@ -107,7 +89,7 @@ convPlot(microVirDI)
 Influence of the different views can be investigated through
 
 ``` r
-inflPlot(microVirDI, samples = 1:20, plotType = "boxplot")
+inflPlot(microMetaboInt, samples = 1:20, plotType = "boxplot")
 ```
 
 ![](README_files/figure-markdown_github/inflPlot-1.png)

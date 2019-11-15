@@ -46,7 +46,7 @@
 #'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
-#' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX)
+#' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         samShape = NULL, featNum = 20L,
                         featCols = c("darkblue", "darkgreen", "darkred",

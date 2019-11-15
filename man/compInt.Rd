@@ -7,12 +7,11 @@
 \usage{
 compInt(data, M = 2L, covariates = NULL, distributions, compositional,
   maxIt = 300L, tol = 0.001, verbose = FALSE, prevCutOff = 0.95,
-  minFraction = 0.1, logTransformMicroArray = TRUE,
-  confounders = NULL, nleq.control = list(maxit = 1000L, cndtol =
-  1e-16), record = TRUE, weights = NULL, fTol = 1e-05, nCores = 1,
-  meanVarFit = "spline", maxFeats = 2000, dispFreq = 10L,
-  allowMissingness = FALSE, biasReduction = TRUE, maxItFeat = 20L,
-  maxItFilt = 50L)
+  minFraction = 0.1, logTransformGaussian = TRUE, confounders = NULL,
+  nleq.control = list(maxit = 1000L, cndtol = 1e-16), record = TRUE,
+  weights = NULL, fTol = 1e-05, nCores = 1, meanVarFit = "spline",
+  maxFeats = 2000, dispFreq = 10L, allowMissingness = FALSE,
+  biasReduction = TRUE, maxItFeat = 20L, maxItFilt = 50L)
 }
 \arguments{
 \item{data}{a list of data matrices with the same number of samples n in the rows.
@@ -22,7 +21,8 @@ Also phyloseq objects are acceptable}
 
 \item{covariates}{a dataframe of n samples with sample-specific variables.}
 
-\item{distributions}{a character vector describing which distributional assumption should be used. See details.}
+\item{distributions}{a character vector describing which distributional
+assumption should be used. See details.}
 
 \item{compositional}{A logical vector with the same length as "data",
 indicating if the datasets should be treated as compositional}
@@ -39,22 +39,26 @@ indicating if the datasets should be treated as compositional}
 should equal at least the number of samples n times minFraction,
   otherwise it is trimmed.}
 
-\item{logTransformMicroArray}{A boolean, should the array data be logtransformed?}
+\item{logTransformGaussian}{A boolean, should the gaussian data be
+logtransformed, i.e. are they log-normal?}
 
-\item{confounders}{A dataframe or a list of dataframes with the same length as data.
-In the former case the same dataframe is used for conditioning,
-In the latter case each view has its own conditioning variables (or NULL).}
+\item{confounders}{A dataframe or a list of dataframes with the same
+length as data.
+ In the former case the same dataframe is used for conditioning,
+ In the latter case each view has its own conditioning variables (or NULL).}
 
 \item{nleq.control}{A list of arguments to the nleqslv function}
 
-\item{record}{A boolean, should intermediate estimates be stored? Can be useful to check convergence}
+\item{record}{A boolean, should intermediate estimates be stored?
+Can be useful to check convergence}
 
 \item{weights}{A character string, either 'marginal' or 'uniform', indicating
 rrhow the feature parameters should be weighted in the normalization}
 
 \item{fTol}{The tolerance for solving the estimating equations}
 
-\item{nCores}{The number of cores to be used in estimating the feature parameters of each view. See details.}
+\item{nCores}{The number of cores to be used in estimating the feature
+parameters of each view. See details.}
 
 \item{meanVarFit}{The type of mean variance fit, see details}
 
@@ -88,16 +92,19 @@ nCores is silently set to the number of views.
 meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
  trend, "cubic" gives a third degree polynomial. Both converge to the
  diagonal line with slope 1 for small means.
- Distribution can be either "quasi" for quasi likelihood or "gaussian" for Gaussian data
+ Distribution can be either "quasi" for quasi likelihood or "gaussian" for
+  Gaussian data
 }
 \examples{
-data(hmp2)
-microVirDI = compInt(data = list("microbiome" = microPruneVir,
-"virome" = virPrune), distributions = c("quasi", "quasi"),
-compositional = c(TRUE, TRUE), verbose = TRUE)
-microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
-"virome" = virPrune), distributions = c("quasi", "quasi"),
-compositional = c(TRUE, TRUE),
-covariates = hmp2samVar[, c("diagnosis","biopsy_location","sex")],
-verbose = TRUE)
+data(Zhang)
+#Unconstrained
+microMetaboInt = compInt(
+list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+logTransformGaussian = FALSE, verbose = TRUE)
+#Constrained
+microMetaboIntConstr = compInt(
+    list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+    distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+    logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
 }
