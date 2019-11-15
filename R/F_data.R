@@ -1,31 +1,34 @@
-#' Microbiomes of IBD patients and healthy controls
+#' Microbiomes of mice that underwent Pulsed Antibiotic Treatment
+#'  (PAT) and controls
 #'
-#' Microbiome sequencing data of IBD patients and healthy controls,
-#' together with baseline covariates
+#' Microbiome of mice that underwent Pulsed Antibiotic Treatment
+#'  (PAT) and controls
 #'
-#' @format A phyloseq object containing microbiome data on IBD patients and healthy controls
+#' @format A phyloseq object containing microbiome data
 #' \describe{
-#'   \item{microPruneVir}{The microbiome dataset pruned for matches with the virome object}
+#'   \item{zhangMicrobio}{The microbiome dataset pruned for matches with the metabolome object}
 #'  }
 #' @source \url{https://www.ibdmdb.org/}
-"microPruneVir"
-#' Viromes of IBD patients and healthy controls
+"zhangMicrobio"
+#' Metabolomes of mice that underwent Pulsed Antibiotic Treatment
+#'  (PAT) and controls
 #'
-#' Virome sequencing data of IBD patients and healthy controls
+#' Metabolome of mice that underwent Pulsed Antibiotic Treatment
+#'  (PAT) and controls
 #'
-#' @format A phyloseq object containing virome data on IBD patients and healthy controls
+#' @format Matrix with metabolome data
 #' \describe{
-#'   \item{virPrune}{The virome dataset pruned for matches with the microbiome object}
+#'   \item{zhangMetabo}{The metabolome data with metabolites in the columns}
 #' }
 #' @source \url{https://www.ibdmdb.org/}
-"virPrune"
-#' Baseline sample variables of IBD patients
+"zhangMetabo"
+#' Baseline sample variables of PAT and control mice
 #'
-#' Baseline covariates of IBD patients and healthy controls,
+#' Baseline covariates of PAT mice and healthy controls
 #'
-#' @format A dataframe with sample variables
+#' @format A dataframe with baseline sample variables
 #' \describe{
-#'   \item{hmp2samVar}{Sample variables matching the microbiome and virome datasets}
+#'   \item{zhangMetavars}{The metadata on the mice}
 #' }
 #' @source \url{https://www.ibdmdb.org/}
-"hmp2samVar"
+"zhangMetavars"

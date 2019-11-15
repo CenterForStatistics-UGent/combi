@@ -5,7 +5,7 @@
 \alias{compIntegrate}
 \title{Perform model-based data integration}
 \usage{
-compInt(data, M = 3L, covariates = NULL, distributions, compositional,
+compInt(data, M = 2L, covariates = NULL, distributions, compositional,
   maxIt = 300L, tol = 0.001, verbose = FALSE, prevCutOff = 0.95,
   minFraction = 0.1, logTransformMicroArray = TRUE,
   confounders = NULL, nleq.control = list(maxit = 1000L, cndtol =
@@ -94,10 +94,10 @@ meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
 data(hmp2)
 microVirDI = compInt(data = list("microbiome" = microPruneVir,
 "virome" = virPrune), distributions = c("quasi", "quasi"),
-compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
+compositional = c(TRUE, TRUE), verbose = TRUE)
 microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
 "virome" = virPrune), distributions = c("quasi", "quasi"),
-compositional = c(TRUE, TRUE), M = 2,
-covariates = hmp2samVar[, c("Occupation", "Education.Level", "diagnosis",
-"Ileum","sex", "race")], verbose = TRUE)
+compositional = c(TRUE, TRUE),
+covariates = hmp2samVar[, c("diagnosis","biopsy_location","sex")],
+verbose = TRUE)
 }

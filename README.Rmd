@@ -29,7 +29,7 @@ install_github("CenterForStatistics-UGent/compIntegrate")
 
 ## Unconstrained integration
 
-For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature should be supplied
+For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature should be supplied.
 
 ```{r unconstr}
 data(hmp2)

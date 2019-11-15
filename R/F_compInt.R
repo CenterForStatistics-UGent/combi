@@ -63,7 +63,7 @@
 #' compositional = c(TRUE, TRUE),
 #' covariates = hmp2samVar[, c("diagnosis","biopsy_location","sex")],
 #' verbose = TRUE)
-compInt = function(data, M = 3L, covariates = NULL, distributions,
+compInt = function(data, M = 2L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformMicroArray = TRUE,
                    confounders = NULL, nleq.control = list(maxit = 1e3L, cndtol = 1e-16),

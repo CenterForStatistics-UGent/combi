@@ -16,6 +16,8 @@ vignette: >
 
 # Introduction
 
+This package implements a novel data integration model for sample-wise integration of different views. It accounts for compositionality and employs a non-parametric mean-variance trend for sequence count data. The resulting model can be conveniently plotted to allow for explorative visualization of variability shared over different views.
+
 <!-- # Publication -->
 
 <!-- The underlying method of the compIntegrate package is described in detail in the following article:  -->
@@ -34,15 +36,73 @@ palStore = palette()
 #load(system.file("fits", "zellerFits.RData", package = "RCM"))
 ```
 
-```{r install, eval = FALSE}
+```{r install, eval = FALSE, echo = FALSE}
 library(BiocManager)
 install("compIntegrate", update = FALSE)
+```
+
+```{r install, eval = FALSE}
+library(devtools)
+install_github("CenterForStatistics-UGent/compIntegrate")
 ```
 
 ```{r loadcompIntpackage}
 suppressPackageStartupMessages(library(compIntegrate))
 cat("compIntegrate package version", 
     as.character(packageVersion("compIntegrate")), "\n")
+```
+
+## Unconstrained integration
+
+For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature (TRUE/FALSE) should be supplied
+
+```{r unconstr}
+data(hmp2)
+microVirDI = compInt(data = list("microbiome" = microPruneVir,
+"virome" = virPrune), 
+distributions = c("quasi", "quasi"),
+ compositional = c(TRUE, TRUE))
+```
+
+A simple plot function is available for the result, for samples and shapes, a data frame should also be supplied
+
+```{r simplePlot}
+plot(microVirDI)
+```
+
+```{r colourPlot}
+plot(microVirDI, samDf = hmp2samVar, samCol = "diagnosis")
+```
+
+## Constrained integration
+
+For a constrained ordination also a data frame of sample variables should be supplied
+
+```{r constr}
+microVirDIconstr = compInt(data = list("microbiome" = microPruneVir,
+ "virome" = virPrune), 
+ distributions = c("quasi", "quasi"),
+ compositional = c(TRUE, TRUE), 
+ covariates = hmp2samVar[, c("diagnosis",
+ "biopsy_location", "sex")])
+```
+
+```{r colourPlotConstr}
+plot(microVirDIconstr, samDf = hmp2samVar, samCol = "diagnosis")
+```
+
+## Diagnostics
+
+Convergence of the iterative algorithm can be assessed as follows:
+
+```{r convPlot}
+convPlot(microVirDI)
+```
+
+Influence of the different views can be investigated through
+
+```{r inflPlot}
+inflPlot(microVirDI, samples = 1:20, plotType = "boxplot")
 ```
 
 # Session info

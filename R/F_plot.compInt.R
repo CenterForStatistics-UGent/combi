@@ -23,6 +23,7 @@
 #' strokes
 #' @param xInd,yInd x and y indentations
 #' @param checkOverlap A boolean, should overlapping labels be omitted?
+#' @param shapeValues the shapes, as numeric values
 #'
 #' @return A ggplot object containing the plot
 #' @method plot compInt
@@ -47,7 +48,8 @@ plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         varSize = 2.5, samColValues = NULL, samSize = 1.5,
                         strokeSize = 0.05, warnMonotonicity = FALSE,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
-                        xInd = 0, yInd = 0, checkOverlap = FALSE){
+                        xInd = 0, yInd = 0, checkOverlap = FALSE,
+                        shapeValues = (21:(21+length(unique(samDf[[samShape]]))))){
     #palette(rainbow(length(unique(samDf[[samCol]]))))
     nViews = length(x$data)
     coords = extractCoords(x, Dim)
@@ -60,7 +62,7 @@ plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
 
     DimChar = paste0("Dim", Dim)
     if(!is.null(samShape)){
-        if(is.factor(samDf$samShape) | is.character(is.factor(samDf$samShape)))
+        if(!(is.factor(samDf[[samShape]]) | is.character(samDf[[samShape]])))
             stop("Shape must be a discrete variable!\n")
     }
     #### Latent variables ####
@@ -68,8 +70,9 @@ plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
         theme_bw() +
         (if(!is.null(samColValues)) scale_fill_manual(values = samColValues, name = samCol))
     if(!is.null(samShape)) {
-        Plot = Plot + scale_shape_discrete(name = samShape) +
-             geom_point(size = samSize)}
+        Plot = Plot + scale_shape_manual(name = samShape, values = shapeValues) +
+             geom_point(size = samSize, stroke = strokeSize) +
+            guides(fill = guide_legend(override.aes = list(shape = 21)))}
     else {
         Plot = Plot+ geom_point(size = samSize, shape = 21, stroke = strokeSize)
 }

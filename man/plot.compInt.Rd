@@ -11,7 +11,8 @@
   manExpFactorVar = 0.975, varNum = nrow(x$alphas), varSize = 2.5,
   samColValues = NULL, samSize = 1.5, strokeSize = 0.05,
   warnMonotonicity = FALSE, returnCoords = FALSE, squarePlot = TRUE,
-  featAlpha = 0.5, xInd = 0, yInd = 0, checkOverlap = FALSE)
+  featAlpha = 0.5, xInd = 0, yInd = 0, checkOverlap = FALSE,
+  shapeValues = (21:(21 + length(unique(samDf[[samShape]])))))
 }
 \arguments{
 \item{x}{the fit}
@@ -53,6 +54,8 @@ in thrird party software}
 \item{xInd, yInd}{x and y indentations}
 
 \item{checkOverlap}{A boolean, should overlapping labels be omitted?}
+
+\item{shapeValues}{the shapes, as numeric values}
 }
 \value{
 A ggplot object containing the plot
@@ -66,4 +69,5 @@ microVirDI = compInt(data = list("microbiome" = microPruneVir,
 "virome" = virPrune), distributions = c("quasi", "quasi"),
 compositional = c(TRUE, TRUE), verbose = TRUE, nCores = 1, M = 2)
 plot(microVirDI)
+plot(microVirDI, samDf = hmp2samVar, samCol = "diagnosis")
 }
