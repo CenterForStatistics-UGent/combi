@@ -43,7 +43,7 @@
 #' @param maxItFeat Integers, the maximum allowed number of iterations
 #' in the estimation of the feature parameters
 #'
-#' @return An object of the "compInt" class, containing all information on the
+#' @return An object of the "combi" class, containing all information on the
 #' data integration and fitting procedure
 #'
 #' @details Using more than one core is only implemented on Unix systems.
@@ -55,7 +55,7 @@
 #'  diagonal line with slope 1 for small means.
 #'  Distribution can be either "quasi" for quasi likelihood or "gaussian" for
 #'   Gaussian data
-#' @aliases compIntegrate
+#' @aliases combi
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda
 #' @importFrom parallel mclapply
@@ -64,16 +64,16 @@
 #' @examples
 #' data(Zhang)
 #' #Unconstrained
-#' microMetaboInt = compInt(
+#' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #' logTransformGaussian = FALSE, verbose = TRUE)
 #' #Constrained
-#' microMetaboIntConstr = compInt(
+#' microMetaboIntConstr = combi(
 #'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
-compInt = function(data, M = 2L, covariates = NULL, distributions,
+combi = function(data, M = 2L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformGaussian = TRUE,
                    confounders = NULL, compositionalConf = rep(FALSE, length(data)),
@@ -612,6 +612,6 @@ switch(weights[[i]],
         rownames(latentRec) = rownames(latentVars)
         }
     }
-    class(out) = "compInt"
+    class(out) = "combi"
     return(out)
 }

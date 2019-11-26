@@ -39,13 +39,13 @@ The options for plotType are: "pointPlot": Dot plot of total influence
 }
 \examples{
 data(Zhang)
-microMetaboInt = compInt(
+microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 logTransformGaussian = FALSE, verbose = TRUE)
 inlfPlot(microMetaboInt)
 #Constrained
-microMetaboIntConstr = compInt(
+microMetaboIntConstr = combi(
     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)

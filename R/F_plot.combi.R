@@ -26,7 +26,7 @@
 #' @param shapeValues the shapes, as numeric values
 #'
 #' @return A ggplot object containing the plot
-#' @method plot compInt
+#' @method plot combi
 #'
 #' @export
 #' @import ggplot2
@@ -35,19 +35,19 @@
 #' @examples
 #' data(Zhang)
 #' #Unconstrained
-#' microMetaboInt = compInt(
+#' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #' logTransformGaussian = FALSE, verbose = TRUE)
 #' plot(microMetaboInt)
 #' plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 #' #Constrained
-#' microMetaboIntConstr = compInt(
+#' microMetaboIntConstr = combi(
 #'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
 #' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
-plot.compInt = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
+plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         samShape = NULL, featNum = 20L,
                         featCols = c("darkblue", "darkgreen", "darkred",
                                      terrain.colors(5)),

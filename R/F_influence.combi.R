@@ -4,7 +4,7 @@
 #' @param samples A boolean, should we look at sample variables? Throws an error otherwise
 #' @param Dim,View Integers, the dimension and views required
 #'
-#' @method influence compInt
+#' @method influence combi
 #' @details Especially the influence of the different views on the latent
 #' variable or gradient estimation may be of interest. The influence values are
 #' not all calculated. Rather, the score values and inverse jacobian are returned
@@ -13,7 +13,7 @@
 #' @return A list with components
 #' \item{score}{The evaluation of the score function}
 #' \item{InvJac}{The inverted jacobian matrix}
-influence.compInt = function(modelObj, samples = is.null(View), Dim = 1, View = NULL){
+influence.combi = function(modelObj, samples = is.null(View), Dim = 1, View = NULL){
     with(modelObj, {
     if(samples){
         lambdaLatent = lambdasLatent[seq_m(Dim, normal = FALSE)]

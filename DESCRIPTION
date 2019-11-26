@@ -1,6 +1,6 @@
-Package: compIntegrate
+Package: combi
 Type: Package
-Title: Integrate omics data for visualization, with special focus on compositionality
+Title: Compositional omics model based integration
 Version: 0.1.0
 Author: Stijn Hawinkel <stijn.hawinkel@ugent.be>
 Maintainer: Joris Meys <joris.meys@ugent.be>

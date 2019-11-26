@@ -1,3 +1,3 @@
 library(testthat)
-library(compIntegrate)
-test_check("compIntegrate")
+library(combi)
+test_check("combi")

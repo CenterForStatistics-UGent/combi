@@ -37,7 +37,7 @@ Add a link on a compositional plot
 }
 \examples{
 data(Zhang)
-microMetaboInt = compInt(
+microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 logTransformGaussian = FALSE, verbose = TRUE)

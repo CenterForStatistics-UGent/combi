@@ -1,5 +1,5 @@
 #' Check for monotonicity in compositional datasets fro given dimensions
-#' @param modelObj The compIntegrate fit
+#' @param modelObj The combi fit
 #' @param Dim The dimensions considered
 #'
 #'@return A boolean matrix indicating monotonicity for every feature

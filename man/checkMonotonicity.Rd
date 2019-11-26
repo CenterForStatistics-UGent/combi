@@ -7,7 +7,7 @@
 checkMonotonicity(modelObj, Dim)
 }
 \arguments{
-\item{modelObj}{The compIntegrate fit}
+\item{modelObj}{The combi fit}
 
 \item{Dim}{The dimensions considered}
 }

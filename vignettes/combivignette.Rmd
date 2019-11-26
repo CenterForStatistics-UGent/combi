@@ -4,12 +4,12 @@ output:
     toc: true
     keep_md: true
 vignette: >
-  %\VignetteIndexEntry{Manual for the compIntegrate pacakage}
+  %\VignetteIndexEntry{Manual for the combi pacakage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-# compIntegrate package: vignette
+# combi package: vignette
 
 \setcounter{tocdepth}{5}
 \tableofcontents
@@ -20,7 +20,7 @@ This package implements a novel data integration model for sample-wise integrati
 
 <!-- # Publication -->
 
-<!-- The underlying method of the compIntegrate package is described in detail in the following article:  -->
+<!-- The underlying method of the combi package is described in detail in the following article:  -->
 
 # Installation
 
@@ -38,18 +38,18 @@ palStore = palette()
 
 ```{r install, eval = FALSE, echo = FALSE}
 library(BiocManager)
-install("compIntegrate", update = FALSE)
+install("combi", update = FALSE)
 ```
 
 ```{r installDevtools, eval = FALSE}
 library(devtools)
-install_github("CenterForStatistics-UGent/compIntegrate")
+install_github("CenterForStatistics-UGent/combi")
 ```
 
-```{r loadcompIntpackage}
-suppressPackageStartupMessages(library(compIntegrate))
-cat("compIntegrate package version", 
-    as.character(packageVersion("compIntegrate")), "\n")
+```{r loadcombipackage}
+suppressPackageStartupMessages(library(combi))
+cat("combi package version", 
+    as.character(packageVersion("combi")), "\n")
 ```
 
 ## Unconstrained integration
@@ -58,7 +58,7 @@ For an unconstrained ordination, a named list of data matrices with overlapping 
 
 ```{r unconstr}
 data(Zhang)
-microMetaboInt = compInt(
+microMetaboInt = combi(
  list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
  distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
  logTransformGaussian = FALSE)
@@ -79,7 +79,7 @@ plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 For a constrained ordination also a data frame of sample variables should be supplied
 
 ```{r constr}
-microMetaboIntConstr = compInt(
+microMetaboIntConstr = combi(
      list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
      distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
      logTransformGaussian = FALSE, covariates = zhangMetavars)
