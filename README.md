@@ -1,6 +1,6 @@
 
-Manual for the use of the compIntegrate package
-===============================================
+Manual for the use of the combi package
+=======================================
 
 Install and load packages
 -------------------------
@@ -11,21 +11,21 @@ The package can be installed from BioConductor and loaded using the following co
 
 ``` r
 library(BiocManager)
-install("compIntegrate", update = FALSE)
+install("combi", update = FALSE)
 ```
 
 ``` r
-suppressPackageStartupMessages(library(compIntegrate))
-cat("compIntegrate package version", as.character(packageVersion("compIntegrate")), "\n")
+suppressPackageStartupMessages(library(combi))
+cat("combi package version", as.character(packageVersion("combi")), "\n")
 ```
 
-    ## compIntegrate package version 0.1.0
+    ## combi package version 0.1.0
 
 Alternatively, the latest version can be installed directly from this GitHub repo as follows:
 
 ``` r
 library(devtools)
-install_github("CenterForStatistics-UGent/compIntegrate")
+install_github("CenterForStatistics-UGent/combi")
 ```
 
 Unconstrained integration
@@ -35,7 +35,7 @@ For an unconstrained ordination, a named list of data matrices with overlapping 
 
 ``` r
 data(Zhang)
-microMetaboInt = compInt(
+microMetaboInt = combi(
  list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
  distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
  logTransformGaussian = FALSE)
@@ -61,7 +61,7 @@ Constrained integration
 For a constrained ordination also a data frame of sample variables should be supplied
 
 ``` r
-microMetaboIntConstr = compInt(
+microMetaboIntConstr = combi(
      list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
      distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
      logTransformGaussian = FALSE, covariates = zhangMetavars)
