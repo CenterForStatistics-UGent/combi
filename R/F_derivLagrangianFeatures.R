@@ -15,7 +15,7 @@ derivLagrangianFeatures = function(x, data, distribution, offSet, latentVars,
     score = scoreFeatureParams(data = data, distribution = distribution,
                             x = param, offSet = offSet,
                             latentVar = latentVars, meanVarTrend = meanVarTrend,
-                            m = mm, compositional = compositional,
+                            mm = mm, compositional = compositional,
                             indepModel = indepModel, paramEstsLower = paramEstsLower, ...) +
         weights*(x[numVar+1] + (2*param*x[numVar+2]) + (if(mm==1) 0 else (x[(numVar+3):(numVar+mm+1)] %*% paramEstsLower)))
     #Extract lagrange multipliers immediately

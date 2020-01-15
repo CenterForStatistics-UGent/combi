@@ -11,11 +11,14 @@
 #' @return A ggplot object containing the convergence plot
 #' @export
 #' @examples
+#' \dontrun{
 #' data(Zhang)
+#' #Unconstrained
 #' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
-#' logTransformGaussian = FALSE, verbose = TRUE)
+#' logTransformGaussian = FALSE, verbose = TRUE)}
+#' load(system.file("fits", "zhangFits.RData", package = "combi"))
 #' convPlot(microMetaboInt)
 convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1,
                     View = NULL, size = 0.125){

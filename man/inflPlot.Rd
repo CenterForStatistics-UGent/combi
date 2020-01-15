@@ -38,16 +38,20 @@ The options for plotType are: "pointPlot": Dot plot of total influence
  per view and sample. In the pointplot, dots crosses represent parameter estimates
 }
 \examples{
+\dontrun{
 data(Zhang)
+#Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 logTransformGaussian = FALSE, verbose = TRUE)
-inlfPlot(microMetaboInt)
 #Constrained
 microMetaboIntConstr = combi(
     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
-    logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
+    logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)}
+load(system.file("fits", "zhangFits.RData", package = "combi"))
+inflPlot(microMetaboInt)
+#Constrained
 inflPlot(microMetaboIntConstr)
 }

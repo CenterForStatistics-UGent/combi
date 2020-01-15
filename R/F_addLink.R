@@ -15,10 +15,14 @@
 #'@export
 #' @examples
 #' data(Zhang)
+#' \dontrun{
+#' #Unconstrained
 #' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #' logTransformGaussian = FALSE, verbose = TRUE)
+#' }
+#' load(system.file("fits", "zhangFits.RData", package = "combi"))
 #' Plot = plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
 #'  returnCoords = TRUE)
 #' addLink(Plot, links = cbind("OTUe37326","OTUa14fb5"), Views = 1,

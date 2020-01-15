@@ -83,7 +83,7 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    allowMissingness = FALSE, biasReduction = TRUE, maxItFeat = 2e1L){
     #Switch off multithreading on windows
     if(.Platform$OS.type == "windows" && nCores>1){
-        message("Forking not supported on Windows machine!\nUsing only one core.")
+        message("Forking not supported on Windows machines!\nUsing only one core.")
         nCores = 1
     }
     nCores = min(nCores, length(data)) # No point in using more cores than views

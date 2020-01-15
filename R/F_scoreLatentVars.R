@@ -60,7 +60,5 @@ if(distribution == "gaussian"){
     prepMat = prepareScoreMat(mu = mu, data = data, meanVarTrend = meanVarTrend)
     (if(constrained) crossprod(covMat, prepMat) else prepMat) %*% paramEsts[mm,]
     }
-} else if(distribution == "binomial"){
-
 }
 }

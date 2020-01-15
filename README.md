@@ -7,11 +7,10 @@ Install and load packages
 
 This repo contains R-code to fit and plot the mode-based integration models for compositional omics data using the *combi* package (Compositional Omics Model-Based Integration). The basic usage is demonstrated here.
 
-The package can be installed from BioConductor and loaded using the following commands:
+The package can be installed from CRAN and loaded using the following commands:
 
 ``` r
-library(BiocManager)
-install("combi", update = FALSE)
+install.packages("combi")
 ```
 
 ``` r

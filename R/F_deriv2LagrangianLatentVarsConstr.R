@@ -23,7 +23,7 @@ deriv2LagrangianLatentVarsConstr = function(x, data, distributions, offsets, par
             jacLatentVarsConstr(data = data[[i]], distribution = distributions[[i]],
                         paramEsts = paramEsts[[i]], offSet = offsets[[i]], paramMats = paramMats[[i]],
                         latentVar = latentVar, latentVarsLower = latentVarsLower,
-                        meanVarTrend = meanVarTrends[[i]], n = numCov,
+                        meanVarTrend = meanVarTrends[[i]], numCov = numCov,
                         covMat = covMat, varPosts = varPosts[[i]], compositional = compositional[[i]],
                         indepModel = indepModels[[i]], mm = m)
         })

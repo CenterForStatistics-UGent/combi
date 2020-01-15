@@ -9,9 +9,9 @@
 #' @importFrom Biobase exprs
 #' @export
 #' @examples
-#' data(hmp2)
-#' matrixList = extractData(list("microbiome" = microPruneVir,
-#' "virome" = virPrune))
+#' data(zhang)
+#' matrixList = extractData(list("microbiome" = zhangMicrobio,
+#' "metabolome" = zhangMetabo))
 extractData = function(data, logTransformGaussian = TRUE){
     datNames = names(data)
     data = lapply(seq_along(data), function(View){

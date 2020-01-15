@@ -9,9 +9,9 @@
 #' @return A plot object
 #' @export
 #' @examples
-#' data(hmp2)
+#' data(Zhang)
 #' par(mfrow = c(1,2))
-#' lapply(extractData(list("microbiome" = microPruneVir, "virome" = virPrune)),
+#' lapply(extractData(list("microbiome" = zhangMicrobio, "metabolome" = zhangMetabo)),
 #'  checkMeanVarTrend)
 #'  par(mfrow = c(1,1))
 checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE,
