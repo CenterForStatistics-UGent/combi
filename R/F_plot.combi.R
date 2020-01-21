@@ -51,7 +51,7 @@
 #' #Constrained
 #' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
-                        samShape = NULL, featNum = 20L,
+                        samShape = NULL, featNum = 15L,
                         featCols = c("darkblue", "darkgreen", "darkred",
                                      terrain.colors(5)),
                         manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,

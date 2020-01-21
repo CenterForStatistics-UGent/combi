@@ -7,10 +7,11 @@ Install and load packages
 
 This repo contains R-code to fit and plot the mode-based integration models for compositional omics data using the *combi* package (Compositional Omics Model-Based Integration). The basic usage is demonstrated here.
 
-The package can be installed from CRAN and loaded using the following commands:
+The package can be installed loaded using the following commands:
 
 ``` r
-install.packages("combi")
+library(devtools)
+install_github("CenterForStatistics-UGent/combi")
 ```
 
 ``` r
@@ -18,15 +19,9 @@ suppressPackageStartupMessages(library(combi))
 cat("combi package version", as.character(packageVersion("combi")), "\n")
 ```
 
-    ## combi package version 0.1.0
+    ## combi package version 0.1.2
 
-Alternatively, the latest version can be installed directly from this GitHub repo as follows:
-
-``` r
-library(devtools)
-install_github("CenterForStatistics-UGent/combi")
-```
-
+<!-- Alternatively, the latest version can be installed directly from this GitHub repo as follows: -->
 Unconstrained integration
 -------------------------
 
