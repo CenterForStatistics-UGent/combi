@@ -5,7 +5,7 @@
 \title{Make multiplots of the data integration object}
 \usage{
 \method{plot}{combi}(x, ..., Dim = c(1, 2), samDf = NULL,
-  samCol = NULL, samShape = NULL, featNum = 20L,
+  samCol = NULL, samShape = NULL, featNum = 15L,
   featCols = c("darkblue", "darkgreen", "darkred", terrain.colors(5)),
   manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
   manExpFactorVar = 0.975, varNum = nrow(x$alphas), varSize = 2.5,
@@ -76,6 +76,7 @@ microMetaboIntConstr = combi(
     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)}
+    #Load the fits
 load(system.file("fits", "zhangFits.RData", package = "combi"))
 plot(microMetaboInt)
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")

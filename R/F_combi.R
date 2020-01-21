@@ -63,6 +63,9 @@
 #' @export
 #' @examples
 #' data(Zhang)
+#' #The method works on several datasets at once, and simply is not very fast.
+#' #Hence the "Not run" statement
+#' \dontrun{
 #' #Unconstrained
 #' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
@@ -73,6 +76,7 @@
 #'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
+#'     }
 combi = function(data, M = 2L, covariates = NULL, distributions,
                    compositional, maxIt = 3e2L, tol = 1e-3, verbose = FALSE,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformGaussian = TRUE,

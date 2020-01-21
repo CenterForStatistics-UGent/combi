@@ -3,7 +3,7 @@ context("combi input")
 data(Zhang)
 test_that("combi throws warnings when ordination model is fitted", {
  expect_warning(combi(data = list("microbiome" = zhangMicrobio), distributions = "quasi",
-                            compositional = TRUE, nCores = 1, M = 2))
+                            compositional = TRUE, nCores = 1, maxIt = 3))
 })
 test_that("combi throws error for wrong input type", {
     expect_error(combi(data = zhangMicrobio, distributions = "quasi",

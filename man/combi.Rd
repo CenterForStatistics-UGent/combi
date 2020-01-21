@@ -100,6 +100,9 @@ meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
 }
 \examples{
 data(Zhang)
+#The method works on several datasets at once, and simply is not very fast.
+#Hence the "Not run" statement
+\dontrun{
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
@@ -110,4 +113,5 @@ microMetaboIntConstr = combi(
     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)
+    }
 }
