@@ -84,8 +84,6 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
     if(M %in% c(0L,1L) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
     }
-    #if(length(distributions)==1) distributions = rep(distributions, length(data))
-    #if(length(compositional)==1) compositional = rep(compositional, length(data))
     if(!is.logical(compositional)) stop("'compositional' should be a logical vector!")
     if(!is.logical(compositionalConf)) stop("'compositionalConf' should be a logical vector!")
     if(!is.character(distributions)) stop("'distributions' should be a character vector!")

@@ -22,7 +22,6 @@
 #' @param ... Additional arguments passed on to the score and jacobian functions
 #' @param latentVars A vector of latent variables
 #'
-#' @importFrom parallel mclapply
 #' @importFrom nleqslv nleqslv
 #' @importFrom BB BBsolve
 #' @importFrom stats rnorm
@@ -37,11 +36,7 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
                                 meanVarTrends, latentVars, numVars, control,
                                 weights, compositional, indepModels, fTol,
                                 allowMissingness, maxItFeat,...){
-    #lapply(
-    mclapply(mc.cores = nCores,
-    seqSets, function(i){
-          #control$trace = TRUE
-          #control$chkjac = TRUE
+    bplapply(seqSets, function(i){
         if(distributions[[i]] == "gaussian"){
             #Solve system of linear equations, variances still not needed
             diag(JacFeatures[[i]])[seq_len(numVars[[i]])] = sum(latentVars[,m]^2)
@@ -66,8 +61,6 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
         sol = out$x
         solf = sum(out$fvec^2)
         iter = 0
-        # control$trace = TRUE
-        # control$maxit = 500L
         id  = seq_along(paramEsts[[i]][m,])
         while((conv != 1L) && ((iter = iter + 1) <= maxItFeat)){
             boo = rnorm(length(out$x), sd = 1.1^iter)
@@ -94,7 +87,6 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
         }
         return(list(x = sol, conv = conv))
         } else {
-        # TO DO: arbitrary degree of polynomial
         out = BBsolve(par = c(paramEsts[[i]][m,], lambdasParams[[i]][
             seqM(m, normal = compositional[[i]])]),
             fn = derivLagrangianFeatures, distribution = distributions[[i]], numVar = numVars[[i]],
@@ -107,7 +99,7 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
         conv = switch(as.character(out$convergence),
                       "0" = 1, "1" = 4, "2" = 3, 4) # Same error codes as nleqslv
         return(list(x = out$par, conv = conv))
-}#}
+}
 
         }
     })

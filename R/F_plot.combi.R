@@ -62,7 +62,6 @@ plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
                         xInd = 0, yInd = 0, checkOverlap = FALSE,
                         shapeValues = (21:(21+length(unique(samDf[[samShape]]))))){
-    #palette(rainbow(length(unique(samDf[[samCol]]))))
     nViews = length(x$data)
     coords = extractCoords(x, Dim)
     latentData = coords$latentData; featureData = coords$featureData
@@ -114,7 +113,6 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
                     col = featCols[[i]], size = featSize, alpha = featAlpha,
                     check_overlap = checkOverlap)
     }
-    # Views Legend, TO DO!
     #### Gradient ####
     if(!is.null(x$covariates)){
 
@@ -140,8 +138,7 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
         warning("Plot not square!\n This may be misleading and is not recommended!
                 See squarePlot parameter")
     }
-    ## TO DO: add colour code for the views
-    Plot = indentPlot(Plot, xInd = xInd, yInd = yInd) #Indentation
+    Plot = RCM:::indentPlot(Plot, xInd = xInd, yInd = yInd) #Indentation
     if(returnCoords){
         return(list(Plot = Plot, latentData = latentData, featureData = featureData,
                varData = varData))
