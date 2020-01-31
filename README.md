@@ -14,12 +14,6 @@ library(devtools)
 install_github("CenterForStatistics-UGent/combi")
 ```
 
-It may be necessary to first install the *devel* version of the RCM package as:
-
-``` r
-install_github("CenterForStatistics-UGent/RCM")
-```
-
 ``` r
 suppressPackageStartupMessages(library(combi))
 cat("combi package version", as.character(packageVersion("combi")), "\n")

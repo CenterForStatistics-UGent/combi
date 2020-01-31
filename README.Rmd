@@ -15,12 +15,6 @@ library(devtools)
 install_github("CenterForStatistics-UGent/combi")
 ```
 
-It may be necessary to first install the _devel_ version of the RCM package as:
-
-```{r installRCM, eval = FALSE}
-install_github("CenterForStatistics-UGent/RCM")
-```
-
 ```{r installcombipackageBioc, eval = FALSE, echo = FALSE}
 library(BiocManager)
 install("combi")

@@ -1,10 +1,10 @@
 Package: combi
 Type: Package
 Title: Compositional omics model based integration
-Version: 0.1.2
+Version: 0.1.99
 Author: Stijn Hawinkel <stijn.hawinkel@ugent.be>
 Maintainer: Joris Meys <joris.meys@ugent.be>
-Description: Combine quasi-likelihood estimation, compositional regression models and row-column association models for data integration and visualization.
+Description: Combine quasi-likelihood estimation, compositional regression models and latent variable models for data integration and visualization.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
