@@ -72,10 +72,8 @@ buildCovMat = function(datFrame) {
         contrasts.arg = lapply(datFrame[vapply(datFrame,
                                                is.factor, FUN.VALUE = TRUE)], contrasts, contrasts = FALSE))
     if (NCOL(covModelMat) == 1)
-        stop("A constrained ordination with only one variable
-                                is meaningless.\n
-Please provide more covariates
-                                or perform an unconstrained analysis.",
+        stop("A constrained ordination with only one variable is meaningless.
+             Please provide more covariates or perform an unconstrained analysis.",
              call. = FALSE)
     if((NCOL(covModelMat) - sum((vapply(FUN.VALUE = TRUE,
                                 datFrame, is.factor))))> NROW(covModelMat))

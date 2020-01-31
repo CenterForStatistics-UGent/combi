@@ -233,8 +233,7 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
                     confMat
                 })
             }
-            warning(paste("Some covariates contain missing values.
-                    We removed samples \n",
+            warning(paste("Some covariates contain missing values. We removed samples\n",
                           paste(which(NArows), collapse = ", "),
                           "\n prior to analysis. Imputation of missing values in predictors is left to the user"),
                     immediate. = TRUE)
@@ -362,8 +361,8 @@ switch(weights[[i]],
         # Redundancy analysis for starting values
         if (sum(!colnames(covMat) %in% CCA$alias) < M) {
             M = sum(!colnames(covMat) %in% CCA$alias)
-            warning(immediate. = TRUE, paste("Can only fit an ordination with",
-                                             M, "dimensions with so few covariates!"))
+            warning(immediate. = TRUE, "Can only fit an ordination with",
+                    M, "dimensions with so few covariates!")
         }
         alphas = matrix(0, numCov, M)
         alphas[!colnames(covMat) %in% CCA$alias,

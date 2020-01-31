@@ -108,7 +108,6 @@ addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2)
         Dim2 = Dim1*l
 c(x1 = Dim1[1], x2 = Dim1[2], y1 = Dim2[1], y2 = Dim2[2])
     })
-
     dfTip = data.frame(x = linkMat["x",], y = linkMat["y",], xend = IntCoords["x1",], yend = IntCoords["y1",])
     dfStart = data.frame(x = linkMat["xend",], y = linkMat["yend",],
                          xend = IntCoords["x2",], yend = IntCoords["y2",])
@@ -121,13 +120,11 @@ c(x1 = Dim1[1], x2 = Dim1[2], y1 = Dim2[1], y2 = Dim2[2])
                                                mapping = aes_string(x = "x", y = "y",
                                                                     xend = "xend", yend = "yend"),
                                                data = dfStart, linetype = "dashed", col = projColour)
-
     # Add a orange line for the projection
     DIplot$Plot = DIplot$Plot + geom_segment(inherit.aes = FALSE,
                                                col = "orange", mapping = aes_string(x = "x1",
                                                                                     y = "y1", xend = "x2", yend = "y2"),
                                                data = data.frame(t(IntCoords)), size = 0.25)
-
     if (addLabel) {
         # Add some annotation
         labPos = if (is.null(labPos)) {
@@ -142,16 +139,15 @@ c(x1 = Dim1[1], x2 = Dim1[2], y1 = Dim2[1], y2 = Dim2[2])
             xLab = xLab * 2
             yLab = yLab * 2
         })
-        # DIplot$plot = DIplot$plot + geom_segment(inherit.aes = FALSE,
-        #                                            mapping = aes_string(x = "xLab",
-        #                                                                 y = "yLab", xend = "xend",
-        #                                                                 yend = "yend"), data = dfRed/2,
-        #                                            arrow = arrow(length = unit(0.2,
-        #                                                                        "cm")), size = 0.25) + annotate("text",
-        #                                                                                                        col = "orange", label = "r~psi~s",
-        #                                                                                                        x = xLab, y = yLab, parse = TRUE,
-        #                                                                                                        size = 7)
+        DIplot$plot = DIplot$plot +
+            geom_segment(inherit.aes = FALSE,
+                         mapping = aes_string(x = "xLab", y = "yLab",
+                                              xend = "xend", yend = "yend"),
+                         data = dfRed/2, arrow = arrow(length = unit(0.2,"cm")),
+                         size = 0.25) + annotate("text", col = "orange",
+                                                 label = "r~psi~s", x = xLab,
+                                                 y = yLab, parse = TRUE,
+                                                 size = 7)
     }
-
     DIplot$Plot
 }

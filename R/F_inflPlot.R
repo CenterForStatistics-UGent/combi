@@ -40,7 +40,6 @@ inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
                     pointFun = "sum", lineSize = 0.07, Dim = 1,
                     samples = seq_len(nrow(if(is.null(modelObj$covariates))
                         modelObj$latentVars else modelObj$alphas)), ...){
-    #if(length(modelObj$data) >2) "sum" else "mean"
     if(!plotType %in% c("lineplot", "pointplot", "boxplot", "boxplotSingle")){
         stop("plotType not recognized, see details!")
     }
@@ -75,7 +74,6 @@ inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
                       aes_string(y = "logAbsoluteInfluence", x = "LatentVariable")) +
             geom_boxplot(aes_string(fill = "View"), outlier.shape = NA, outlier.size = 0.75)
         # Means = aggregate(data = moltInflMat, Influence ~ LatentVariable + View, FUN = mean)
-        # Plot = Plot + geom_point(data = Means, aes_string(y = "Influence", x = "factor(LatentVariable)"),inherit.aes = FALSE) +
     } else if (plotType == "boxplotSingle"){
         Plot = ggplot(data = moltInflMat,
                       aes_string(y = "logAbsoluteInfluence", x = "View", fill = "View")) + geom_boxplot()

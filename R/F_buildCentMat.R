@@ -18,8 +18,7 @@ buildCentMat = function(object) {
         })
         object[, oneLevelID] = NULL  #Drop factors with one level
         if (any(oneLevelID)) {
-            warning("The following variables were not included
-                    in the analyses because they have only one value: \n",
+            warning("The following variables were not included in the analyses because they have only one value: \n",
                 paste(object[oneLevelID], sep = " \n"), immediate. = TRUE)
         }
     # Already prepare the matrix that defines the equations for

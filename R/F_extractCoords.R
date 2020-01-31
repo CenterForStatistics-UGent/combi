@@ -18,7 +18,6 @@ extractCoords = function(modelObj, Dim){
     })
     if(!is.null(modelObj$covariates)) {
         varData = data.frame(modelObj$alphas[,Dim], "varNames" = rownames(modelObj$alphas))
-        # colnames(varData) = dimNames
     } else {varData = NULL}
     list(latentData = latentData, featureData = featureData,
          varData = varData)

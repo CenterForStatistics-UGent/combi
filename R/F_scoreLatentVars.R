@@ -25,37 +25,32 @@ scoreLatentVars = function(data, distribution, paramEsts, paramMats, offSet, lat
         data[isNA] = mu[isNA]
     }
     }
-# | any(is.infinite(mu))
-if(distribution == "gaussian"){
-    (if(constrained) crossprod(covMat, data - mu) else
-      data - mu) %*% (paramEsts[mm,]/varPosts)
-} else if(distribution == "quasi"){
-    if(compositional){
-    CompMat = buildCompMat(indepModel$colMat, paramEsts,
-                           latentVar = if(constrained){
-                               covMat %*% cbind(latentVarsLower, latentVar)} else{
-                                   cbind(latentVarsLower, latentVar)}, m = mm,
-                               norm = TRUE)
-    mu = CompMat*indepModel$libSizes
-    # if(anyNA(mu)){
-    #     return(rep(1e16, length(latentVar)))
-    # }
-    if(allowMissingness){
-        isNA = is.na(data)
-        data[isNA] = mu[isNA]
+    if(distribution == "gaussian"){
+        (if(constrained) crossprod(covMat, data - mu) else
+          data - mu) %*% (paramEsts[mm,]/varPosts)
+    } else if(distribution == "quasi"){
+        if(compositional){
+        CompMat = buildCompMat(indepModel$colMat, paramEsts,
+                               latentVar = if(constrained){
+                                   covMat %*% cbind(latentVarsLower, latentVar)} else{
+                                       cbind(latentVarsLower, latentVar)}, m = mm,
+                                   norm = TRUE)
+        mu = CompMat*indepModel$libSizes
+        if(allowMissingness){
+            isNA = is.na(data)
+            data[isNA] = mu[isNA]
+        }
+        CompMatVar = CompMat/meanVarTrend(CompMat, outerProd = FALSE)
+        #This can be improved
+        tmpMat  = CompMatVar*(data-mu)*
+            (paramMats - c(CompMat %*% paramEsts[mm,]))
+        if(constrained){
+        tmpMat = crossprod(covMat, tmpMat)
+        }
+        rowSums(tmpMat)
+        } else {
+        prepMat = prepareScoreMat(mu = mu, data = data, meanVarTrend = meanVarTrend)
+        (if(constrained) crossprod(covMat, prepMat) else prepMat) %*% paramEsts[mm,]
+        }
     }
-    CompMatVar = CompMat/meanVarTrend(CompMat, outerProd = FALSE)
-    # CompMatVar[is.na(CompMatVar)] = 1
-    #This can be improved
-    tmpMat  = CompMatVar*(data-mu)*
-        (paramMats - c(CompMat %*% paramEsts[mm,]))
-    if(constrained){
-    tmpMat = crossprod(covMat, tmpMat)
-    }
-    rowSums(tmpMat)
-    } else {
-    prepMat = prepareScoreMat(mu = mu, data = data, meanVarTrend = meanVarTrend)
-    (if(constrained) crossprod(covMat, prepMat) else prepMat) %*% paramEsts[mm,]
-    }
-}
 }

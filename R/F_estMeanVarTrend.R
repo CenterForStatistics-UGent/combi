@@ -20,11 +20,9 @@
 estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
                            plot = FALSE, meanVarFit, degree = 2L,
                            constraint = "none",...){
-    # # A vector of means
-    # meanVec = colMeans(meanMat)
     # A vector of variances
     varVec = colSums((meanMat - data)^2/libSizes, na.rm = TRUE)/(nrow(data)-1)
-    #Logarithms
+    #Logarithms of mean vector
     logMeanVec = log(baseAbundances); logVarVec = log(varVec)
     #The smallest value
     minFit = min(logMeanVec)
@@ -33,15 +31,15 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
         slopeLin = lm(logVarVec ~ logMeanVec)$coef[2]
         #Find linearization point by minimizing residuals.
         #Is quite computation intensive, so go for a rough approximation
-    minPos = optimize(f = function(minPos){
-        suppressWarnings(sum(cobs(x = logMeanVec, y = logVarVec, constraint = constraint,
-                   pointwise = rbind(c(0, minPos, minPos),
-                                     c(2,minPos, 1)), #, c(2, max(logMeanVec), slopeLin)
-                   lambda = -1,
-                print.mesg = FALSE, print.warn = FALSE, maxiter = 25,
-                lambda.length = 10, keep.x.ps = FALSE, degree = degree)$resid^2))
-    }, interval = c(log(1/sum(meanMat))-10, minFit + 1),
-    tol = 0.1)$minimum
+        minPos = optimize(f = function(minPos){
+            suppressWarnings(sum(cobs(x = logMeanVec, y = logVarVec, constraint = constraint,
+                       pointwise = rbind(c(0, minPos, minPos),
+                                         c(2,minPos, 1)), #, c(2, max(logMeanVec), slopeLin)
+                       lambda = -1,
+                    print.mesg = FALSE, print.warn = FALSE, maxiter = 25,
+                    lambda.length = 10, keep.x.ps = FALSE, degree = degree)$resid^2))
+        }, interval = c(log(1/sum(meanMat))-10, minFit + 1),
+        tol = 0.1)$minimum
     #Use optimal value
     pointwiseMat = rbind(c(0, minPos, minPos),
                          c(2,minPos, 1))#,
@@ -50,32 +48,14 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
     mvFit = suppressWarnings(cobs(x = logMeanVec, y = logVarVec, constraint = constraint,
          pointwise = pointwiseMat, lambda = -1, degree = degree,
          print.mesg = FALSE, print.warn = FALSE, keep.x.ps = FALSE))
-    # if(any(mvFit$ifl != 1)){
-    #     warning("Lambda estimation of spline in mean variance trend did not converge!",
-    #             immediate. = TRUE, call. = FALSE)
-    # }
     linX = minPos
-    # linXUpper = max(logMeanVec)
-    # linYUpper = predict(mvFit, linXUpper)[,2]
-    # slopeUpper = predict(mvFit, linXUpper, deriv = 1L)[,2]
     if (length(mvFit$coef) > (nk1 = length(mvFit$knots) + 1L))
         length(mvFit$coef) = nk1
     new.knots <- c(rep.int(mvFit$knots[1], degree), mvFit$knots,
                    rep.int(mvFit$knots[length(mvFit$knots)], degree))
-    mvFit = mvFit[["coef"]] #Only keep the coefficients
-    # } else if(meanVarFit = "smoothSpline"){
-    #     #Use splines to guarantee continuous derivatives
-    #     mvFit = smooth.spline(x = log(meanVec), y = logVarVec)$fit
-    #     minFit = mvFit$min
-    #     lowerEval = predict(mvFit, minFit)$y
-    #     lowerSlope = predict(mvFit, minFit, deriv = 1L)$y
+    mvFit = mvFit[["coef"]]
     } else if(meanVarFit == "cubic"){
         #Enforce slope >1 and function value > x at smallest observed mean
-        # fitUnconstr = lm(logVarVec ~ logMeanVec + I(logMeanVec^2) + I(logMeanVec^3))
-        # mvFit = restriktor(fitUnconstr, rhs = c(1, 1),
-        #             constraints = rbind(c(1, minFit, minFit^2, minFit^3),
-        #                                 c(0,1,2*minFit,3*minFit^2)),
-        #             neq = 0L, se = "none")$b.restr
         mvFit = lm(logVarVec ~ logMeanVec + I(logMeanVec^2) + I(logMeanVec^3))$coef
         lowerEval = c(c(1, minFit, minFit^2, minFit^3) %*% mvFit)
         lowerSlope = c(c(1, 2*minFit, 3*minFit^2) %*% mvFit[-1])
@@ -93,7 +73,6 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
     }
     coefsQuad = nleqslv(rep(1,3), fn = quadFunc)$x
     linX = (1-coefsQuad[2])/(2*coefsQuad[1]) #The x where parabole has slope 1 and touches the diagonal
-    #linY = c(model.matrix(~linX + I(linX^2)) %*% coefsQuad[3:1]) #The y where parabole has slope 1 and touches the diagonal
     } else {
     # If curve points away from the diagonal, backtrack until the slope was equal to 1 and linearize from there (still not optimal)
     minFit = nleqslv(minFit, fn = function(x){
@@ -101,9 +80,6 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
            "cubic" = c(1, 2*x, 3*x^2) %*% mvFit[-1],
            "spline" = predict(mvFit, x, deriv = 1L)$y)-1})$x
     linX = minFit
-    # linY = switch(meanVarFit,
-    #               "cubic" = c(c(1, minFit, minFit^2, minFit^3) %*% mvFit),
-    #               "spline" = predict(mvFit, minFit)$y)
     coefsQuad = integer(3)
     }
     } else if(meanVarFit == "quadratic") {
@@ -113,7 +89,6 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
                control.outer = list(trace = FALSE))$par
     linX = (1-coefsQuad[2])/(2*coefsQuad[1])
     minFit = Inf; mvFit = NULL
-
     } else {stop("Mean-variance trend must be either, quadratic cubic or spline!\n")}
     dispFunction = function(means, libSizes, deriv = 0L, outerProd = !deriv){
         logMeans = log(means)
@@ -132,10 +107,7 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
                                   linX, coefsQuad, meanVarFit = meanVarFit,
                                   minFit = minFit, new.knots = new.knots,
                                   degree = degree))/means[!idSmaller]
-            baa[idSmaller] = 1#exp(predictSpline(mvFit, logMeans[idSmaller], lowerSlope, lowerEval,
-                                               #linX, coefsQuad, meanVarFit = meanVarFit,
-                                              # minFit = minFit, new.knots = new.knots,
-                                              # degree = degree))/means[idSmaller]
+            baa[idSmaller] = 1
         }
         if(outerProd) outer(libSizes, baa) else baa
     }
