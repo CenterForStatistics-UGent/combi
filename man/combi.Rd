@@ -9,7 +9,7 @@ combi(data, M = 2L, covariates = NULL, distributions, compositional,
   minFraction = 0.1, logTransformGaussian = TRUE, confounders = NULL,
   compositionalConf = rep(FALSE, length(data)),
   nleq.control = list(maxit = 1000L, cndtol = 1e-16), record = TRUE,
-  weights = NULL, fTol = 1e-05, nCores = 1, meanVarFit = "spline",
+  weights = NULL, fTol = 1e-05, meanVarFit = "spline",
   maxFeats = 2000, dispFreq = 10L, allowMissingness = FALSE,
   biasReduction = TRUE, maxItFeat = 20L)
 }
@@ -61,9 +61,6 @@ rrhow the feature parameters should be weighted in the normalization}
 
 \item{fTol}{The tolerance for solving the estimating equations}
 
-\item{nCores}{The number of cores to be used in estimating the feature
-parameters of each view. See details.}
-
 \item{meanVarFit}{The type of mean variance fit, see details}
 
 \item{maxFeats}{The maximal number of features for a Newton-Raphson procedure
@@ -88,10 +85,8 @@ data integration and fitting procedure
 Perform model-based data integration
 }
 \details{
-Using more than one core is only implemented on Unix systems.
-Setting nCores > 1 on Windows will use a single core, with a warning.
-When the number of cores specified is larger than the number of views,
-nCores is silently set to the number of views.
+Estimation of independence model and view wise parameters can be
+parametrized. See ?BiocParallel::bplapply and ?BiocParallel::register.
 meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
  trend, "cubic" gives a third degree polynomial. Both converge to the
  diagonal line with slope 1 for small means.

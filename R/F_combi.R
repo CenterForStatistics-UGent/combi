@@ -54,7 +54,6 @@
 #' @import BiocParallel
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda
-#' @importFrom parallel bplapply
 #' @importFrom stats sd
 #' @export
 #' @examples
