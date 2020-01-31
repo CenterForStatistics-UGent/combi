@@ -6,7 +6,7 @@
 #' @param b the vector to be orthogonalized to
 #'
 #' @return The orthogonalized vector
-GramSchmidtOrth = function(a, b, weights = 1, norm = TRUE){
+gramSchmidtOrth = function(a, b, weights = 1, norm = TRUE){
     tmp = a-c(crossprod(a*weights, b))/sum(b^2*weights)*b
     if(norm) tmp/sqrt(sum(tmp^2*weights)) else tmp
 }

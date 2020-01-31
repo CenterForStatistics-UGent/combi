@@ -16,7 +16,7 @@
 influence.combi = function(modelObj, samples = is.null(View), Dim = 1, View = NULL){
     with(modelObj, {
     if(samples){
-        lambdaLatent = lambdasLatent[seq_m(Dim, normal = FALSE)]
+        lambdaLatent = lambdasLatent[seqM(Dim, normal = FALSE)]
         constrained = !is.null(covariates)
         if(constrained) covMat = buildCovMat(covariates)$covModelMat
         #Find the normalization lagrange mutliplier?

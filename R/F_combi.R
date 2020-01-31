@@ -11,8 +11,6 @@
 #' @param maxIt an integer, the maximum number of iterations
 #' @param tol A small scalar, the convergence tolerance
 #' @param verbose Logical. Should verbose output be printed to the console?
-#' @param nCores The number of cores to be used in estimating the feature
-#' parameters of each view. See details.
 #' @param confounders A dataframe or a list of dataframes with the same
 #' length as data.
 #'  In the former case the same dataframe is used for conditioning,
@@ -46,19 +44,17 @@
 #' @return An object of the "combi" class, containing all information on the
 #' data integration and fitting procedure
 #'
-#' @details Using more than one core is only implemented on Unix systems.
-#' Setting nCores > 1 on Windows will use a single core, with a warning.
-#' When the number of cores specified is larger than the number of views,
-#' nCores is silently set to the number of views.
+#' @details Estimation of independence model and view wise parameters can be
+#' parametrized. See ?BiocParallel::bplapply and ?BiocParallel::register.
 #' meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
 #'  trend, "cubic" gives a third degree polynomial. Both converge to the
 #'  diagonal line with slope 1 for small means.
 #'  Distribution can be either "quasi" for quasi likelihood or "gaussian" for
 #'   Gaussian data
-#' @aliases combi
+#' @import BiocParallel
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda
-#' @importFrom parallel mclapply
+#' @importFrom parallel bplapply
 #' @importFrom stats sd
 #' @export
 #' @examples
@@ -82,15 +78,9 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    prevCutOff = 0.95, minFraction = 0.1, logTransformGaussian = TRUE,
                    confounders = NULL, compositionalConf = rep(FALSE, length(data)),
                    nleq.control = list(maxit = 1e3L, cndtol = 1e-16),
-                   record = TRUE, weights = NULL, fTol = 1e-5, nCores = 1,
+                   record = TRUE, weights = NULL, fTol = 1e-5,
                    meanVarFit = "spline", maxFeats = 2e3, dispFreq = 10L,
                    allowMissingness = FALSE, biasReduction = TRUE, maxItFeat = 2e1L){
-    #Switch off multithreading on windows
-    if(.Platform$OS.type == "windows" && nCores>1){
-        message("Forking not supported on Windows machines!\nUsing only one core.")
-        nCores = 1
-    }
-    nCores = min(nCores, length(data)) # No point in using more cores than views
     #Perform checks
     if(M %in% c(0L,1L) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
@@ -174,10 +164,6 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                                               c("quasi"), "marginal", "uniform") else weights
     #Define some handy quantities
     numSets = length(data) #Number of views
-    if(numSets < nCores){
-        message("It has no use supplying more cores than views, only ", numSets, " cores used!")
-        nCores = numSets
-    }
     seqSets = seq_len(numSets) #A sequence along the views
     #Build confounder matrices
     oneConfMat = length(confounders) == 1 #Single confounder matrix for all views?
@@ -271,7 +257,7 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
 
     #### MARGINAL INDEPENDENCE MODELS ####
     if(verbose){cat("Estimating independence models...\n")}
-    marginModels = mclapply(seqSets, mc.cores = nCores, function(i){
+    marginModels = bplapply(seqSets, function(i){
         estIndepModel(data = data[[i]], distribution = distributions[[i]],
                        link = links[[i]], compositional = compositional[[i]],
                        invLink = invLinks[[i]], tol = tol, maxIt = maxIt,
@@ -475,7 +461,7 @@ switch(weights[[i]],
                                             lambdasParams = lambdasParams,
                                             JacFeatures = emptyFeatureJacs,
                                             seqSets = seqSets,
-                                            control = nleq.control, nCores = nCores,
+                                            control = nleq.control,
                                             weights = weightsList, compositional = compositional,
                                             indepModels = indepModels, fTol = fTol,
                                             newtonRaphson = newtonRaphson,
@@ -486,13 +472,13 @@ switch(weights[[i]],
             tmp = paramEstsTmp[[i]]$x[seq_len(numVars[[i]])]
             tmp = tmp - sum(tmp*weightsList[[i]]) #Center
             if(m>1){
-                paramEsts[[i]][m,] = GramSchmidtOrth(paramEsts[[i]][m,],
+                paramEsts[[i]][m,] = gramSchmidtOrth(paramEsts[[i]][m,],
                                                      paramEsts[[i]][m-1,],
                                                      weights = weightsList[[i]],
                                                      norm = compositional[[i]])
             } #Orthogonalize
             paramEsts[[i]][m,] = tmp/sqrt(sum(tmp^2*weightsList[[i]])) #Scale
-            lambdasParams[[i]][seq_m(m, nLambda1s = 1, normal = compositional[[i]] )] =
+            lambdasParams[[i]][seqM(m, nLambda1s = 1, normal = compositional[[i]] )] =
                 paramEstsTmp[[i]]$x[-seq_len(numVars[[i]])]
             #Record convergence
             if(record) paramConv[iter[[m]],i,m] = paramEstsTmp[[i]]$conv
@@ -527,7 +513,7 @@ switch(weights[[i]],
                             n = n, m = m, numSets = numSets, numVars = numVars,
                             meanVarTrends = meanVarTrends[[m]], links = links,
                             lambdasLatent = lambdasLatent[
-                                          seq_m(m, normal = constrained,
+                                          seqM(m, normal = constrained,
                                                 nLambda1s = nLambda1s)],
                             Jac = as.matrix(emptyJacLatent),
                             control = nleq.control, covMat = covMat,
@@ -536,19 +522,19 @@ switch(weights[[i]],
                             compositional = compositional, indepModels = indepModels,
                             fTol = fTol, allowMissingness = allowMissingness)
         #nleq.control$trace = FALSE
-        lambdasLatent[seq_m(m, normal = constrained, nLambda1s = nLambda1s)] =
+        lambdasLatent[seqM(m, normal = constrained, nLambda1s = nLambda1s)] =
             latentVarsTmp$x[-seq_len(if(constrained) numCov else n)]
         if(constrained){
             alphas[,m] = latentVarsTmp$x[seq_len(if(constrained) numCov else n)]
             if(m>1){
-            alphas[,m] = GramSchmidtOrth(alphas[,m], alphas[,m-1], norm = TRUE)
+            alphas[,m] = gramSchmidtOrth(alphas[,m], alphas[,m-1], norm = TRUE)
             }
             latentVars[,m] = covMat %*% alphas[,m]
         } else {
             latentVars[, m] = latentVarsTmp$x[seq_len(n)] -
                 mean(latentVarsTmp$x[seq_len(n)]) #Enforce centering for stability
             if(m>1){
-                latentVars[, m] = GramSchmidtOrth(latentVars[, m],
+                latentVars[, m] = gramSchmidtOrth(latentVars[, m],
                                                   latentVars[, m-1], norm = FALSE)
             } #Orthogonalize
         }

@@ -50,7 +50,7 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
             return(list(x = sol@x, conv = 1))
         } else {
         out = try(nleqslv(x = c(paramEsts[[i]][m,], lambdasParams[[i]][
-            seq_m(m, normal = compositional[[i]])]),
+            seqM(m, normal = compositional[[i]])]),
             fn = derivLagrangianFeatures, jac = deriv2LagrangianFeatures,
             distribution = distributions[[i]], numVar = numVars[[i]],
             paramEstsLower = paramEsts[[i]][seq_len(m-1),,drop = FALSE],
@@ -74,7 +74,7 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
             boo[id] = boo[id] - sum(boo[id]*weights[[i]])
             for(jj in seq_len(m-1)){
                 boo[id] =
-                GramSchmidtOrth(boo[id], paramEsts[[i]][jj,],
+                gramSchmidtOrth(boo[id], paramEsts[[i]][jj,],
                                 weights[[i]], norm = FALSE)
             }
             boo[id] = boo[id]/sqrt(sum(boo[id]^2*weights[[i]]))
@@ -96,7 +96,7 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
         } else {
         # TO DO: arbitrary degree of polynomial
         out = BBsolve(par = c(paramEsts[[i]][m,], lambdasParams[[i]][
-            seq_m(m, normal = compositional[[i]])]),
+            seqM(m, normal = compositional[[i]])]),
             fn = derivLagrangianFeatures, distribution = distributions[[i]], numVar = numVars[[i]],
             paramEstsLower = paramEsts[[i]][seq_len(m-1),,drop = FALSE],
              meanVarTrend = meanVarTrends[[i]], Jac =NULL,
