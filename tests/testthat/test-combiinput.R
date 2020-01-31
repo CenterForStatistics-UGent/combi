@@ -36,3 +36,8 @@ test_that("combi runs when NAs present in data matrix
         "combi"
         )
 })
+
+test_that("Polynomial mean-variance model works", {
+    expect_s3_class(combi(data = list("microbiome" = zhangMicrobio, "metabo" = zhangMetabo), distributions = c("quasi", "gaussian"),
+                         compositional = c(TRUE, FALSE), nCores = 1, maxIt = 3, meanVarFit = "cubic"), "combi")
+})

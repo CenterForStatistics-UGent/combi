@@ -18,9 +18,6 @@ scoreFeatureParams = function(x, data, distribution, offSet, latentVar,
             isNA = is.na(data)
             data[isNA] = mu[isNA]
         }
-    # if(anyNA(mu) ){
-    #     return(rep(1e16, length(x)))
-    # }# Put up a big "Keep Out" sign when drifting towards extreme means
     }
     if(distribution == "gaussian"){
         latentVar[,mm] %*% (data - mu)
@@ -34,7 +31,6 @@ scoreFeatureParams = function(x, data, distribution, offSet, latentVar,
             data[isNA] = mu[isNA]
         }
         CompMatVar = CompMat/meanVarTrend(CompMat, outerProd = FALSE)
-        # CompMatVar[is.na(CompMatVar)] = 1
         crossprod(latentVar[,mm],
                   (1-CompMat)*(data-mu)*CompMatVar)
         } else {

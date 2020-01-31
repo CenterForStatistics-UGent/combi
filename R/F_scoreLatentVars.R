@@ -20,9 +20,6 @@ scoreLatentVars = function(data, distribution, paramEsts, paramMats, offSet, lat
     mu = buildMu(offSet = offSet, latentVar = if(constrained)
         c(covMat %*% latentVar) else latentVar, paramEsts = paramMats,
         distribution, paramMatrix = TRUE)
-    # if(anyNA(mu)){
-    #     return(rep(1e16, length(latentVar)))
-    # }
     if(allowMissingness){
         isNA = is.na(data)
         data[isNA] = mu[isNA]
