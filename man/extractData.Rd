@@ -10,6 +10,8 @@ extractData(data, logTransformGaussian = TRUE)
 \item{data}{The list of data objects, either matrix, phyloseq or ExpressionSet objects}
 
 \item{logTransformGaussian}{A boolean, should array data be logtransformed}
+
+\item{...}{additional arguments for the extractor function}
 }
 \value{
 the raw data matrices, samples in the rows
