@@ -16,6 +16,8 @@
 #'  par(mfrow = c(1,1))
 checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE,
                              ...){
+    if(!meanVarFit %in% c("cubic","quadratic", "spline"))
+        stop("Mean-variance trend must be either quadratic, cubic or spline!\n")
     libSizes = rowSums(data)
     baseAbundances = colSums(data)/sum(data)
     data = data[libSizes>0, baseAbundances>0]
