@@ -18,6 +18,10 @@ extractMat(Y, ...)
 }
 \arguments{
 \item{Y}{a phyloseq or eSet object, or another object, or a raw data matrix}
+
+\item{...}{additional arguments for the extractor function}
+
+\item{logTransformGaussian}{A boolean, should array data be logtransformed}
 }
 \value{
 A data matrix with samples in the rows and features in the columns

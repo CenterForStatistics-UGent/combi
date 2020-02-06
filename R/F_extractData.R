@@ -23,19 +23,21 @@ extractData = function(data, logTransformGaussian = TRUE){
 }
 #' A function to extract a data matrix from a number of objects
 #' @param Y a phyloseq or eSet object, or another object, or a raw data matrix
+#' @param logTransformGaussian A boolean, should array data be logtransformed
+#' @param ... additional arguments for the extractor function
 #' @return A data matrix with samples in the rows and features in the columns
 #' @rdname extractMat
 setGeneric("extractMat", function(Y, ...) standardGeneric("extractMat"))
-#'@import methods
-#'@importFrom phyloseq t otu_table taxa_are_rows
-#'@rdname extractMat
+#' @import methods
+#' @importFrom phyloseq t otu_table taxa_are_rows
+#' @rdname extractMat
 setMethod("extractMat", "phyloseq", function(Y,...){
     if(taxa_are_rows(Y)) t(as(otu_table(Y), "matrix")) else
         as(otu_table(Y), "matrix")
     })
-#'@rdname extractMat
-#'@import methods
-#'@importFrom Biobase exprs
+#' @rdname extractMat
+#' @import methods
+#' @importFrom Biobase exprs
 setMethod("extractMat", "ExpressionSet", function(Y, logTransformGaussian,...){
     dat = t(exprs(Y))
     if(logTransformGaussian) dat = log(dat)
