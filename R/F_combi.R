@@ -87,7 +87,7 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
               is.logical(logTransformGaussian), is.logical(compositionalConf),
               is.list(nleq.control), is.logical(record), is.numeric(fTol),
               is.character(meanVarFit), is.numeric(maxFeats),
-              is.numeric(dispFreq), is.logical(allowMisingness),
+              is.numeric(dispFreq), is.logical(allowMissingness),
               is.logical(biasReduction), is.numeric(maxItFeat))
     if(M %in% c(0L,1L) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")

@@ -13,8 +13,7 @@ n  = 50; p = 100
 tmpMat  = matrix(rnbinom(n*p, mu = 5, size = 1),n,p)
 test_that("combi throws errors when no row names provided", {
     expect_error(
-        combi(list(tmpMat), distributions = "quasi",
-                         compositional = TRUE)
+        combi(list(tmpMat), distributions = "quasi", compositional = TRUE)
         )
 })
 tmpMat2 = tmpMat
@@ -23,8 +22,7 @@ tmpMat2[1,1] = NA
 
 test_that("combi throws errors when NAs present in data matrix", {
   expect_error(
-      combi(list(tmpMat2), distributions = "quasi",
-                       compositional = TRUE)
+      combi(list(tmpMat2), distributions = "quasi", compositional = TRUE)
       )
 })
 
