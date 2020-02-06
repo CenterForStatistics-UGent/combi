@@ -73,7 +73,6 @@ inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
         Plot = ggplot(data = moltInflMat,
                       aes_string(y = "logAbsoluteInfluence", x = "LatentVariable")) +
             geom_boxplot(aes_string(fill = "View"), outlier.shape = NA, outlier.size = 0.75)
-        # Means = aggregate(data = moltInflMat, Influence ~ LatentVariable + View, FUN = mean)
     } else if (plotType == "boxplotSingle"){
         Plot = ggplot(data = moltInflMat,
                       aes_string(y = "logAbsoluteInfluence", x = "View", fill = "View")) + geom_boxplot()

@@ -30,7 +30,7 @@ filterConfounders = function(confMat, data, distribution, link, invLink,
                                    allowMissingness = allowMissingness)
             if(paramEstsTmp2$convergence!=0){
                 warning("Estimation of conditioning parameters did not converge!
-                    Try stricter filtering using the prevCutOff argument")
+                    Try stricter filtering using the prevCutOff argument.")
             }
         }
         paramEsts = cbind(0, matrix(if(paramEstsTmp$termcd==1) paramEstsTmp$x else paramEstsTmp2$par,

@@ -136,7 +136,7 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
         Plot = Plot + coord_fixed()
     } else {
         warning("Plot not square! This may be misleading and is not recommended!
-                See squarePlot parameter")
+                See squarePlot parameter.")
     }
     Plot = RCM:::indentPlot(Plot, xInd = xInd, yInd = yInd) #Indentation
     if(returnCoords){

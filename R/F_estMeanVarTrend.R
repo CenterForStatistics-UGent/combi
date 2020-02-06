@@ -89,7 +89,7 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
                control.outer = list(trace = FALSE))$par
     linX = (1-coefsQuad[2])/(2*coefsQuad[1])
     minFit = Inf; mvFit = NULL
-    } else {stop("Mean-variance trend must be either, quadratic cubic or spline!\n")}
+    } else {}
     dispFunction = function(means, libSizes, deriv = 0L, outerProd = !deriv){
         logMeans = log(means)
         idSmaller = logMeans < linX

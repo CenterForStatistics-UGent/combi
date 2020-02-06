@@ -81,6 +81,14 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    meanVarFit = "spline", maxFeats = 2e3, dispFreq = 10L,
                    allowMissingness = FALSE, biasReduction = TRUE, maxItFeat = 2e1L){
     #Perform checks
+    stopifnot(is.numeric(M), is.logical(compositional),
+              is.character(distributions), is.numeric(maxIt), is.numeric(tol),
+              is.numeric(prevCutOff), is.numeric(minFraction),
+              is.logical(logTransformGaussian), is.logical(compositionalConf),
+              is.list(nleq.control), is.logical(record), is.numeric(fTol),
+              is.character(meanVarFit), is.numeric(maxFeats),
+              is.numeric(dispFreq), is.logical(allowMisingness),
+              is.logical(biasReduction), is.numeric(maxItFeat))
     if(M %in% c(0L,1L) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
     }
@@ -92,6 +100,8 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    identical, length(compositional)))){
         stop("Make sure data, distribution, links and compositional have the same length")
     }
+    if(!meanVarFit %in% c("cubic","quadratic", "spline"))
+        stop("Mean-variance trend must be either quadratic, cubic or spline!\n")
     if(length(data)==1){
         warning("Please provide at least two views for data integration!
                 Now fitting an ordination model.",
