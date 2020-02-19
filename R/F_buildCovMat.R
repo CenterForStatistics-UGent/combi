@@ -13,7 +13,6 @@
 #' \item{covModelMat}{The model matrix}
 #' \item{datFrame}{The dataframe used to construct the model matrix}
 #'
-#' @importFrom RCM checkAlias
 #' @import stats
 buildCovMat = function(datFrame) {
 

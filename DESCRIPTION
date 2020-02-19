@@ -1,15 +1,15 @@
 Package: combi
 Type: Package
-Title: Compositional omics model based integration
-Version: 0.1.99
+Title: Compositional omics model based visual integration
+Version: 0.99.1
 Author: Stijn Hawinkel <stijn.hawinkel@ugent.be>
 Maintainer: Joris Meys <joris.meys@ugent.be>
-Description: Combine quasi-likelihood estimation, compositional regression models and latent variable models for data integration and visualization.
+Description: Combine quasi-likelihood estimation, compositional regression models and latent variable models for integrative visualization of several omics datasets. Both unconstrained and constrained integration is available, the results are shown as interpretable multiplots.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: ggplot2 (>= 2.2.1.9000), nleqslv, phyloseq, tensor, stats, limma, Matrix, RCM (>= 1.1.2), BB, reshape2, alabama, cobs, Biobase, vegan, BiocParallel, grDevices, graphics, methods
+Imports: ggplot2 (>= 2.2.1.9000), nleqslv, phyloseq, tensor, stats, limma, Matrix, BB, reshape2, alabama, cobs, Biobase, vegan, BiocParallel, grDevices, graphics, methods
 Depends: R (>= 3.6.0)
 Suggests: 
     knitr,
