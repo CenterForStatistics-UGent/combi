@@ -38,7 +38,7 @@ load(system.file("fits", "zhangFits.RData", package = "combi"))
 
 ```{r install, eval = FALSE, echo = FALSE}
 library(BiocManager)
-install("combi", update = FALSE)
+BiocManager::install("combi", update = FALSE)
 ```
 
 ```{r installDevtools, eval = FALSE}
