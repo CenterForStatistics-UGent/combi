@@ -34,7 +34,7 @@
 #' @importFrom stats quantile
 #' @examples
 #' data(Zhang)
-#' \dontrun{
+#' \donttest{
 #' #Unconstrained
 #' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),

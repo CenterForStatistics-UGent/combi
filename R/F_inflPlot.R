@@ -19,7 +19,7 @@
 #' @return A ggplot object
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data(Zhang)
 #' #Unconstrained
 #' microMetaboInt = combi(

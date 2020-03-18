@@ -60,7 +60,7 @@
 #' data(Zhang)
 #' #The method works on several datasets at once, and simply is not very fast.
 #' #Hence the "Not run" statement
-#' \dontrun{
+#' \donttest{
 #' #Unconstrained
 #' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),

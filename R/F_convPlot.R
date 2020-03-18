@@ -11,7 +11,7 @@
 #' @return A ggplot object containing the convergence plot
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data(Zhang)
 #' #Unconstrained
 #' microMetaboInt = combi(
