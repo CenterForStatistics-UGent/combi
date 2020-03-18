@@ -1,5 +1,6 @@
 #' Show an overview of a fitted combi object
 #' @param object a fitted combi object
+#' @param ... Further arguments, currently ignored
 #'
 #' @return A ggplot object containing the plot
 #' @method summary combi

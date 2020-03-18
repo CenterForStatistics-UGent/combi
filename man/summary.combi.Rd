@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{object}{a fitted combi object}
+
+\item{...}{Further arguments, currently ignored}
 }
 \value{
 A ggplot object containing the plot
