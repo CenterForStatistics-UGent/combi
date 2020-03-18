@@ -18,7 +18,7 @@
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #' logTransformGaussian = FALSE, verbose = TRUE)}
-#' load(system.file("fits", "zhangFits.RData", package = "combi"))
+#' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' convPlot(microMetaboInt)
 convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1,
                     View = NULL, size = 0.125){

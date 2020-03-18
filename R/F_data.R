@@ -32,3 +32,4 @@
 #' }
 #' @source \url{https://www.ibdmdb.org/}
 "zhangMetavars"
+#' @usage data(Zhang)

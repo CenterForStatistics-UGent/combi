@@ -22,7 +22,7 @@
 #' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #' logTransformGaussian = FALSE, verbose = TRUE)
 #' }
-#' load(system.file("fits", "zhangFits.RData", package = "combi"))
+#' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' Plot = plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
 #'  returnCoords = TRUE)
 #' addLink(Plot, links = cbind("OTUe37326","OTUa14fb5"), Views = 1,

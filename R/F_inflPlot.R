@@ -31,7 +31,7 @@
 #'     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 #'     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 #'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)}
-#' load(system.file("fits", "zhangFits.RData", package = "combi"))
+#' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' inflPlot(microMetaboInt)
 #' #Constrained
 #' inflPlot(microMetaboIntConstr)
