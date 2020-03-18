@@ -10,8 +10,6 @@ extractData(data, logTransformGaussian = TRUE)
 \item{data}{The list of data objects, either matrix, phyloseq or ExpressionSet objects}
 
 \item{logTransformGaussian}{A boolean, should array data be logtransformed}
-
-\item{...}{additional arguments for the extractor function}
 }
 \value{
 the raw data matrices, samples in the rows
@@ -20,7 +18,7 @@ the raw data matrices, samples in the rows
 Helper function to extract data matrix from phyloseq, expressionset objects etc. Also filers out all zero rows
 }
 \examples{
-data(zhang)
+data(Zhang)
 matrixList = extractData(list("microbiome" = zhangMicrobio,
 "metabolome" = zhangMetabo))
 }

@@ -11,7 +11,7 @@ addLink(DIplot, links, Views, samples, variable = NULL, Dims = c(1, 2),
 \arguments{
 \item{DIplot}{A list with ggplot object where the links are to be added, and data frames with coordinates}
 
-\item{links}{A matrix with two columns containing either feature names or approximate coordinates}
+\item{links}{A matrix containing either feature names (two column matrix) or approximate coordinates (four column matrix)}
 
 \item{Views}{Indices or names of the views for which the links should be added}
 
@@ -37,14 +37,14 @@ Add a link on a compositional plot
 }
 \examples{
 data(Zhang)
-\dontrun{
+\donttest{
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 logTransformGaussian = FALSE, verbose = TRUE)
 }
-load(system.file("fits", "zhangFits.RData", package = "combi"))
+load(system.file("extdata", "zhangFits.RData", package = "combi"))
 Plot = plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
  returnCoords = TRUE)
 addLink(Plot, links = cbind("OTUe37326","OTUa14fb5"), Views = 1,

@@ -19,7 +19,7 @@ or via BioConductor:
 
 ```{r installcombipackageBioc, eval = FALSE}
 library(BiocManager)
-install("combi")
+BiocManager::install("combi")
 ```
 
 ```{r loadcombipackage}

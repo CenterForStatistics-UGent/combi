@@ -65,7 +65,7 @@ Make multiplots of the data integration object
 }
 \examples{
 data(Zhang)
-\dontrun{
+\donttest{
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
@@ -77,7 +77,7 @@ microMetaboIntConstr = combi(
     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)}
     #Load the fits
-load(system.file("fits", "zhangFits.RData", package = "combi"))
+load(system.file("extdata", "zhangFits.RData", package = "combi"))
 plot(microMetaboInt)
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 #Constrained

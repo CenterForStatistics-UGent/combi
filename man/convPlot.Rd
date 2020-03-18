@@ -27,13 +27,13 @@ A ggplot object containing the convergence plot
 Plot the convegrence of the different parameter estimates in a line plot
 }
 \examples{
-\dontrun{
+\donttest{
 data(Zhang)
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
 distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 logTransformGaussian = FALSE, verbose = TRUE)}
-load(system.file("fits", "zhangFits.RData", package = "combi"))
+load(system.file("extdata", "zhangFits.RData", package = "combi"))
 convPlot(microMetaboInt)
 }

@@ -1,11 +1,10 @@
 #' Helper function to extract data matrix from phyloseq, expressionset objects etc. Also filers out all zero rows
 #' @param logTransformGaussian A boolean, should array data be logtransformed
 #' @param data The list of data objects, either matrix, phyloseq or ExpressionSet objects
-#' @param ... additional arguments for the extractor function
 #' @return the raw data matrices, samples in the rows
 #' @export
 #' @examples
-#' data(zhang)
+#' data(Zhang)
 #' matrixList = extractData(list("microbiome" = zhangMicrobio,
 #' "metabolome" = zhangMetabo))
 extractData = function(data, logTransformGaussian = TRUE){

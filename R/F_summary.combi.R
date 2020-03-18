@@ -1,5 +1,5 @@
 #' Show an overview of a fitted combi object
-#' @param comb a fitted combi object
+#' @param object a fitted combi object
 #'
 #' @return A ggplot object containing the plot
 #' @method summary combi
@@ -22,13 +22,13 @@
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' summary(microMetaboInt)
 #' summary(microMetaboIntConstr)
-summary.combi = function(comb){
-    constr = if(is.null(comb$covariates)) "Unconstrained" else "Constrained"
-    dim = length(comb$iter)
-    datSets = length(comb$data)
-    nSam = nrow(comb$latentVars)
-    viewsString = sapply(seq_along(comb$data), function(i){
-        paste0(names(comb$data[i]),": ", ncol(comb$paramEsts[[i]]), "\n")
+summary.combi = function(object, ...){
+    constr = if(is.null(object$covariates)) "Unconstrained" else "Constrained"
+    dim = length(object$iter)
+    datSets = length(object$data)
+    nSam = nrow(object$latentVars)
+    viewsString = sapply(seq_along(object$data), function(i){
+        paste0(names(object$data[i]),": ", ncol(object$paramEsts[[i]]), "\n")
     })
     cat(constr, "combi ordination of", dim, "dimensions on",
         datSets, "views with", nSam,

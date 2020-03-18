@@ -33,10 +33,10 @@ knitr::opts_chunk$set(cache = FALSE, autodep = TRUE, warning = FALSE,
                       fig.show = "hold", cache.lazy = FALSE)
 palStore = palette()
 #Load all fits, to avoid refitting every time rebuilding the vignette
-load(system.file("fits", "zhangFits.RData", package = "combi"))
+load(system.file("extdata", "zhangFits.RData", package = "combi"))
 ```
 
-```{r install, eval = FALSE, echo = FALSE}
+```{r install, eval = FALSE}
 library(BiocManager)
 BiocManager::install("combi", update = FALSE)
 ```
@@ -60,7 +60,7 @@ data(Zhang)
 
 For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature (TRUE/FALSE) should be supplied
 
-```{r unconstr, eval = FALSE}
+```{r unconstr}
 microMetaboInt = combi(
  list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
  distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
@@ -81,7 +81,7 @@ plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 
 For a constrained ordination also a data frame of sample variables should be supplied
 
-```{r constr, eval = FALSE}
+```{r constr}
 microMetaboIntConstr = combi(
      list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
      distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
