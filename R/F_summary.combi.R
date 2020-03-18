@@ -27,7 +27,8 @@ summary.combi = function(object, ...){
     dim = length(object$iter)
     datSets = length(object$data)
     nSam = nrow(object$latentVars)
-    viewsString = sapply(seq_along(object$data), function(i){
+    viewsString = vapply(seq_along(object$data), FUN.VALUE = character(1),
+                         function(i){
         paste0(names(object$data[i]),": ", ncol(object$paramEsts[[i]]), "\n")
     })
     cat(constr, "combi ordination of", dim, "dimensions on",

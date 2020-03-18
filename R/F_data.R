@@ -4,7 +4,7 @@
 #' Microbiome of mice that underwent Pulsed Antibiotic Treatment
 #'  (PAT) and controls. The data were extracted from the source
 #'  \url{https://www.ibdmdb.org/}, and then only the samples matching between
-#'  microbiome and metabolome
+#'  microbiome and metabolome were retained.
 #'
 #' @format A phyloseq object containing microbiome data
 #' \describe{
