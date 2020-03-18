@@ -14,24 +14,25 @@
 #'@return The evaluation of the spline, i.e. the predicted variance
 predictSpline = function(fit, newdata, linX, coefsQuad, deriv = 0L,
                          meanVarFit, minFit, new.knots, degree){
-    out = newdata
+    n = length(newdata)
     if(meanVarFit == "spline"){
         orderZ = sort.list(newdata)
+        #Call C routine directly for speed
+        .C("spline_value", PACKAGE = "cobs", new.knots, fit,
+                 length(fit), degree + 1L,
+                 newdata[orderZ], n, deriv,
+                 y = double(n))$y[sort.list(orderZ)]
     } else {
+        out = newdata
         idLinear = newdata < linX
         idLower = newdata < minFit
         idLowerNotLinear = idLower & !idLinear
         out[idLowerNotLinear] = if(deriv) coefsQuad[2] +
             coefsQuad[1]*2*newdata[idLowerNotLinear] else
             polyHorner(coefsQuad, newdata[idLowerNotLinear])
+        out[!idLower] = if(deriv) polyHorner(fit[-4]*c(3,2,1), newdata[!idLower])  else
+            polyHorner(fit, newdata[!idLower])
+        return(out)
     }
-    n = length(newdata)
-    #Call C routine directly for speed
- switch(meanVarFit, "spline" = .C("spline_value", PACKAGE = "cobs",
-                                  new.knots, fit,
-                                         length(fit), degree + 1L,
-                                         newdata[orderZ], n, deriv,
-                                         y = double(n))$y[sort.list(orderZ)],
-                            if(deriv) polyHorner(fit[-4]*c(3,2,1), newdata[!idLower])  else
-                               polyHorner(fit, newdata[!idLower]))
+
 }

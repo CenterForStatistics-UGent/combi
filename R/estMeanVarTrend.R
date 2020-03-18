@@ -123,10 +123,9 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
     lines(Seq[idNum==1], eval[idNum==1], col = "blue")
     lines(Seq[idNum==2], eval[idNum==2], col = "orange")
     legend("topleft", legend = c(switch(meanVarFit, "spline"= "Spline",
-                                        "cubic" = c("Cubic fit", "Quadratic part"),
-                                        "quadratic" = c("Quadratic fit", "Linear part")),
+                                        "cubic" = c("Cubic fit", "Quadratic part")),
                                  "Linear part"),
-           lty = 1, col  = c(switch(meanVarFit, "quadratic" = "blue", "black"),
+           lty = 1, col  = c("black",
                              switch(meanVarFit, "spline"= NULL, "cubic" = "blue"), "orange"))
     }
     return(dispFunction)

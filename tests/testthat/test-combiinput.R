@@ -1,5 +1,4 @@
 context("combi input")
-
 data(Zhang)
 test_that("combi throws warnings when ordination model is fitted", {
  expect_warning(combi(data = list("microbiome" = zhangMicrobio), distributions = "quasi",
