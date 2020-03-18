@@ -34,7 +34,7 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
         minPos = optimize(f = function(minPos){
             suppressWarnings(sum(cobs(x = logMeanVec, y = logVarVec, constraint = constraint,
                        pointwise = rbind(c(0, minPos, minPos),
-                                         c(2,minPos, 1)), #, c(2, max(logMeanVec), slopeLin)
+                                         c(2,minPos, 1)),
                        lambda = -1,
                     print.mesg = FALSE, print.warn = FALSE, maxiter = 25,
                     lambda.length = 10, keep.x.ps = FALSE, degree = degree)$resid^2))
@@ -42,8 +42,7 @@ estMeanVarTrend = function(data, meanMat, baseAbundances, libSizes,
         tol = 0.1)$minimum
     #Use optimal value
     pointwiseMat = rbind(c(0, minPos, minPos),
-                         c(2,minPos, 1))#,
-                         #c(2, max(logMeanVec), slopeLin))
+                         c(2,minPos, 1))
     #Enforce slope 1 and y equal to x at small value + slope 1 at upper end
     mvFit = suppressWarnings(cobs(x = logMeanVec, y = logVarVec, constraint = constraint,
          pointwise = pointwiseMat, lambda = -1, degree = degree,
