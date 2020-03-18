@@ -15,7 +15,9 @@ library(devtools)
 install_github("CenterForStatistics-UGent/combi")
 ```
 
-```{r installcombipackageBioc, eval = FALSE, echo = FALSE}
+or via BioConductor:
+
+```{r installcombipackageBioc, eval = FALSE}
 library(BiocManager)
 install("combi")
 ```
