@@ -12,7 +12,7 @@
 \url{https://www.ibdmdb.org/}
 }
 \usage{
-zhangMetavars
+data(Zhang)
 }
 \description{
 Baseline covariates of PAT mice and healthy controls

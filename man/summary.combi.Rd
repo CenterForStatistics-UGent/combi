@@ -4,10 +4,10 @@
 \alias{summary.combi}
 \title{Show an overview of a fitted combi object}
 \usage{
-\method{summary}{combi}(comb)
+\method{summary}{combi}(object, ...)
 }
 \arguments{
-\item{comb}{a fitted combi object}
+\item{object}{a fitted combi object}
 }
 \value{
 A ggplot object containing the plot

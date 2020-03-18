@@ -13,7 +13,7 @@
 \url{https://www.ibdmdb.org/}
 }
 \usage{
-zhangMicrobio
+data(Zhang)
 }
 \description{
 Microbiome of mice that underwent Pulsed Antibiotic Treatment

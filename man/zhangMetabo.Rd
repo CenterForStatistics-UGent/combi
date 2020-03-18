@@ -13,7 +13,7 @@
 \url{https://www.ibdmdb.org/}
 }
 \usage{
-zhangMetabo
+data(Zhang)
 }
 \description{
 Metabolome of mice that underwent Pulsed Antibiotic Treatment

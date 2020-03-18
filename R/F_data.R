@@ -8,6 +8,7 @@
 #' \describe{
 #'   \item{zhangMicrobio}{The microbiome dataset pruned for matches with the metabolome object}
 #'  }
+#' @usage data(Zhang)
 #' @source \url{https://www.ibdmdb.org/}
 "zhangMicrobio"
 #' Metabolomes of mice that underwent Pulsed Antibiotic Treatment
@@ -20,6 +21,7 @@
 #' \describe{
 #'   \item{zhangMetabo}{The metabolome data with metabolites in the columns}
 #' }
+#' @usage data(Zhang)
 #' @source \url{https://www.ibdmdb.org/}
 "zhangMetabo"
 #' Baseline sample variables of PAT and control mice
@@ -30,6 +32,6 @@
 #' \describe{
 #'   \item{zhangMetavars}{The metadata on the mice}
 #' }
+#' @usage data(Zhang)
 #' @source \url{https://www.ibdmdb.org/}
 "zhangMetavars"
-#' @usage data(Zhang)
