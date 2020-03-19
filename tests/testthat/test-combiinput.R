@@ -2,7 +2,7 @@ context("combi input")
 data(Zhang)
 test_that("combi throws warnings when ordination model is fitted", {
  expect_warning(combi(data = list("microbiome" = zhangMicrobio), distributions = "quasi",
-                            compositional = TRUE, maxIt = 3))
+                            compositional = TRUE, maxIt = 2L))
 })
 test_that("combi throws error for wrong input type", {
     expect_error(combi(data = zhangMicrobio, distributions = "quasi",
@@ -29,7 +29,7 @@ test_that("combi runs when NAs present in data matrix
           and allowMissingess = TRUE", {
     expect_s3_class(
         combi(list(tmpMat2), distributions = "quasi",
-                         compositional = TRUE, allowMissingness = TRUE),
+                    compositional = TRUE, allowMissingness = TRUE, maxIt = 2L),
         "combi"
         )
 })
@@ -38,6 +38,6 @@ test_that("Polynomial mean-variance model works", {
     expect_s3_class(combi(data = list("microbiome" = zhangMicrobio,
                                       "metabo" = zhangMetabo),
                           distributions = c("quasi", "gaussian"),
-                         compositional = c(TRUE, FALSE), maxIt = 3,
+                         compositional = c(TRUE, FALSE), maxIt = 2L,
                          meanVarFit = "cubic"), "combi")
 })
