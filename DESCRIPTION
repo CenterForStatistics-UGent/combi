@@ -9,7 +9,7 @@ License: GPL-2
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Imports: ggplot2 (>= 2.2.1.9000), nleqslv, phyloseq, tensor, stats, limma, Matrix, BB, reshape2, alabama, cobs, Biobase, vegan, BiocParallel, grDevices, graphics, methods
-Depends: R (>= 4.0)
+Depends: R (>= 3.6)
 Suggests: 
     knitr,
     rmarkdown,

@@ -14,12 +14,19 @@ library(devtools)
 install_github("CenterForStatistics-UGent/combi")
 ```
 
+or via BioConductor:
+
+``` r
+library(BiocManager)
+BiocManager::install("combi")
+```
+
 ``` r
 suppressPackageStartupMessages(library(combi))
 cat("combi package version", as.character(packageVersion("combi")), "\n")
 ```
 
-    ## combi package version 0.1.99
+    ## combi package version 0.99.4
 
 <!-- Alternatively, the latest version can be installed directly from this GitHub repo as follows: -->
 Unconstrained integration
