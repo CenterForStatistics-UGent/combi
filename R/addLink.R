@@ -41,7 +41,7 @@ addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2)
               is.logical(addLabel),
               is.null(labPos) | (is.numeric(labPos) && length(labPos)==2),
               is.numeric(latentSize))
-    if(!(names(DIplot) %in% c("Plot", "latentData", "featureData", "varData"))){
+    if(any(names(DIplot) != c("Plot", "latentData", "featureData", "varData"))){
         stop("Provide list of plot and coordinates, obtained by calling
              plot(..., returnCoords = TRUE) on a combi object!")
     }
