@@ -16,7 +16,7 @@
 #'  par(mfrow = c(1,1))
 checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE,
                              ...){
-    data = extractData(data)
+    data = extractMat(data)
     if(!meanVarFit %in% c("cubic", "spline"))
         stop("Mean-variance trend must be either cubic or spline!\n")
     libSizes = rowSums(data)

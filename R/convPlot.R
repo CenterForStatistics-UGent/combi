@@ -30,8 +30,8 @@ convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1L,
              Try rerunning with record = TRUE.\n")
     }
     stopifnot(is(model, "combi"), is.logical(latent), is.numeric(Dim),
-              length(Dim)!=1, is.numeric(nVars), is.numeric(View) |
-                  is.character(View), !(length(View) %in% c(0,1)),
+              length(Dim)==1, is.numeric(nVars), is.numeric(View) |
+                  is.character(View) | is.null(View), length(View) %in% c(0,1),
               is.numeric(size))
     df = if(latent){
 if(is.null(model$covariates)) model$latentRec[,Dim,seq_len(model$iter[[Dim]])] else

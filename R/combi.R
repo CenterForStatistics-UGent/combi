@@ -353,10 +353,10 @@ switch(weights[[i]],
         })
         #Convergence
         latentConv = matrix(nrow = maxIt, ncol =  M, dimnames = list(
-            DimNames, NULL
+            NULL, DimNames
         ))
         paramConv = array(dim = c(maxIt, numSets, M), dimnames = list(
-            NULL, namesData, NULL
+            NULL, namesData, DimNames
         ))
     } else {
         latentConv = paramConv = alphaRec = paramRec = latentRec = NULL

@@ -40,6 +40,7 @@ inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
                     pointFun = "sum", lineSize = 0.07, Dim = 1,
                     samples = seq_len(nrow(if(is.null(modelObj$covariates))
                         modelObj$latentVars else modelObj$alphas)), ...){
+    stopifnot(is(modelObj, "combi"))
     if(!plotType %in% c("lineplot", "pointplot", "boxplot", "boxplotSingle")){
         stop("plotType not recognized, see details!")
     }
