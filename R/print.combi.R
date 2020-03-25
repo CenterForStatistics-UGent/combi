@@ -34,5 +34,10 @@ print.combi = function(x, ...){
     })
     cat(constr, "combi ordination of", dim, "dimensions on",
         datSets, "views with", nSam,
-        "samples.\nViews and number of features were:\n", viewsString)
+        "samples.\nViews and number of features were:\n", viewsString,
+        if(!is.null(x$covariates)) {
+            paste0("Number of sample variables included was ",ncol(x$covariates),
+                  ",\nfor which ", ncol(x$covMat),
+                  " parameters were estimated per dimension.")
+            })
 }
