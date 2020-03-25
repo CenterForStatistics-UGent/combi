@@ -107,7 +107,7 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                 Now fitting an ordination model.",
                 immediate. = TRUE)}
     if(is.null(names(data))) names(data) = paste0("View", seq_along(data))
-    namesData = names(compositional) = names(dsitributions) = names(data)
+    namesData = names(compositional) = names(distributions) = names(data)
     DimNames = paste0("Dim", seq_len(M))
     #Extract otu table from phyloseq objects
     data = extractData(data, logTransformGaussian = logTransformGaussian)
