@@ -108,7 +108,8 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                 immediate. = TRUE)}
     if(is.null(names(data))) names(data) = paste0("View", seq_along(data))
     namesData = names(data)
-    #Extract otu table from phyloseq objects6
+    DimNames = paste0("Dim", seq_len(M))
+    #Extract otu table from phyloseq objects
     data = extractData(data, logTransformGaussian = logTransformGaussian)
     if(any(vapply(FUN.VALUE = TRUE, data, function(x){is.null(rownames(x))}))){
         stop("Make sure to provide sample names for all views!")
@@ -172,6 +173,7 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
     #Define some handy quantities
     numSets = length(data) #Number of views
     seqSets = seq_len(numSets) #A sequence along the views
+    names(seqSets) = namesData
     #Build confounder matrices
     oneConfMat = length(confounders) == 1 #Single confounder matrix for all views?
     confounders = lapply(seqSets, function(i){if(is.null(confounders[[i]])) NULL else
@@ -335,14 +337,27 @@ switch(weights[[i]],
     #M more restrictions for the normalisation
     #Prepare to record the iterations if necessary
     if(record){
-        if(constrained) alphaRec = array(0, dim = c(numCov ,M, maxIt)) else
-            latentRec = array(0, dim = c(n ,M, maxIt))
+        if(constrained){
+            alphaRec = array(0, dim = c(numCov ,M, maxIt), dimnames = list(
+                colnames(covMat), dimNames, NULL
+            ))
+            } else{
+            latentRec = array(0, dim = c(n ,M, maxIt), dimnames = list(
+                rowNames, dimNames, NULL
+            ))
+            }
         paramRec = lapply(numVars, function(numVar){
-            array(0, dim = c(M, numVar, maxIt))
+            array(0, dim = c(M, numVar, maxIt), dimnames = list(
+                dimNames, NULL, NULL
+            ))
         })
         #Convergence
-        latentConv = matrix(nrow = maxIt, ncol =  M)
-        paramConv = array(dim = c(maxIt, numSets, M))
+        latentConv = matrix(nrow = maxIt, ncol =  M, dimnames = list(
+            dimNames, NULL
+        ))
+        paramConv = array(dim = c(maxIt, numSets, M), dimnames = list(
+            NULL, namesData, NULL
+        ))
     } else {
         latentConv = paramConv = alphaRec = paramRec = latentRec = NULL
     }
@@ -572,7 +587,7 @@ switch(weights[[i]],
     }
     ### Assign names
     rownames(latentVars) =  rownames(data[[1]])
-    colnames(latentVars) = paste0("Dim", seq_len(M))
+    colnames(latentVars) = DimNames
     if(constrained) {
         colnames(alphas) = colnames(latentVars)
         rownames(alphas) = colnames(covMat)
