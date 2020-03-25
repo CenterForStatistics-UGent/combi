@@ -58,7 +58,7 @@ data(Zhang)
 
 ## Unconstrained integration
 
-For an unconstrained ordination, a named list of data matrices with overlapping samples must be supplied. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature (TRUE/FALSE) should be supplied
+For an unconstrained ordination, a named list of datasets with overlapping samples must be supplied. The datasets can currently be supplied as a raw data matrix (with features in the columns), or as a phyloseq, SummarizedExperiment or ExpressionSet object. In addition, information on the required distribution ("quasi" for quasi-likelihood fitting, "gaussian" for normal data) and compositional nature (TRUE/FALSE) should be supplied
 
 ```{r unconstr}
 microMetaboInt = combi(
