@@ -1,9 +1,9 @@
-#' Show an overview of a fitted combi object
-#' @param object a fitted combi object
+#' print an overview of a fitted combi x
+#' @param x a fitted combi x
 #' @param ... Further arguments, currently ignored
 #'
-#' @return A ggplot object containing the plot
-#' @method show combi
+#' @return A ggplot x containing the plot
+#' @method print combi
 #'
 #' @export
 #' @examples
@@ -21,16 +21,16 @@
 #'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)}
 #'     #Load the fits
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
-#' show(microMetaboInt)
-#' show(microMetaboIntConstr)
-show.combi = function(object, ...){
-    constr = if(is.null(object$covariates)) "Unconstrained" else "Constrained"
-    dim = length(object$iter)
-    datSets = length(object$data)
-    nSam = nrow(object$latentVars)
-    viewsString = vapply(seq_along(object$data), FUN.VALUE = character(1),
+#' print(microMetaboInt)
+#' print(microMetaboIntConstr)
+print.combi = function(x){
+    constr = if(is.null(x$covariates)) "Unconstrained" else "Constrained"
+    dim = length(x$iter)
+    datSets = length(x$data)
+    nSam = nrow(x$latentVars)
+    viewsString = vapply(seq_along(x$data), FUN.VALUE = character(1),
                          function(i){
-        paste0(names(object$data[i]),": ", ncol(object$paramEsts[[i]]), "\n")
+        paste0(names(x$data[i]),": ", ncol(x$paramEsts[[i]]), "\n")
     })
     cat(constr, "combi ordination of", dim, "dimensions on",
         datSets, "views with", nSam,
