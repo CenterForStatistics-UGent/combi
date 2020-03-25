@@ -4,7 +4,7 @@
 \alias{convPlot}
 \title{Plot the convegrence of the different parameter estimates in a line plot}
 \usage{
-convPlot(model, latent = is.null(View), nVars = Inf, Dim = 1,
+convPlot(model, latent = is.null(View), nVars = Inf, Dim = 1L,
   View = NULL, size = 0.125)
 }
 \arguments{
@@ -14,11 +14,12 @@ convPlot(model, latent = is.null(View), nVars = Inf, Dim = 1,
 
 \item{nVars}{An integer, the number of variables to plot. By default all are plotted}
 
-\item{Dim}{The dimension to be plotted}
+\item{Dim}{An integer, the dimension to be plotted}
 
-\item{View}{An integer, the view to be plotted (if latent  = FALSE)}
+\item{View}{An integer or character string, indicating the view
+to be plotted (if latent = FALSE)}
 
-\item{size}{The line size}
+\item{size}{The line size (see ?geom_path)}
 }
 \value{
 A ggplot object containing the convergence plot
@@ -36,4 +37,6 @@ distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
 logTransformGaussian = FALSE, verbose = TRUE)}
 load(system.file("extdata", "zhangFits.RData", package = "combi"))
 convPlot(microMetaboInt)
+convPlot(microMetaboInt, Dim = 2)
+convPlot(microMetaboInt, View = "microbiome")
 }

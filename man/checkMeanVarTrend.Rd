@@ -8,12 +8,12 @@ checkMeanVarTrend(data, meanVarFit = "spline", returnTrend = FALSE,
   ...)
 }
 \arguments{
-\item{data}{The n-by-p data matrix}
+\item{data}{Data in any acceptable format (see details ?combi)}
 
-\item{meanVarFit}{The type of mean variance fit}
+\item{meanVarFit}{The type of mean variance fit, either "cubic" or "spline"}
 
-\item{returnTrend}{A boolean, should the estimated trend be returned or
-only plotted?}
+\item{returnTrend}{A boolean, should the estimated trend be returned (TRUE) or
+only plotted (FALSE)?}
 
 \item{...}{passed on to the estMeanVarTrend() function}
 }
@@ -26,7 +26,7 @@ Quickly check if the mean variance trend provides a good fit
 \examples{
 data(Zhang)
 par(mfrow = c(1,2))
-lapply(extractData(list("microbiome" = zhangMicrobio, "metabolome" = zhangMetabo)),
+lapply(list("microbiome" = zhangMicrobio, "metabolome" = zhangMetabo),
  checkMeanVarTrend)
  par(mfrow = c(1,1))
 }

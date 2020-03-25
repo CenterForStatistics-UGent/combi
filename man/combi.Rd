@@ -14,8 +14,7 @@ combi(data, M = 2L, covariates = NULL, distributions, compositional,
   biasReduction = TRUE, maxItFeat = 20L)
 }
 \arguments{
-\item{data}{a list of data matrices with the same number of samples n in the rows.
-Also phyloseq objects are acceptable}
+\item{data}{A list of data objects with the same number of samples. See details.}
 
 \item{M}{the required dimension of the fit, a non-negative integer}
 
@@ -85,7 +84,8 @@ data integration and fitting procedure
 Perform model-based data integration
 }
 \details{
-Estimation of independence model and view wise parameters can be
+Data can be provided as raw matrices with features in the columns, or as phyloseq, SummarizedExperiment or
+ExpressionSet objects. Estimation of independence model and view wise parameters can be
 parametrized. See ?BiocParallel::bplapply and ?BiocParallel::register.
 meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
  trend, "cubic" gives a third degree polynomial. Both converge to the

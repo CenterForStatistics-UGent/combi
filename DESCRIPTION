@@ -8,7 +8,7 @@ Description: Combine quasi-likelihood estimation, compositional regression model
 License: GPL-2
 Encoding: UTF-8
 RoxygenNote: 6.1.1
-Imports: ggplot2 (>= 2.2.1.9000), nleqslv, phyloseq, tensor, stats, limma, Matrix, BB, reshape2, alabama, cobs, Biobase, vegan, BiocParallel, grDevices, graphics, methods, SummarizedExperiment
+Imports: ggplot2, nleqslv, phyloseq, tensor, stats, limma, Matrix, BB, reshape2, alabama, cobs, Biobase, vegan, BiocParallel, grDevices, graphics, methods, SummarizedExperiment
 Depends: R (>= 3.6)
 Suggests: 
     knitr,

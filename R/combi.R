@@ -339,21 +339,21 @@ switch(weights[[i]],
     if(record){
         if(constrained){
             alphaRec = array(0, dim = c(numCov ,M, maxIt), dimnames = list(
-                colnames(covMat), dimNames, NULL
+                colnames(covMat), DimNames, NULL
             ))
             } else{
-            latentRec = array(0, dim = c(n ,M, maxIt), dimnames = list(
-                rowNames, dimNames, NULL
+            latentRec = array(0, dim = c(n, M, maxIt), dimnames = list(
+                rowNames[[1]], DimNames, NULL
             ))
             }
         paramRec = lapply(numVars, function(numVar){
             array(0, dim = c(M, numVar, maxIt), dimnames = list(
-                dimNames, NULL, NULL
+                DimNames, NULL, NULL
             ))
         })
         #Convergence
         latentConv = matrix(nrow = maxIt, ncol =  M, dimnames = list(
-            dimNames, NULL
+            DimNames, NULL
         ))
         paramConv = array(dim = c(maxIt, numSets, M), dimnames = list(
             NULL, namesData, NULL
