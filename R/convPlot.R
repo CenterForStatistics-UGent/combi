@@ -2,9 +2,10 @@
 #' @param model A fitted modelDI object
 #' @param latent A boolean, should latent variable trajectory be plotted
 #' @param nVars An integer, the number of variables to plot. By default all are plotted
-#' @param Dim The dimension to be plotted
-#' @param View An integer, the view to be plotted (if latent  = FALSE)
-#' @param size The line size
+#' @param Dim An integer, the dimension to be plotted
+#' @param View An integer or character string, indicating the view
+#' to be plotted (if latent = FALSE)
+#' @param size The line size (see ?geom_path)
 #'
 #' @importFrom reshape2 melt
 #'
@@ -20,12 +21,18 @@
 #' logTransformGaussian = FALSE, verbose = TRUE)}
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' convPlot(microMetaboInt)
-convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1,
+#' convPlot(microMetaboInt, Dim = 2)
+#' convPlot(microMetaboInt, View = "microbiome")
+convPlot = function(model, latent = is.null(View), nVars = Inf, Dim = 1L,
                     View = NULL, size = 0.125){
     if(is.null(model$paramRec)){
         stop("Intermediate parameter estimates not recorded.
              Try rerunning with record = TRUE.\n")
     }
+    stopifnot(is(model, "combi"), is.logical(latent), is.numeric(Dim),
+              length(Dim)!=1, is.numeric(nVars), is.numeric(View) |
+                  is.character(View), !(length(View) %in% c(0,1)),
+              is.numeric(size))
     df = if(latent){
 if(is.null(model$covariates)) model$latentRec[,Dim,seq_len(model$iter[[Dim]])] else
     model$alphaRec[,Dim,seq_len(model$iter[[Dim]])]
