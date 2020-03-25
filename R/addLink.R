@@ -1,6 +1,6 @@
 #' Add a link on a compositional plot
 #'@param DIplot A list with ggplot object where the links are to be added,
-#'and data frames with coordinates
+#'and data frames with coordinates (obtained by setting plot(..., returnCoords = TRUE))
 #'@param links A matrix containing either feature names (two column matrix)
 #'or approximate coordinates (four column matrix)
 #'@param Views Indices or names of the views for which the links should be added
@@ -9,8 +9,8 @@
 #'should be plotted
 #'@param Dims vector of length 2 referring to the model dimensions
 #'@param addLabel A boolean, should arrow with label be plotted?
-#'@param labPos The position of the label
-#'@param projColour The colour of the projection
+#'@param labPos The position of the label, as a numeric vector of length 2
+#'@param projColour The colour of the projection, as character string
 #'@param latentSize Size of the line from the origin to the latent variable dot
 #'
 #'@return A ggplot object with the links added
@@ -34,6 +34,17 @@
 addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2),
                    addLabel = FALSE, labPos = NULL, projColour = "grey",
                    latentSize = 0.25) {
+    #Checks for the exported function
+    stopifnot(is.matrix(links),
+              is.integer(Views) | is.character(Views), is.vector(samples),
+              is.character(variable) | is.null(variable), length(Dims)==2,
+              is.logical(addLabel),
+              is.null(labPos) | (is.numeric(labPos) && length(labPos)==2),
+              is.numeric(latentSize))
+    if(names(DIplot) != c("Plot", "latentData", "featureData", "varData")){
+        stop("Provide list of plot and coordinates, obtained by calling
+             plot(..., returnCoords = TRUE) on a combi object!")
+    }
     dimNames = paste0("Dim", Dims)
     if(length(Views) == 1L) {
         Views = rep(Views, 2)
@@ -49,11 +60,13 @@ addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2)
         # Closest to approximate coordinate
         linkNames = cbind((DIplot$featureData[[Views[1]]]$featNames)[links1],
                           (DIplot$featureData[[Views[2]]]$featNames)[links2])
-    } else {
+    } else if(is.character(links)){
         if(ncol(links) != 2L){
             stop("Provide character links matrix with two columns.")
         }
         linkNames = links
+    } else {
+        stop("Provide links as two-column character of four column numeric matrix!")
     }
     if (is.numeric(samples)) {
         samples = which.min(colSums((t(DIplot$latentData[, dimNames]) - samples)^2))

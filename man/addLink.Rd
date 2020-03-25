@@ -9,15 +9,18 @@ addLink(DIplot, links, Views, samples, variable = NULL, Dims = c(1, 2),
   latentSize = 0.25)
 }
 \arguments{
-\item{DIplot}{A list with ggplot object where the links are to be added, and data frames with coordinates}
+\item{DIplot}{A list with ggplot object where the links are to be added,
+and data frames with coordinates}
 
-\item{links}{A matrix containing either feature names (two column matrix) or approximate coordinates (four column matrix)}
+\item{links}{A matrix containing either feature names (two column matrix)
+or approximate coordinates (four column matrix)}
 
 \item{Views}{Indices or names of the views for which the links should be added}
 
 \item{samples}{Sample names or approximate sample coordinates}
 
-\item{variable}{Name of variable in environmental gradient for which link should be plotted}
+\item{variable}{Name of variable in environmental gradient for which link
+should be plotted}
 
 \item{Dims}{vector of length 2 referring to the model dimensions}
 
