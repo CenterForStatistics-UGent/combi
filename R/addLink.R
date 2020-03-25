@@ -36,7 +36,7 @@ addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2)
                    latentSize = 0.25) {
     #Checks for the exported function
     stopifnot(is.matrix(links),
-              is.integer(Views) | is.character(Views), is.vector(samples),
+              is.numeric(Views) | is.character(Views), is.vector(samples),
               is.character(variable) | is.null(variable), length(Dims)==2,
               is.logical(addLabel),
               is.null(labPos) | (is.numeric(labPos) && length(labPos)==2),

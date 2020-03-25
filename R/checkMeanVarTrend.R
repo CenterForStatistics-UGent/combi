@@ -1,9 +1,9 @@
 #' Quickly check if the mean variance trend provides a good fit
 #'
-#' @param data The n-by-p data matrix
-#' @param meanVarFit The type of mean variance fit
-#' @param returnTrend A boolean, should the estimated trend be returned or
-#' only plotted?
+#' @param data Data in any acceptable format (see details ?combi)
+#' @param meanVarFit The type of mean variance fit, either "cubic" or "spline"
+#' @param returnTrend A boolean, should the estimated trend be returned (TRUE) or
+#' only plotted (FALSE)?
 #' @param ... passed on to the estMeanVarTrend() function
 #'
 #' @return A plot object
@@ -11,20 +11,21 @@
 #' @examples
 #' data(Zhang)
 #' par(mfrow = c(1,2))
-#' lapply(extractData(list("microbiome" = zhangMicrobio, "metabolome" = zhangMetabo)),
+#' lapply(list("microbiome" = zhangMicrobio, "metabolome" = zhangMetabo),
 #'  checkMeanVarTrend)
 #'  par(mfrow = c(1,1))
 checkMeanVarTrend = function(data, meanVarFit = "spline", returnTrend = FALSE,
                              ...){
-    if(!meanVarFit %in% c("cubic","quadratic", "spline"))
-        stop("Mean-variance trend must be either quadratic, cubic or spline!\n")
+    data = extractData(data)
+    if(!meanVarFit %in% c("cubic", "spline"))
+        stop("Mean-variance trend must be either cubic or spline!\n")
     libSizes = rowSums(data)
     baseAbundances = colSums(data)/sum(data)
     data = data[libSizes>0, baseAbundances>0]
     libSizes = libSizes[libSizes>0]
     baseAbundances = baseAbundances[baseAbundances>0]
-    foo = estMeanVarTrend(data, meanMat = outer(libSizes, baseAbundances),
-                    plot = TRUE, meanVarFit = meanVarFit, baseAbundances = baseAbundances,
-                    libSizes = libSizes, ...)
-    if(returnTrend) return(foo) else return(invisible())
+    mvt = estMeanVarTrend(data, meanMat = outer(libSizes, baseAbundances),
+                    plot = TRUE, meanVarFit = meanVarFit,
+                    baseAbundances = baseAbundances, libSizes = libSizes, ...)
+    if(returnTrend) return(mvt) else return(invisible())
 }

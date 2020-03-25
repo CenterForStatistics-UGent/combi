@@ -1,7 +1,6 @@
 #' Perform model-based data integration
 #'
-#' @param data a list of data matrices with the same number of samples n in the rows.
-#' Also phyloseq objects are acceptable
+#' @param data A list of data objects with the same number of samples. See details.
 #' @param M the required dimension of the fit, a non-negative integer
 #' @param covariates a dataframe of n samples with sample-specific variables.
 #' @param distributions a character vector describing which distributional
@@ -44,7 +43,8 @@
 #' @return An object of the "combi" class, containing all information on the
 #' data integration and fitting procedure
 #'
-#' @details Estimation of independence model and view wise parameters can be
+#' @details Data can be provided as raw matrices with features in the columns, or as phyloseq, SummarizedExperiment or
+#' ExpressionSet objects. Estimation of independence model and view wise parameters can be
 #' parametrized. See ?BiocParallel::bplapply and ?BiocParallel::register.
 #' meanVarFit = "spline" yields a cubic spline fit for the abundance-variance
 #'  trend, "cubic" gives a third degree polynomial. Both converge to the
