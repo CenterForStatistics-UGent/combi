@@ -11,6 +11,7 @@
 #' @param m The dimension
 #' @param JacFeatures An empty Jacobian matrix
 #' @param meanVarTrends The mean-variance trends of the different views
+#' @param latentVars A vector of latent variables
 #' @param control A list of control arguments for the nleqslv function
 #' @param weights The normalization weights
 #' @param compositional A list of booleans indicating compositionality
@@ -19,8 +20,8 @@
 #' @param allowMissingness A boolean indicating whether missing values are
 #' allowed
 #' @param maxItFeat An integer, the maximum number of iterations
+#' @param BPPARAM see ?combi()
 #' @param ... Additional arguments passed on to the score and jacobian functions
-#' @param latentVars A vector of latent variables
 #'
 #' @importFrom nleqslv nleqslv
 #' @importFrom BB BBsolve
@@ -35,7 +36,7 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
                                 distributions, offsets, nCores, m, JacFeatures,
                                 meanVarTrends, latentVars, numVars, control,
                                 weights, compositional, indepModels, fTol,
-                                allowMissingness, maxItFeat,...){
+                                allowMissingness, maxItFeat, BPPARAM, ...){
     bplapply(seqSets, function(i){
         if(distributions[[i]] == "gaussian"){
             #Solve system of linear equations, variances still not needed
@@ -102,5 +103,5 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
 }
 
         }
-    })
+    }, BPPARAM = BPPARAM)
 }

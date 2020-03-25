@@ -94,6 +94,14 @@ microMetaboIntConstr = combi(
      logTransformGaussian = FALSE, covariates = zhangMetavars)
 ```
 
+Also here we can get a quick overview
+
+```{r printConstr}
+microMetaboIntConstr
+```
+
+and plot the ordination
+
 ```{r colourPlotConstr}
 plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 ```

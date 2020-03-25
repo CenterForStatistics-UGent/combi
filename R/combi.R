@@ -39,6 +39,8 @@
 #' confounder correction in groups with all zeroes? Not guaranteed to work
 #' @param maxItFeat Integers, the maximum allowed number of iterations
 #' in the estimation of the feature parameters
+#' @param BPPARAM a BiocParallel backend, see ?bpparam. By default this is
+#' a serial backend, so without parallelization.
 #'
 #' @return An object of the "combi" class, containing all information on the
 #' data integration and fitting procedure
@@ -51,7 +53,7 @@
 #'  diagonal line with slope 1 for small means.
 #'  Distribution can be either "quasi" for quasi likelihood or "gaussian" for
 #'   Gaussian data
-#' @import BiocParallel
+#' @importFrom BiocParallel bplapply SerialParam
 #' @importFrom limma squeezeVar
 #' @importFrom vegan rda
 #' @importFrom stats sd
@@ -79,7 +81,8 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    nleq.control = list(maxit = 1e3L, cndtol = 1e-16),
                    record = TRUE, weights = NULL, fTol = 1e-5,
                    meanVarFit = "spline", maxFeats = 2e3, dispFreq = 10L,
-                   allowMissingness = FALSE, biasReduction = TRUE, maxItFeat = 2e1L){
+                   allowMissingness = FALSE, biasReduction = TRUE,
+                maxItFeat = 2e1L, BPPARAM = SerialParam()){
     #Perform checks
     stopifnot(is.numeric(M), is.logical(compositional),
               is.character(distributions), is.numeric(maxIt), is.numeric(tol),
@@ -271,7 +274,7 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
                        invLink = invLinks[[i]], tol = tol, maxIt = maxIt,
                       meanVarFit = meanVarFit[[i]], newtonRaphson = newtonRaphson[[i]],
                       control = nleq.control, dispFreq = dispFreq)
-        })
+        }, BPPARAM = BPPARAM)
     #Corresponding offsets
     offsetsMargin = lapply(seqSets, function(i){buildMarginalOffset(indepModel = marginModels[[i]],
                                                       invLink = invLinks[[i]])})
@@ -487,7 +490,7 @@ switch(weights[[i]],
                                             indepModels = indepModels, fTol = fTol,
                                             newtonRaphson = newtonRaphson,
                                             allowMissingness = allowMissingness,
-                                            maxItFeat = maxItFeat)
+                                            maxItFeat = maxItFeat, BPPARAM = BPPARAM)
         for (i in seqSets){
             #Enforce restrictions to stabilize algorithm
             tmp = paramEstsTmp[[i]]$x[seq_len(numVars[[i]])]
