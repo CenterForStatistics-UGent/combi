@@ -29,7 +29,6 @@ extractData = function(data, logTransformGaussian = TRUE){
 setGeneric("extractMat", function(Y, ...) standardGeneric("extractMat"))
 #' @import methods
 #' @importFrom phyloseq t otu_table taxa_are_rows
-#' @rdname extractMat
 setMethod("extractMat", "phyloseq", function(Y,...){
     if(taxa_are_rows(Y)) t(as(otu_table(Y), "matrix")) else
         as(otu_table(Y), "matrix")
@@ -41,6 +40,12 @@ setMethod("extractMat", "ExpressionSet", function(Y, logTransformGaussian,...){
     dat = t(exprs(Y))
     if(logTransformGaussian) dat = log(dat)
     return(dat)
+})
+#' @rdname extractMat
+#' @import methods
+#' @importFrom SummarizedExperiment assay
+setMethod("extractMat", "SummarizedExperiment", function(Y, ...){
+    t(assay(Y))
 })
 #' @rdname extractMat
 setMethod("extractMat", "matrix", function(Y, ...){

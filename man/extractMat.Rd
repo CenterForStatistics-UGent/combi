@@ -3,16 +3,16 @@
 \docType{methods}
 \name{extractMat}
 \alias{extractMat}
-\alias{extractMat,phyloseq-method}
 \alias{extractMat,ExpressionSet-method}
+\alias{extractMat,SummarizedExperiment-method}
 \alias{extractMat,matrix-method}
 \title{A function to extract a data matrix from a number of objects}
 \usage{
 extractMat(Y, ...)
 
-\S4method{extractMat}{phyloseq}(Y, ...)
-
 \S4method{extractMat}{ExpressionSet}(Y, logTransformGaussian, ...)
+
+\S4method{extractMat}{SummarizedExperiment}(Y, ...)
 
 \S4method{extractMat}{matrix}(Y, ...)
 }

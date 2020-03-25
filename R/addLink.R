@@ -1,9 +1,12 @@
 #' Add a link on a compositional plot
-#'@param DIplot A list with ggplot object where the links are to be added, and data frames with coordinates
-#'@param links A matrix containing either feature names (two column matrix) or approximate coordinates (four column matrix)
+#'@param DIplot A list with ggplot object where the links are to be added,
+#'and data frames with coordinates
+#'@param links A matrix containing either feature names (two column matrix)
+#'or approximate coordinates (four column matrix)
 #'@param Views Indices or names of the views for which the links should be added
 #'@param samples Sample names or approximate sample coordinates
-#'@param variable Name of variable in environmental gradient for which link should be plotted
+#'@param variable Name of variable in environmental gradient for which link
+#'should be plotted
 #'@param Dims vector of length 2 referring to the model dimensions
 #'@param addLabel A boolean, should arrow with label be plotted?
 #'@param labPos The position of the label

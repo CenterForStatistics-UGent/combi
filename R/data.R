@@ -19,9 +19,9 @@
 #' Metabolome of mice that underwent Pulsed Antibiotic Treatment
 #'  (PAT) and controls
 #'
-#' @format Matrix with metabolome data
+#' @format SummarizedExperiment with metabolome data
 #' \describe{
-#'   \item{zhangMetabo}{The metabolome data with metabolites in the columns}
+#'   \item{zhangMetabo}{The metabolome data as a SummarizedExperiment object}
 #' }
 #' @usage data(Zhang)
 #' @source \url{https://www.ibdmdb.org/}
