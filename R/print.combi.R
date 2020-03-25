@@ -23,7 +23,7 @@
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' print(microMetaboInt)
 #' print(microMetaboIntConstr)
-print.combi = function(x){
+print.combi = function(x, ...){
     constr = if(is.null(x$covariates)) "Unconstrained" else "Constrained"
     dim = length(x$iter)
     datSets = length(x$data)

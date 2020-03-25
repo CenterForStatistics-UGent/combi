@@ -10,7 +10,7 @@ addLink(DIplot, links, Views, samples, variable = NULL, Dims = c(1, 2),
 }
 \arguments{
 \item{DIplot}{A list with ggplot object where the links are to be added,
-and data frames with coordinates}
+and data frames with coordinates (obtained by setting plot(..., returnCoords = TRUE))}
 
 \item{links}{A matrix containing either feature names (two column matrix)
 or approximate coordinates (four column matrix)}
@@ -26,9 +26,9 @@ should be plotted}
 
 \item{addLabel}{A boolean, should arrow with label be plotted?}
 
-\item{labPos}{The position of the label}
+\item{labPos}{The position of the label, as a numeric vector of length 2}
 
-\item{projColour}{The colour of the projection}
+\item{projColour}{The colour of the projection, as character string}
 
 \item{latentSize}{Size of the line from the origin to the latent variable dot}
 }
