@@ -7,7 +7,7 @@
 estFeatureParameters(paramEsts, lambdasParams, seqSets, data,
   distributions, offsets, nCores, m, JacFeatures, meanVarTrends,
   latentVars, numVars, control, weights, compositional, indepModels, fTol,
-  allowMissingness, maxItFeat, ...)
+  allowMissingness, maxItFeat, BPPARAM, ...)
 }
 \arguments{
 \item{paramEsts}{Current list of parameter estimates for the different views}
@@ -48,6 +48,8 @@ estFeatureParameters(paramEsts, lambdasParams, seqSets, data,
 allowed}
 
 \item{maxItFeat}{An integer, the maximum number of iterations}
+
+\item{BPPARAM}{see ?combi()}
 
 \item{...}{Additional arguments passed on to the score and jacobian functions}
 }
