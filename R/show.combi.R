@@ -3,7 +3,7 @@
 #' @param ... Further arguments, currently ignored
 #'
 #' @return A ggplot object containing the plot
-#' @method summary combi
+#' @method show combi
 #'
 #' @export
 #' @examples
@@ -21,9 +21,9 @@
 #'     logTransformGaussian = FALSE, covariates = zhangMetavars, verbose = TRUE)}
 #'     #Load the fits
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
-#' summary(microMetaboInt)
-#' summary(microMetaboIntConstr)
-summary.combi = function(object, ...){
+#' show(microMetaboInt)
+#' show(microMetaboIntConstr)
+show.combi = function(object, ...){
     constr = if(is.null(object$covariates)) "Unconstrained" else "Constrained"
     dim = length(object$iter)
     datSets = length(object$data)

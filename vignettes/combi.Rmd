@@ -67,6 +67,12 @@ microMetaboInt = combi(
  logTransformGaussian = FALSE)
 ```
 
+One can print basic infor about the ordination
+
+```{r show}
+microMetaboInt
+```
+
 A simple plot function is available for the result, for samples and shapes, a data frame should also be supplied
 
 ```{r simplePlot}
