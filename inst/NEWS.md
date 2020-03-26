@@ -8,3 +8,15 @@
 =====
 
 -   Reduce build time using
+
+0.99.7
+======
+
+-   Created a print method for combi objects
+-   Stricter argument checking for exported functions
+-   Consequent naming of results
+
+0.99.9
+======
+
+-   Removed bplapply functionality because of Windows errors
