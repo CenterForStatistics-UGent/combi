@@ -11,7 +11,7 @@ combi(data, M = 2L, covariates = NULL, distributions, compositional,
   nleq.control = list(maxit = 1000L, cndtol = 1e-16), record = TRUE,
   weights = NULL, fTol = 1e-05, meanVarFit = "spline",
   maxFeats = 2000, dispFreq = 10L, allowMissingness = FALSE,
-  biasReduction = TRUE, maxItFeat = 20L, BPPARAM = SerialParam())
+  biasReduction = TRUE, maxItFeat = 20L)
 }
 \arguments{
 \item{data}{A list of data objects with the same number of samples. See details.}
@@ -75,9 +75,6 @@ confounder correction in groups with all zeroes? Not guaranteed to work}
 
 \item{maxItFeat}{Integers, the maximum allowed number of iterations
 in the estimation of the feature parameters}
-
-\item{BPPARAM}{a BiocParallel backend, see ?bpparam. By default this is
-a serial backend, so without parallelization.}
 }
 \value{
 An object of the "combi" class, containing all information on the

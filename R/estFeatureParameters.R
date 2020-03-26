@@ -20,7 +20,6 @@
 #' @param allowMissingness A boolean indicating whether missing values are
 #' allowed
 #' @param maxItFeat An integer, the maximum number of iterations
-#' @param BPPARAM see ?combi()
 #' @param ... Additional arguments passed on to the score and jacobian functions
 #'
 #' @importFrom nleqslv nleqslv
@@ -29,15 +28,12 @@
 #'
 #' @return A vector with estimates of the feature parameters
 #'
-#' @details If forking is available on the OS and the number of cores specified
-#'   is larger than 1, this function will multithread the estimation of the
-#'   feature parameters for the different views.
 estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
                                 distributions, offsets, nCores, m, JacFeatures,
                                 meanVarTrends, latentVars, numVars, control,
                                 weights, compositional, indepModels, fTol,
-                                allowMissingness, maxItFeat, BPPARAM, ...){
-    bplapply(seqSets, function(i){
+                                allowMissingness, maxItFeat,  ...){
+    lapply(seqSets, function(i){
         if(distributions[[i]] == "gaussian"){
             #Solve system of linear equations, variances still not needed
             diag(JacFeatures[[i]])[seq_len(numVars[[i]])] = sum(latentVars[,m]^2)
@@ -103,5 +99,5 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
 }
 
         }
-    }, BPPARAM = BPPARAM)
+    })
 }

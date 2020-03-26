@@ -7,7 +7,7 @@
 estFeatureParameters(paramEsts, lambdasParams, seqSets, data,
   distributions, offsets, nCores, m, JacFeatures, meanVarTrends,
   latentVars, numVars, control, weights, compositional, indepModels, fTol,
-  allowMissingness, maxItFeat, BPPARAM, ...)
+  allowMissingness, maxItFeat, ...)
 }
 \arguments{
 \item{paramEsts}{Current list of parameter estimates for the different views}
@@ -49,8 +49,6 @@ allowed}
 
 \item{maxItFeat}{An integer, the maximum number of iterations}
 
-\item{BPPARAM}{see ?combi()}
-
 \item{...}{Additional arguments passed on to the score and jacobian functions}
 }
 \value{
@@ -58,9 +56,4 @@ A vector with estimates of the feature parameters
 }
 \description{
 Estimate the feature parameters
-}
-\details{
-If forking is available on the OS and the number of cores specified
-  is larger than 1, this function will multithread the estimation of the
-  feature parameters for the different views.
 }
