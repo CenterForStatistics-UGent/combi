@@ -26,7 +26,7 @@ suppressPackageStartupMessages(library(combi))
 cat("combi package version", as.character(packageVersion("combi")), "\n")
 ```
 
-    ## combi package version 0.99.4
+    ## combi package version 0.99.9
 
 <!-- Alternatively, the latest version can be installed directly from this GitHub repo as follows: -->
 Unconstrained integration
