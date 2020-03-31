@@ -44,5 +44,5 @@ print.combi = function(x, ...){
                   ",\nfor which ", ncol(x$covMat),
                   " parameters were estimated per dimension.\n")
             }, "Importance parameters of dimensions", 1, "to", dim,
-        "are", paste(psis[-dim], collapse = ","), "and", psis[dim],".")
+        "are", paste(psis[-dim], collapse = ","), "and", psis[dim])
 }

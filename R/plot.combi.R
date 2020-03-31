@@ -6,6 +6,8 @@
 #' @param samDf a dataframe of sample variables
 #' @param samCol A variable name from samDf used to colour the samples
 #' @param samShape A variable name from samDf used to shape the samples
+#' @param featurePlot A character string, either "threshold", "points" or
+#' "density". See details
 #' @param featCols Colours for the features
 #' @param samColValues Colours for the samples
 #' @param warnMonotonicity A boolean, should a warning be thrown when the
@@ -24,6 +26,12 @@
 #' @param xInd,yInd x and y indentations
 #' @param checkOverlap A boolean, should overlapping labels be omitted?
 #' @param shapeValues the shapes, as numeric values
+#'
+#' @details It is usually impossible to plot all features with their labels.
+#' Therefore, he default option of the 'featurePlot' parameter is "threshold",
+#' whereby only the 'featNum" features furthest away from the origin are shown.
+#' Alternatively, the "points" or "density" options are available to plot all
+#' features as a point or density cloud, but without labels.
 #'
 #' @return A ggplot object containing the plot
 #' @method plot combi
@@ -52,7 +60,7 @@
 #' #Constrained
 #' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
-                        samShape = NULL, featNum = 15L,
+                        samShape = NULL, featurePlot = "threshold", featNum = 15L,
                         featCols = c("darkblue", "darkgreen", "darkred",
                                      terrain.colors(5)),
                         manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
@@ -62,6 +70,7 @@ plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
                         xInd = 0, yInd = 0, checkOverlap = FALSE,
                         shapeValues = (21:(21+length(unique(samDf[[samShape]]))))){
+
     nViews = length(x$data)
     coords = extractCoords(x, Dim)
     latentData = coords$latentData; featureData = coords$featureData

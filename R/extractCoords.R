@@ -6,6 +6,19 @@
 #' \item{latentData}{The latent variables}
 #' \item{featureData}{The feature parameters}
 #' \item{varData}{The variables}
+#' @export
+#' @examples
+#' data(Zhang)
+#' \donttest{
+#' #Unconstrained
+#' microMetaboInt = combi(
+#' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+#' distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+#' logTransformGaussian = FALSE, verbose = TRUE)
+#' }
+#'     #Load the fits
+#' load(system.file("extdata", "zhangFits.RData", package = "combi"))
+#' extractCoords(microMetaboInt)
 extractCoords = function(modelObj, Dim){
     dimNames = paste0("Dim", Dim)
     latentData = data.frame(modelObj$latentVars[, Dim])

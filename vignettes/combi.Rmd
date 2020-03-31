@@ -83,6 +83,12 @@ plot(microMetaboInt)
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 ```
 
+Extract the coordinates for use in third-party software
+
+```{r extractCoords}
+coords = extractCoords(microMetaboInt)
+```
+
 ## Constrained integration
 
 For a constrained ordination also a data frame of sample variables should be supplied
