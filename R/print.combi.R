@@ -2,7 +2,8 @@
 #' @param x a fitted combi x
 #' @param ... Further arguments, currently ignored
 #'
-#' @return A ggplot x containing the plot
+#' @return An overview of the number of dimensions, views and parameters,
+#' type of ordination and importance parameters
 #' @method print combi
 #'
 #' @export
