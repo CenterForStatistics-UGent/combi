@@ -83,7 +83,21 @@ plot(microMetaboInt)
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 ```
 
-Extract the coordinates for use in third-party software
+By default, only the most important features (furthest away from the origin) are shown. To show all features, one can resort to point cloud plots or density plots as follows:
+
+```{r cloudPlot}
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX", 
+     featurePlot = "points")
+```
+
+```{r denPlot}
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX", 
+     featurePlot = "density")
+```
+
+The drawback is that now no feature labels are shown.
+
+Finally, one can extract the coordinates for use in third-party software
 
 ```{r extractCoords}
 coords = extractCoords(microMetaboInt)
