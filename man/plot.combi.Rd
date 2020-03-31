@@ -94,9 +94,9 @@ plot(microMetaboInt)
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 #Plot all features as points or density
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
-featurePlot = "points)
+featurePlot = "points")
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
-featurePlot = "density)
+featurePlot = "density")
 #Constrained
 plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 }

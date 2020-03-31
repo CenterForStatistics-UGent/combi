@@ -31,5 +31,5 @@ logTransformGaussian = FALSE, verbose = TRUE)
 }
     #Load the fits
 load(system.file("extdata", "zhangFits.RData", package = "combi"))
-extractCoords(microMetaboInt)
+extractCoords(microMetaboInt, Dim = c(1,2))
 }

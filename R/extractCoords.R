@@ -18,7 +18,7 @@
 #' }
 #'     #Load the fits
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
-#' extractCoords(microMetaboInt)
+#' extractCoords(microMetaboInt, Dim = c(1,2))
 extractCoords = function(modelObj, Dim){
     dimNames = paste0("Dim", Dim)
     latentData = data.frame(modelObj$latentVars[, Dim])
