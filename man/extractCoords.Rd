@@ -20,3 +20,16 @@ A list with components (matrices with two columns)
 \description{
 Extract coordinates from fitted object
 }
+\examples{
+data(Zhang)
+\donttest{
+#Unconstrained
+microMetaboInt = combi(
+list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+logTransformGaussian = FALSE, verbose = TRUE)
+}
+    #Load the fits
+load(system.file("extdata", "zhangFits.RData", package = "combi"))
+extractCoords(microMetaboInt)
+}

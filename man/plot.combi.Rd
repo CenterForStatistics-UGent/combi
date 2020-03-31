@@ -5,14 +5,16 @@
 \title{Make multiplots of the data integration object}
 \usage{
 \method{plot}{combi}(x, ..., Dim = c(1, 2), samDf = NULL,
-  samCol = NULL, samShape = NULL, featNum = 15L,
-  featCols = c("darkblue", "darkgreen", "darkred", terrain.colors(5)),
-  manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
-  manExpFactorVar = 0.975, varNum = nrow(x$alphas), varSize = 2.5,
-  samColValues = NULL, samSize = 1.5, strokeSize = 0.05,
-  warnMonotonicity = FALSE, returnCoords = FALSE, squarePlot = TRUE,
-  featAlpha = 0.5, xInd = 0, yInd = 0, checkOverlap = FALSE,
-  shapeValues = (21:(21 + length(unique(samDf[[samShape]])))))
+  samCol = NULL, samShape = NULL, featurePlot = "threshold",
+  featNum = 15L, featCols = c("darkblue", "darkgreen", "darkred",
+  terrain.colors(5)), manExpFactorTaxa = 0.975,
+  featSize = switch(featurePlot, threshold = 2.5, points = samSize *
+  0.75, density = 0.35), crossSize = 4, manExpFactorVar = 0.975,
+  varNum = nrow(x$alphas), varSize = 2.5, samColValues = NULL,
+  samSize = 1.5, strokeSize = 0.05, warnMonotonicity = FALSE,
+  returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
+  xInd = 0, yInd = 0, checkOverlap = FALSE, shapeValues = (21:(21 +
+  length(unique(samDf[[samShape]])))))
 }
 \arguments{
 \item{x}{the fit}
@@ -27,6 +29,9 @@
 
 \item{samShape}{A variable name from samDf used to shape the samples}
 
+\item{featurePlot}{A character string, either "threshold", "points" or
+"density". See details}
+
 \item{featNum, varNum}{The number of features and variables to plot}
 
 \item{featCols}{Colours for the features}
@@ -35,8 +40,8 @@
 variables, normally calculated natively}
 
 \item{featSize, crossSize, varSize, samSize, strokeSize}{Size parameters for
-the feature dots, central cross, variable labels, sample dots and sample
-strokes}
+the features (text, dots or density contour lines), central cross, variable labels, sample dots, sample
+strokes and feature contour lines}
 
 \item{samColValues}{Colours for the samples}
 
@@ -63,6 +68,13 @@ A ggplot object containing the plot
 \description{
 Make multiplots of the data integration object
 }
+\details{
+It is usually impossible to plot all features with their labels.
+Therefore, he default option of the 'featurePlot' parameter is "threshold",
+whereby only the 'featNum" features furthest away from the origin are shown.
+Alternatively, the "points" or "density" options are available to plot all
+features as a point or density cloud, but without labels.
+}
 \examples{
 data(Zhang)
 \donttest{
@@ -80,6 +92,11 @@ microMetaboIntConstr = combi(
 load(system.file("extdata", "zhangFits.RData", package = "combi"))
 plot(microMetaboInt)
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
+#Plot all features as points or density
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
+featurePlot = "points)
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
+featurePlot = "density)
 #Constrained
 plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 }
