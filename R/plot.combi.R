@@ -21,8 +21,8 @@
 #' @param manExpFactorTaxa,manExpFactorVar Expansion factors for taxa and
 #' variables, normally calculated natively
 #' @param featSize,crossSize,varSize,samSize,strokeSize Size parameters for
-#' the feature dots, central cross, variable labels, sample dots and sample
-#' strokes
+#' the features (text, dots or density contour lines), central cross, variable labels, sample dots, sample
+#' strokes and feature contour lines
 #' @param xInd,yInd x and y indentations
 #' @param checkOverlap A boolean, should overlapping labels be omitted?
 #' @param shapeValues the shapes, as numeric values
@@ -57,20 +57,29 @@
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' plot(microMetaboInt)
 #' plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
+#' #Plot all features as points or density
+#' plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
+#' featurePlot = "points)
+#' plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
+#' featurePlot = "density)
 #' #Constrained
 #' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
 plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                         samShape = NULL, featurePlot = "threshold", featNum = 15L,
                         featCols = c("darkblue", "darkgreen", "darkred",
                                      terrain.colors(5)),
-                        manExpFactorTaxa = 0.975, featSize = 2.5, crossSize = 4,
-                        manExpFactorVar = 0.975, varNum = nrow(x$alphas),
+                        manExpFactorTaxa = 0.975, featSize = switch(featurePlot,
+                                "threshold" = 2.5, "points" = samSize*0.75, "density" = 0.35),
+                        crossSize = 4, manExpFactorVar = 0.975, varNum = nrow(x$alphas),
                         varSize = 2.5, samColValues = NULL, samSize = 1.5,
                         strokeSize = 0.05, warnMonotonicity = FALSE,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
                         xInd = 0, yInd = 0, checkOverlap = FALSE,
                         shapeValues = (21:(21+length(unique(samDf[[samShape]]))))){
-
+    if(length(featurePlot)!=1 ||
+       !(featurePlot %in% c("threshold", "points", "density"))){
+        stop("featurePlot should be either 'threshold', 'points', or 'density'!")
+    }
     nViews = length(x$data)
     coords = extractCoords(x, Dim)
     latentData = coords$latentData; featureData = coords$featureData
@@ -96,35 +105,57 @@ plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
     else {
         Plot = Plot+ geom_point(size = samSize, shape = 21, stroke = strokeSize)
 }
-
     #### Views ####
-    if(length(featNum)==1){featNum = rep(featNum, nViews)}
-    checkComp = checkMonotonicity(x, Dim)
-    for(i in seq_len(nViews)){
-        if(featNum[i]==0) break
-        arrowLengths = rowSums(featureData[[i]][, DimChar]^2)
-        featurePlot = arrowLengths >= quantile(arrowLengths, 1-min(1,featNum[i]/nrow(featureData[[i]])))
-        featureData[[i]] = featureData[[i]][featurePlot,]
-        scalingFactorTmp = apply(latentData[, DimChar], 2, range)/
-            apply(featureData[[i]][,DimChar], 2, range)
-        scalingFactor = min(scalingFactorTmp[scalingFactorTmp >0]) *
-            manExpFactorTaxa
-        featureData[[i]][, DimChar] = featureData[[i]][, DimChar]*scalingFactor
-        #Warn for non monotonicity in case of compositionality
-        if(warnMonotonicity && !all(checkComp[[i]][,featurePlot])){
-            checkMate = apply(checkComp[[i]][, featurePlot], c(1,2), all)
-warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate, 2 ,all)], collapse = "\n"),
+    if(featurePlot == "threshold"){
+        if(length(featNum)==1){featNum = rep(featNum, nViews)}
+        checkComp = checkMonotonicity(x, Dim)
+        for(i in seq_len(nViews)){
+            if(featNum[i]==0) break
+            tmpDat = featureData[[i]]
+            featureData[[i]] = scaleCoords(tmpDat[, DimChar], latentData[, DimChar],
+                                           manExpFactorTaxa = manExpFactorTaxa,
+                              featNum = featNum[i])
+            featureShow = featureData[[i]]$featNames
+            #Warn for non monotonicity in case of compositionality
+            if(warnMonotonicity && !all(checkComp[[i]][,featureShow])){
+                checkMate = apply(checkComp[[i]][, featureShow], c(1,2), all)
+    warning("Features \n", paste(colnames(x$data[[i]])[featureShow][
+        !apply(checkMate, 2 ,all)], collapse = "\n"),
         "\nnot monotonous on this plot")
+            }
+            if(length(featCols[[i]])>1) featCols[[i]] = featCols[[i]][featureShow]
+            Plot = Plot + geom_text(aes_string(x = DimChar[1], y = DimChar[2],
+                                               label = "featNames"),
+                        inherit.aes = FALSE, data = featureData[[i]],
+                        col = featCols[[i]], size = featSize, alpha = featAlpha,
+                        check_overlap = checkOverlap)
         }
-        if(length(featCols[[i]])>1) featCols[[i]] = featCols[[i]][featurePlot]
-        Plot = Plot + geom_text(aes_string(x = DimChar[1], y = DimChar[2], label = "featNames"),
-                    inherit.aes = FALSE, data = featureData[[i]],
-                    col = featCols[[i]], size = featSize, alpha = featAlpha,
-                    check_overlap = checkOverlap)
+    } else {
+        #Rescale
+        featureData = lapply(seq_along(featureData), function(i){
+            scaleCoords(featureData[[i]][, DimChar], latentData[, DimChar],
+                                       manExpFactorTaxa = manExpFactorTaxa)
+        })
+        #Stack all featureData
+        stackFeat = Reduce(featureData, f = rbind)
+        stackFeat$View = rep(names(x$data), times = vapply(x$data, ncol,
+                                                           FUN.VALUE = integer(1)))
+        if(featurePlot == "points"){
+            Plot = Plot + geom_point(aes_string(x = DimChar[1], y = DimChar[2],
+                                                col = "View"),
+                                inherit.aes = FALSE, data = stackFeat,
+                                size = featSize, alpha = featAlpha)
+        } else if(featurePlot == "density"){
+            Plot = Plot +
+                geom_density_2d(aes_string(col ="View", x = DimChar[1],
+                                           y = DimChar[2]),
+                                   data = stackFeat, inherit.aes = FALSE,
+                                   size = featSize, alpha = featAlpha)
+        }
+        Plot = Plot + scale_colour_manual(values = featCols)
     }
     #### Gradient ####
     if(!is.null(x$covariates)){
-
         arrowLengthsVar = rowSums(varData[,DimChar]^2)
         varPlot = arrowLengthsVar >= quantile(arrowLengthsVar, 1-varNum/nrow(x$alphas))
         varData = varData[varPlot,]
@@ -154,4 +185,26 @@ warning("Features \n", paste(colnames(x$data[[i]])[featurePlot][!apply(checkMate
     } else {
         return(Plot)
     }
+}
+#' A helper function to rescale coordinates
+#'
+#' @param featCoords the feature coordinates to be rescaled
+#' @param latentData latent variables
+#' @param manExpFactorTaxa an expansion factor
+#' @param featNum the number of features to retain
+#'
+#' @return The rescaled feature coordinates
+scaleCoords = function(featCoords, latentData, manExpFactorTaxa,
+                       featNum = NULL){
+    arrowLengths = rowSums(featCoords^2)
+    if(!is.null(featNum)){
+    featureShow = arrowLengths >= quantile(arrowLengths,
+                                           1-min(1,featNum/nrow(featCoords)))
+    featCoords = featCoords[featureShow,]
+    }
+    scalingFactorTmp = apply(latentData, 2, range)/
+        apply(featCoords, 2, range)
+    scalingFactor = min(scalingFactorTmp[scalingFactorTmp >0]) *
+        manExpFactorTaxa
+    data.frame(featCoords*scalingFactor, featNames = rownames(featCoords))
 }
