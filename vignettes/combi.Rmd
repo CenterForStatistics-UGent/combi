@@ -100,7 +100,7 @@ The drawback is that now no feature labels are shown.
 Finally, one can extract the coordinates for use in third-party software
 
 ```{r extractCoords}
-coords = extractCoords(microMetaboInt)
+coords = extractCoords(microMetaboInt, Dim = c(1,2))
 ```
 
 ## Constrained integration
