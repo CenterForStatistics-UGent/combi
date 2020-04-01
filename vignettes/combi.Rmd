@@ -97,6 +97,19 @@ plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
 
 The drawback is that now no feature labels are shown.
 
+## Adding projections
+
+As an aid to interpretation of compositional views, links between features can be plotted and projected onto samples by providing their names or approximate coordinates
+
+```{r projections}
+#First define the plot, and return the coordinates
+mmPlot = plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX", returnCoords = TRUE, featNum = 10)
+#Providing feature names, and sample coordinates, but any combination is allowed
+addLink(mmPlot, links = cbind("Staphylococcus_819c11","OTU929ffc"), Views = 1, samples = c(0,1))
+```
+
+## Coordinates
+
 Finally, one can extract the coordinates for use in third-party software
 
 ```{r extractCoords}
