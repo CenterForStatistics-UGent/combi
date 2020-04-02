@@ -97,6 +97,6 @@ inflPlot = function(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
     Plot = Plot + theme_bw() + theme(axis.text.x = element_text(angle = 90)) +
         ggtitle(paste("Dimension", Dim))
     if(plotType != "boxplotSingle") Plot = Plot +
-        xlab(if(constrained) "Environmental variable" else "Latent variable")
+        xlab(if(constrained) "Environmental variable" else "Sample")
     Plot
     }
