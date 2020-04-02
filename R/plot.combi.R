@@ -23,6 +23,7 @@
 #' @param featSize,crossSize,varSize,samSize,strokeSize Size parameters for
 #' the features (text, dots or density contour lines), central cross, variable labels, sample dots, sample
 #' strokes and feature contour lines
+#' @param featShape Shape of feature dots when featurePlot = "points"
 #' @param xInd,yInd x and y indentations
 #' @param checkOverlap A boolean, should overlapping labels be omitted?
 #' @param shapeValues the shapes, as numeric values
@@ -64,17 +65,21 @@
 #' featurePlot = "density")
 #' #Constrained
 #' plot(microMetaboIntConstr, samDf = zhangMetavars, samCol = "ABX")
-plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
-                        samShape = NULL, featurePlot = "threshold", featNum = 15L,
-                        featCols = c("darkblue", "darkgreen", "darkred",
-                                     terrain.colors(5)),
+plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samShape = NULL,
+                      samCol = NULL, featurePlot = "threshold", featNum = 15L,
+                        samColValues = c("red", "darkorange", "brown",
+                                     "darkred", "darkorange4", "chocolate"),
                         manExpFactorTaxa = 0.975, featSize = switch(featurePlot,
-                                "threshold" = 2.5, "points" = samSize*0.75, "density" = 0.35),
+                                "threshold" = 2.5, "points" = samSize*0.4,
+                                "density" = 0.35),
                         crossSize = 4, manExpFactorVar = 0.975, varNum = nrow(x$alphas),
-                        varSize = 2.5, samColValues = NULL, samSize = 1.5,
+                        varSize = 2.5,  samSize = 1.75,
+                        featCols = c("darkblue", "darkgreen", "darkgrey",
+                                     "blue", "green", "grey",
+                                         "lightblue", "ligthgreen", "grey75"),
                         strokeSize = 0.05, warnMonotonicity = FALSE,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
-                        xInd = 0, yInd = 0, checkOverlap = FALSE,
+                        featShape = 0, xInd = 0, yInd = 0, checkOverlap = FALSE,
                         shapeValues = (21:(21+length(unique(samDf[[samShape]]))))){
     if(length(featurePlot)!=1 ||
        !(featurePlot %in% c("threshold", "points", "density"))){
@@ -144,7 +149,7 @@ plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
             Plot = Plot + geom_point(aes_string(x = DimChar[1], y = DimChar[2],
                                                 col = "View"),
                                 inherit.aes = FALSE, data = stackFeat,
-                                size = featSize, alpha = featAlpha)
+                                size = featSize, alpha = featAlpha, shape = featShape)
         } else if(featurePlot == "density"){
             Plot = Plot +
                 geom_density_2d(aes_string(col ="View", x = DimChar[1],
@@ -152,8 +157,8 @@ plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samCol = NULL,
                                    data = stackFeat, inherit.aes = FALSE,
                                    size = featSize, alpha = featAlpha)
         }
-        Plot = Plot + scale_colour_manual(values = featCols)
     }
+    Plot = Plot + scale_colour_manual(values = featCols) #Use manual colours
     #### Gradient ####
     if(!is.null(x$covariates)){
         arrowLengthsVar = rowSums(varData[,DimChar]^2)
