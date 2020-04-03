@@ -92,9 +92,6 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
     if(M %in% c(0L,1L) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
     }
-    if(!is.logical(compositional)) stop("'compositional' should be a logical vector!")
-    if(!is.logical(compositionalConf)) stop("'compositionalConf' should be a logical vector!")
-    if(!is.character(distributions)) stop("'distributions' should be a character vector!")
     if(!all(vapply(FUN.VALUE = integer(1),
                    c(length(data), length(distributions), length(compositionalConf)),
                    identical, length(compositional)))){
@@ -213,6 +210,7 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
                 "\nfiltered out after filtering features")
     }
     data = lapply(data, function(x){x[!zeroRowsIndep,]})
+    rowNames = lapply(data, function(x){sort(rownames(x))})
     if (constrained) {
         if(!is.data.frame(covariates)){
             stop("Please provide covariate matrix as a dataframe")
