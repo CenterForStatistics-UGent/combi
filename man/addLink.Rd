@@ -50,6 +50,6 @@ logTransformGaussian = FALSE, verbose = TRUE)
 load(system.file("extdata", "zhangFits.RData", package = "combi"))
 Plot = plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
  returnCoords = TRUE)
-addLink(Plot, links = cbind("OTUe37326","OTUa14fb5"), Views = 1,
- samples = c(1,2.7))
+addLink(Plot, links = cbind("OTU0565b3","OTUa14fb5"), Views = 1,
+ samples = c(1,1))
 }

@@ -28,8 +28,8 @@
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' Plot = plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX",
 #'  returnCoords = TRUE)
-#' addLink(Plot, links = cbind("OTUe37326","OTUa14fb5"), Views = 1,
-#'  samples = c(1,2.7))
+#' addLink(Plot, links = cbind("OTU0565b3","OTUa14fb5"), Views = 1,
+#'  samples = c(1,1))
 #'@import ggplot2
 addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2),
                    addLabel = FALSE, labPos = NULL, projColour = "grey",
@@ -94,6 +94,10 @@ addLink = function(DIplot, links, Views, samples, variable = NULL, Dims = c(1,2)
     linkMat = apply(linkNames, 1, function(ln){
                 tmp = unlist(vapply(seq_along(Views), FUN.VALUE = numeric(2),
                                     function(i){
+                    if(!(ln[i] %in% rownames((DIplot$featureData[[Views[i]]])))){
+                        stop("Feature '", ln[i], "' not plotted!
+                        Please check spelling or provide numeric coordinates.")
+                    }
                     unlist(DIplot$featureData[[Views[i]]][ln[i], dimNames])
                 }))
                 names(tmp) = c("x", "y", "xend", "yend")

@@ -33,6 +33,11 @@ setMethod("extractMat", "phyloseq", function(Y,...){
     if(taxa_are_rows(Y)) t(as(otu_table(Y), "matrix")) else
         as(otu_table(Y), "matrix")
     })
+#' @import methods
+#' @importFrom phyloseq t taxa_are_rows
+setMethod("extractMat", "otu_table", function(Y,...){
+    if(taxa_are_rows(Y)) t(as(Y, "matrix")) else as(Y, "matrix")
+})
 #' @rdname extractMat
 #' @import methods
 #' @importFrom Biobase exprs

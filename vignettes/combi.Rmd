@@ -83,6 +83,39 @@ plot(microMetaboInt)
 plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX")
 ```
 
+By default, only the most important features (furthest away from the origin) are shown. To show all features, one can resort to point cloud plots or density plots as follows:
+
+```{r cloudPlot}
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX", 
+     featurePlot = "points")
+```
+
+```{r denPlot}
+plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX", 
+     featurePlot = "density")
+```
+
+The drawback is that now no feature labels are shown.
+
+## Adding projections
+
+As an aid to interpretation of compositional views, links between features can be plotted and projected onto samples by providing their names or approximate coordinates
+
+```{r projections}
+#First define the plot, and return the coordinates
+mmPlot = plot(microMetaboInt, samDf = zhangMetavars, samCol = "ABX", returnCoords = TRUE, featNum = 10)
+#Providing feature names, and sample coordinates, but any combination is allowed
+addLink(mmPlot, links = cbind("Staphylococcus_819c11","OTU929ffc"), Views = 1, samples = c(0,1))
+```
+
+## Coordinates
+
+Finally, one can extract the coordinates for use in third-party software
+
+```{r extractCoords}
+coords = extractCoords(microMetaboInt, Dim = c(1,2))
+```
+
 ## Constrained integration
 
 For a constrained ordination also a data frame of sample variables should be supplied

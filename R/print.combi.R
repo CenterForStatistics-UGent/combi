@@ -1,4 +1,4 @@
-#' print an overview of a fitted combi x
+#' Print an overview of a fitted combi x
 #' @param x a fitted combi x
 #' @param ... Further arguments, currently ignored
 #'
@@ -24,11 +24,14 @@
 #' load(system.file("extdata", "zhangFits.RData", package = "combi"))
 #' print(microMetaboInt)
 #' print(microMetaboIntConstr)
+#' #Or simply
+#' microMetaboInt
 print.combi = function(x, ...){
     constr = if(is.null(x$covariates)) "Unconstrained" else "Constrained"
     dim = length(x$iter)
     datSets = length(x$data)
     nSam = nrow(x$latentVars)
+    psis = signif(diag(crossprod(x$latentVars)), 3) #Some measure of importance
     viewsString = vapply(seq_along(x$data), FUN.VALUE = character(1),
                          function(i){
         paste0(names(x$data[i]),": ", ncol(x$paramEsts[[i]]), "\n")
@@ -39,6 +42,7 @@ print.combi = function(x, ...){
         if(!is.null(x$covariates)) {
             paste0("Number of sample variables included was ",ncol(x$covariates),
                   ",\nfor which ", ncol(x$covMat),
-                  " parameters were estimated per dimension.")
-            })
+                  " parameters were estimated per dimension.\n")
+            }, "Importance parameters of dimensions", 1, "to", dim,
+        "are", paste(psis[-dim], collapse = ","), "and", psis[dim])
 }

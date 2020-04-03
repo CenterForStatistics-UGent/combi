@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.combi.R
 \name{print.combi}
 \alias{print.combi}
-\title{print an overview of a fitted combi x}
+\title{Print an overview of a fitted combi x}
 \usage{
 \method{print}{combi}(x, ...)
 }
@@ -12,10 +12,11 @@
 \item{...}{Further arguments, currently ignored}
 }
 \value{
-A ggplot x containing the plot
+An overview of the number of dimensions, views and parameters,
+type of ordination and importance parameters
 }
 \description{
-print an overview of a fitted combi x
+Print an overview of a fitted combi x
 }
 \examples{
 data(Zhang)
@@ -34,4 +35,6 @@ microMetaboIntConstr = combi(
 load(system.file("extdata", "zhangFits.RData", package = "combi"))
 print(microMetaboInt)
 print(microMetaboIntConstr)
+#Or simply
+microMetaboInt
 }
