@@ -15,7 +15,13 @@ library(devtools)
 install_github("CenterForStatistics-UGent/combi")
 ```
 
-or via BioConductor:
+for R version 3.6 or lower use:
+
+```{r installcombipackage36, eval = FALSE}
+install_github("CenterForStatistics-UGent/combi", ref = ‘review’)
+```
+
+Alternatively, via BioConductor:
 
 ```{r installcombipackageBioc, eval = FALSE}
 library(BiocManager)
