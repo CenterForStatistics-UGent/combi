@@ -97,8 +97,8 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    identical, length(compositional)))){
         stop("Make sure data, distribution, links and compositional have the same length")
     }
-    if(!meanVarFit %in% c("cubic","quadratic", "spline"))
-        stop("Mean-variance trend must be either quadratic, cubic or spline!\n")
+    if(!meanVarFit %in% c("cubic", "spline"))
+        stop("Mean-variance trend must be either 'cubic' or 'spline'!\n")
     if(length(data)==1){
         warning("Please provide at least two views for data integration!
                 Now fitting an ordination model.",
