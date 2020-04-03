@@ -6,17 +6,17 @@
 \usage{
 \method{plot}{combi}(x, ..., Dim = c(1, 2), samDf = NULL,
   samShape = NULL, samCol = NULL, featurePlot = "threshold",
-  featNum = 15L, samColValues = c("red", "darkorange", "brown",
-  "darkred", "darkorange4", "chocolate"), manExpFactorTaxa = 0.975,
-  featSize = switch(featurePlot, threshold = 2.5, points = samSize * 0.4,
-  density = 0.35), crossSize = 4, manExpFactorVar = 0.975,
-  varNum = nrow(x$alphas), varSize = 2.5, samSize = 1.75,
-  featCols = c("darkblue", "darkgreen", "darkgrey", "blue", "green",
-  "grey", "lightblue", "ligthgreen", "grey75"), strokeSize = 0.05,
-  warnMonotonicity = FALSE, returnCoords = FALSE, squarePlot = TRUE,
-  featAlpha = 0.5, featShape = 0, xInd = 0, yInd = 0,
-  checkOverlap = FALSE, shapeValues = (21:(21 +
-  length(unique(samDf[[samShape]])))))
+  featNum = 15L, samColValues = switch(featurePlot, threshold = NULL,
+  c("red", "darkorange", "purple2", "brown", "chocolate", "darkorange4")),
+  manExpFactorTaxa = 0.975, featSize = switch(featurePlot, threshold =
+  2.5, points = samSize * 0.45, density = 0.35), crossSize = 4,
+  manExpFactorVar = 0.975, varNum = nrow(x$alphas), varSize = 2.5,
+  samSize = 1.75, featCols = c("darkblue", "darkgreen", "grey10",
+  "turquoise4", "blue", "green", "grey", "cornflowerblue", "lightgreen",
+  "grey75"), strokeSize = 0.05, warnMonotonicity = FALSE,
+  returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
+  featShape = 20, xInd = 0, yInd = 0, checkOverlap = FALSE,
+  shapeValues = (21:(21 + length(unique(samDf[[samShape]])))))
 }
 \arguments{
 \item{x}{the fit}
