@@ -78,7 +78,7 @@ plot.combi = function(x, ..., Dim = c(1,2), samDf = NULL, samShape = NULL,
                                      "cornflowerblue", "lightgreen", "grey75"),
                         strokeSize = 0.05, warnMonotonicity = FALSE,
                         returnCoords = FALSE, squarePlot = TRUE, featAlpha = 0.5,
-                        featShape = 20, xInd = 0, yInd = 0, checkOverlap = FALSE,
+                        featShape = 8, xInd = 0, yInd = 0, checkOverlap = FALSE,
                         shapeValues = (21:(21+length(unique(samDf[[samShape]]))))){
     if(length(featurePlot)!=1 ||
        !(featurePlot %in% c("threshold", "points", "density"))){
