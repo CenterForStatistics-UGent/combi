@@ -226,7 +226,6 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
         centMat = tmp$centMat
         covariates = tmp$datFrame
         rm(tmp)
-
         # Remove rows with NA's, we might want to find
         # something better or leave it to the end user
         if (anyNA(covariates)) {
@@ -259,7 +258,7 @@ confounders = confMats[[if(length(confounders)>1) i else 1]]$confModelMatTrim)
     IDs = lapply(seqSets, function(i){
         (sum(numVars[seq_len(i-1)])+1):sum(numVars[seq_len(i)])
     }) # The indices of the features of each view
-    newtonRaphson = numVars <= maxFeats #Indicates if too many features for newton raphson
+    newtonRaphson = numVars <= maxFeats #Indicates if too many features for Newton-Raphson
 
     #### MARGINAL INDEPENDENCE MODELS ####
     if(verbose){cat("Estimating independence models...\n")}
