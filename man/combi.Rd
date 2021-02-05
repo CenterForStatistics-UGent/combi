@@ -4,14 +4,31 @@
 \alias{combi}
 \title{Perform model-based data integration}
 \usage{
-combi(data, M = 2L, covariates = NULL, distributions, compositional,
-  maxIt = 300L, tol = 0.001, verbose = FALSE, prevCutOff = 0.95,
-  minFraction = 0.1, logTransformGaussian = TRUE, confounders = NULL,
+combi(
+  data,
+  M = 2L,
+  covariates = NULL,
+  distributions,
+  compositional,
+  maxIt = 300L,
+  tol = 0.001,
+  verbose = FALSE,
+  prevCutOff = 0.95,
+  minFraction = 0.1,
+  logTransformGaussian = TRUE,
+  confounders = NULL,
   compositionalConf = rep(FALSE, length(data)),
-  nleq.control = list(maxit = 1000L, cndtol = 1e-16), record = TRUE,
-  weights = NULL, fTol = 1e-05, meanVarFit = "spline",
-  maxFeats = 2000, dispFreq = 10L, allowMissingness = FALSE,
-  biasReduction = TRUE, maxItFeat = 20L)
+  nleq.control = list(maxit = 1000L, cndtol = 1e-16),
+  record = TRUE,
+  weights = NULL,
+  fTol = 1e-05,
+  meanVarFit = "spline",
+  maxFeats = 2000,
+  dispFreq = 10L,
+  allowMissingness = FALSE,
+  biasReduction = TRUE,
+  maxItFeat = 20L
+)
 }
 \arguments{
 \item{data}{A list of data objects with the same number of samples. See details.}

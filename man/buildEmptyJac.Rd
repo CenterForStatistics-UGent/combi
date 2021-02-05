@@ -5,8 +5,16 @@
 \title{Prepare an empty Jacobian matrix, with useful entries prefilled.
 In case of distribution "gaussian", it returns the lhs matrix of the linear system for finding the feature paramters}
 \usage{
-buildEmptyJac(n, m, lower, distribution = "quasi", normal = FALSE,
-  nLambda1s = 1, centMat = NULL, weights = 1)
+buildEmptyJac(
+  n,
+  m,
+  lower,
+  distribution = "quasi",
+  normal = FALSE,
+  nLambda1s = 1,
+  centMat = NULL,
+  weights = 1
+)
 }
 \arguments{
 \item{n}{the number of parameters}

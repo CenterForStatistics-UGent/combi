@@ -4,8 +4,17 @@
 \alias{predictSpline}
 \title{A custom spline prediction function, extending linearly with a slope such that prediction never drops below first bisectant}
 \usage{
-predictSpline(fit, newdata, linX, coefsQuad, deriv = 0L, meanVarFit,
-  minFit, new.knots, degree)
+predictSpline(
+  fit,
+  newdata,
+  linX,
+  coefsQuad,
+  deriv = 0L,
+  meanVarFit,
+  minFit,
+  new.knots,
+  degree
+)
 }
 \arguments{
 \item{fit}{The existing spline fit}

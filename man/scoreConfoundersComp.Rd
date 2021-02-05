@@ -4,8 +4,16 @@
 \alias{scoreConfoundersComp}
 \title{Score equations for conditioning under compositionality}
 \usage{
-scoreConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
-  biasReduction, allowMissingness, subtractMax = TRUE)
+scoreConfoundersComp(
+  x,
+  confMat,
+  data,
+  meanVarTrend,
+  marginModel,
+  biasReduction,
+  allowMissingness,
+  subtractMax = TRUE
+)
 }
 \arguments{
 \item{x}{Confounder parameter estimates}

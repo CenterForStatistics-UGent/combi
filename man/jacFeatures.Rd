@@ -4,9 +4,20 @@
 \alias{jacFeatures}
 \title{Evaluate the jacobian for estimating the feature parameters for one view}
 \usage{
-jacFeatures(latentVars, data, distribution, paramEsts, meanVarTrend,
-  offSet, compositional, indepModel, m, paramEstsLower, allowMissingness,
-  ...)
+jacFeatures(
+  latentVars,
+  data,
+  distribution,
+  paramEsts,
+  meanVarTrend,
+  offSet,
+  compositional,
+  indepModel,
+  m,
+  paramEstsLower,
+  allowMissingness,
+  ...
+)
 }
 \arguments{
 \item{latentVars}{A vector of latent variables}

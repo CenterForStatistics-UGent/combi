@@ -4,10 +4,16 @@
 \alias{inflPlot}
 \title{A ggplot line plot showing the influences}
 \usage{
-inflPlot(modelObj, plotType = ifelse(length(modelObj$data) <= 2,
-  "pointplot", "boxplot"), pointFun = "sum", lineSize = 0.07,
-  Dim = 1, samples = seq_len(nrow(if (is.null(modelObj$covariates))
-  modelObj$latentVars else modelObj$alphas)), ...)
+inflPlot(
+  modelObj,
+  plotType = ifelse(length(modelObj$data) <= 2, "pointplot", "boxplot"),
+  pointFun = "sum",
+  lineSize = 0.07,
+  Dim = 1,
+  samples = seq_len(nrow(if (is.null(modelObj$covariates)) modelObj$latentVars else
+    modelObj$alphas)),
+  ...
+)
 }
 \arguments{
 \item{modelObj}{The fitted data integration}

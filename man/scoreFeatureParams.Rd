@@ -5,8 +5,20 @@
 \title{Evaluate the score functions for the estimation of the feature parameters for a
 single dataset}
 \usage{
-scoreFeatureParams(x, data, distribution, offSet, latentVar, meanVarTrend,
-  mm, indepModel, compositional, paramEstsLower, allowMissingness, ...)
+scoreFeatureParams(
+  x,
+  data,
+  distribution,
+  offSet,
+  latentVar,
+  meanVarTrend,
+  mm,
+  indepModel,
+  compositional,
+  paramEstsLower,
+  allowMissingness,
+  ...
+)
 }
 \arguments{
 \item{x}{the parameter estimates}

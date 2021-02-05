@@ -4,8 +4,7 @@
 \alias{checkMeanVarTrend}
 \title{Quickly check if the mean variance trend provides a good fit}
 \usage{
-checkMeanVarTrend(data, meanVarFit = "spline", returnTrend = FALSE,
-  ...)
+checkMeanVarTrend(data, meanVarFit = "spline", returnTrend = FALSE, ...)
 }
 \arguments{
 \item{data}{Data in any acceptable format (see details ?combi)}

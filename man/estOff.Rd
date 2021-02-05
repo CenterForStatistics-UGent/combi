@@ -4,8 +4,17 @@
 \alias{estOff}
 \title{Estimate the row/column parameters of the independence model}
 \usage{
-estOff(data, distribution, rowOff, colOff, meanVarTrend, col,
-  newtonRaphson, libSizes, ...)
+estOff(
+  data,
+  distribution,
+  rowOff,
+  colOff,
+  meanVarTrend,
+  col,
+  newtonRaphson,
+  libSizes,
+  ...
+)
 }
 \arguments{
 \item{data}{a list of data matrices with the same number of samples n

@@ -4,9 +4,22 @@
 \alias{deriv2LagrangianFeatures}
 \title{The score function to estimate the latent variables}
 \usage{
-deriv2LagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
-  paramEstsLower, mm, Jac, meanVarTrend, weights, compositional,
-  indepModel, ...)
+deriv2LagrangianFeatures(
+  x,
+  data,
+  distribution,
+  offSet,
+  latentVars,
+  numVar,
+  paramEstsLower,
+  mm,
+  Jac,
+  meanVarTrend,
+  weights,
+  compositional,
+  indepModel,
+  ...
+)
 }
 \arguments{
 \item{x}{parameter estimates}

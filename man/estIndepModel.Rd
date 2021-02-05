@@ -4,8 +4,19 @@
 \alias{estIndepModel}
 \title{Estimate the independence model belonging to one view}
 \usage{
-estIndepModel(data, distribution, compositional, maxIt, tol, link, invLink,
-  meanVarFit, newtonRaphson, dispFreq, ...)
+estIndepModel(
+  data,
+  distribution,
+  compositional,
+  maxIt,
+  tol,
+  link,
+  invLink,
+  meanVarFit,
+  newtonRaphson,
+  dispFreq,
+  ...
+)
 }
 \arguments{
 \item{data}{a list of data matrices with the same number of samples n in the rows.

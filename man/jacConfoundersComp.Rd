@@ -4,8 +4,16 @@
 \alias{jacConfoundersComp}
 \title{Jacobian for conditioning under compositionality}
 \usage{
-jacConfoundersComp(x, confMat, data, meanVarTrend, marginModel,
-  allowMissingness, biasReduction, subtractMax = TRUE)
+jacConfoundersComp(
+  x,
+  confMat,
+  data,
+  meanVarTrend,
+  marginModel,
+  allowMissingness,
+  biasReduction,
+  subtractMax = TRUE
+)
 }
 \arguments{
 \item{x}{the parameter estimates}

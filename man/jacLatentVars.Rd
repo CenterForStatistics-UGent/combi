@@ -4,9 +4,23 @@
 \alias{jacLatentVars}
 \title{Evaluate the jacobian for estimating the latent variable for one view}
 \usage{
-jacLatentVars(latentVar, data, distribution, paramEsts, paramMats, offSet,
-  meanVarTrend, n, varPosts, mm, indepModel, latentVarsLower,
-  compositional, allowMissingness, ...)
+jacLatentVars(
+  latentVar,
+  data,
+  distribution,
+  paramEsts,
+  paramMats,
+  offSet,
+  meanVarTrend,
+  n,
+  varPosts,
+  mm,
+  indepModel,
+  latentVarsLower,
+  compositional,
+  allowMissingness,
+  ...
+)
 }
 \arguments{
 \item{latentVar}{the latent variable estimates}

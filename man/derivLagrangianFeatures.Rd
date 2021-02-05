@@ -4,9 +4,21 @@
 \alias{derivLagrangianFeatures}
 \title{The score function to estimate the feature parameters}
 \usage{
-derivLagrangianFeatures(x, data, distribution, offSet, latentVars, numVar,
-  paramEstsLower, mm, indepModel, meanVarTrend, weights, compositional,
-  ...)
+derivLagrangianFeatures(
+  x,
+  data,
+  distribution,
+  offSet,
+  latentVars,
+  numVar,
+  paramEstsLower,
+  mm,
+  indepModel,
+  meanVarTrend,
+  weights,
+  compositional,
+  ...
+)
 }
 \arguments{
 \item{x}{current parameter estimates}

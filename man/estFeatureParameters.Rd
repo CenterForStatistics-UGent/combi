@@ -4,10 +4,28 @@
 \alias{estFeatureParameters}
 \title{Estimate the feature parameters}
 \usage{
-estFeatureParameters(paramEsts, lambdasParams, seqSets, data,
-  distributions, offsets, nCores, m, JacFeatures, meanVarTrends,
-  latentVars, numVars, control, weights, compositional, indepModels, fTol,
-  allowMissingness, maxItFeat, ...)
+estFeatureParameters(
+  paramEsts,
+  lambdasParams,
+  seqSets,
+  data,
+  distributions,
+  offsets,
+  nCores,
+  m,
+  JacFeatures,
+  meanVarTrends,
+  latentVars,
+  numVars,
+  control,
+  weights,
+  compositional,
+  indepModels,
+  fTol,
+  allowMissingness,
+  maxItFeat,
+  ...
+)
 }
 \arguments{
 \item{paramEsts}{Current list of parameter estimates for the different views}

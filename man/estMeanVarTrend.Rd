@@ -4,8 +4,17 @@
 \alias{estMeanVarTrend}
 \title{Estimate a column-wise mean-variance trend}
 \usage{
-estMeanVarTrend(data, meanMat, baseAbundances, libSizes, plot = FALSE,
-  meanVarFit, degree = 2L, constraint = "none", ...)
+estMeanVarTrend(
+  data,
+  meanMat,
+  baseAbundances,
+  libSizes,
+  plot = FALSE,
+  meanVarFit,
+  degree = 2L,
+  constraint = "none",
+  ...
+)
 }
 \arguments{
 \item{data}{the data matrix with n rows}

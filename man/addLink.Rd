@@ -4,9 +4,18 @@
 \alias{addLink}
 \title{Add a link on a compositional plot}
 \usage{
-addLink(DIplot, links, Views, samples, variable = NULL, Dims = c(1, 2),
-  addLabel = FALSE, labPos = NULL, projColour = "grey",
-  latentSize = 0.25)
+addLink(
+  DIplot,
+  links,
+  Views,
+  samples,
+  variable = NULL,
+  Dims = c(1, 2),
+  addLabel = FALSE,
+  labPos = NULL,
+  projColour = "grey",
+  latentSize = 0.25
+)
 }
 \arguments{
 \item{DIplot}{A list with ggplot object where the links are to be added,

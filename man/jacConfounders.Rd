@@ -4,8 +4,17 @@
 \alias{jacConfounders}
 \title{Jacobian when estimating confounder variables}
 \usage{
-jacConfounders(confMat, data, distribution, x, meanVarTrend, offSet,
-  CompMat, libSizes, allowMissingness)
+jacConfounders(
+  confMat,
+  data,
+  distribution,
+  x,
+  meanVarTrend,
+  offSet,
+  CompMat,
+  libSizes,
+  allowMissingness
+)
 }
 \arguments{
 \item{confMat}{Characteristics of the views}

@@ -4,8 +4,17 @@
 \alias{scoreConfounders}
 \title{Score functions for confounder variables}
 \usage{
-scoreConfounders(x, data, distribution, offSet, confMat, meanVarTrend,
-  allowMissingness, libSizes, CompMat)
+scoreConfounders(
+  x,
+  data,
+  distribution,
+  offSet,
+  confMat,
+  meanVarTrend,
+  allowMissingness,
+  libSizes,
+  CompMat
+)
 }
 \arguments{
 \item{x}{the parameter estimates}

@@ -4,8 +4,7 @@
 \alias{influence.combi}
 \title{Evaluate the influence function}
 \usage{
-\method{influence}{combi}(modelObj, samples = is.null(View), Dim = 1,
-  View = NULL)
+\method{influence}{combi}(modelObj, samples = is.null(View), Dim = 1, View = NULL)
 }
 \arguments{
 \item{modelObj}{The model object}

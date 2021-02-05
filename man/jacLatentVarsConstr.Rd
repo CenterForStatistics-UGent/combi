@@ -4,9 +4,22 @@
 \alias{jacLatentVarsConstr}
 \title{Evaluate the jacobian for estimating the latent variable for one view for constrained ordination}
 \usage{
-jacLatentVarsConstr(latentVar, data, distribution, paramEsts, offSet,
-  meanVarTrend, numCov, covMat, varPosts, compositional, mm, indepModel,
-  latentVarsLower, ...)
+jacLatentVarsConstr(
+  latentVar,
+  data,
+  distribution,
+  paramEsts,
+  offSet,
+  meanVarTrend,
+  numCov,
+  covMat,
+  varPosts,
+  compositional,
+  mm,
+  indepModel,
+  latentVarsLower,
+  ...
+)
 }
 \arguments{
 \item{latentVar}{current latent variable estimates}

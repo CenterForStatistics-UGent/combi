@@ -4,9 +4,21 @@
 \alias{filterConfounders}
 \title{Filter out the effect of known confounders}
 \usage{
-filterConfounders(confMat, data, distribution, link, invLink,
-  compositional, control, meanVarTrend, offSet, numVar, marginModel,
-  biasReduction, allowMissingness)
+filterConfounders(
+  confMat,
+  data,
+  distribution,
+  link,
+  invLink,
+  compositional,
+  control,
+  meanVarTrend,
+  offSet,
+  numVar,
+  marginModel,
+  biasReduction,
+  allowMissingness
+)
 }
 \arguments{
 \item{confMat}{A confounder design matrix}

@@ -4,10 +4,29 @@
 \alias{derivLagrangianLatentVarsConstr}
 \title{The score function to estimate the latent variables}
 \usage{
-derivLagrangianLatentVarsConstr(x, data, distributions, offsets, paramEsts,
-  numVars, latentVarsLower, n, m, numSets, meanVarTrends, links, covMat,
-  numCov, centMat, nLambda1s, varPosts, compositional, indepModels,
-  paramMats, ...)
+derivLagrangianLatentVarsConstr(
+  x,
+  data,
+  distributions,
+  offsets,
+  paramEsts,
+  numVars,
+  latentVarsLower,
+  n,
+  m,
+  numSets,
+  meanVarTrends,
+  links,
+  covMat,
+  numCov,
+  centMat,
+  nLambda1s,
+  varPosts,
+  compositional,
+  indepModels,
+  paramMats,
+  ...
+)
 }
 \arguments{
 \item{x}{The current estimates of the latent variables}

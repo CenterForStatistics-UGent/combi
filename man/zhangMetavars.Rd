@@ -4,10 +4,12 @@
 \name{zhangMetavars}
 \alias{zhangMetavars}
 \title{Baseline sample variables of PAT and control mice}
-\format{A dataframe with baseline sample variables
+\format{
+A dataframe with baseline sample variables
 \describe{
   \item{zhangMetavars}{The metadata on the mice}
-}}
+}
+}
 \source{
 \url{https://www.ibdmdb.org/}
 }

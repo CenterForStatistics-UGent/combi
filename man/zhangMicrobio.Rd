@@ -5,10 +5,12 @@
 \alias{zhangMicrobio}
 \title{Microbiomes of mice that underwent Pulsed Antibiotic Treatment
  (PAT) and controls}
-\format{A phyloseq object containing microbiome data
+\format{
+A phyloseq object containing microbiome data
 \describe{
   \item{zhangMicrobio}{The microbiome dataset pruned for matches with the metabolome object}
- }}
+ }
+}
 \source{
 \url{https://www.ibdmdb.org/}
 }

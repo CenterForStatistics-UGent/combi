@@ -4,8 +4,14 @@
 \alias{convPlot}
 \title{Plot the convegrence of the different parameter estimates in a line plot}
 \usage{
-convPlot(model, latent = is.null(View), nVars = Inf, Dim = 1L,
-  View = NULL, size = 0.125)
+convPlot(
+  model,
+  latent = is.null(View),
+  nVars = Inf,
+  Dim = 1L,
+  View = NULL,
+  size = 0.125
+)
 }
 \arguments{
 \item{model}{A fitted modelDI object}

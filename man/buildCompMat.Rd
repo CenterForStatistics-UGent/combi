@@ -4,8 +4,15 @@
 \alias{buildCompMat}
 \title{Build the composition matrix for a certain dimension m dimensions}
 \usage{
-buildCompMat(colMat, paramEsts, latentVar, m, norm = TRUE,
-  id = seq_len(m), subtractMax = TRUE)
+buildCompMat(
+  colMat,
+  paramEsts,
+  latentVar,
+  m,
+  norm = TRUE,
+  id = seq_len(m),
+  subtractMax = TRUE
+)
 }
 \arguments{
 \item{colMat}{The nxp independence model composition matrix}

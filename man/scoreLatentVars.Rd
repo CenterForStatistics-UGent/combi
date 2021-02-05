@@ -5,10 +5,24 @@
 \title{Evaluate the score functions for the estimation of the latent variables for a
 single dataset}
 \usage{
-scoreLatentVars(data, distribution, paramEsts, paramMats, offSet,
-  latentVar, meanVarTrend, constrained = FALSE, covMat = NULL,
-  varPosts, compositional, indepModel, mm, latentVarsLower,
-  allowMissingness, ...)
+scoreLatentVars(
+  data,
+  distribution,
+  paramEsts,
+  paramMats,
+  offSet,
+  latentVar,
+  meanVarTrend,
+  constrained = FALSE,
+  covMat = NULL,
+  varPosts,
+  compositional,
+  indepModel,
+  mm,
+  latentVarsLower,
+  allowMissingness,
+  ...
+)
 }
 \arguments{
 \item{data, distribution, offSet, meanVarTrend, indepModel, varPosts, paramEsts, paramMats, compositional}{Characteristics of the views}

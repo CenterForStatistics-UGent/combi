@@ -4,9 +4,26 @@
 \alias{deriv2LagrangianLatentVars}
 \title{The jacobian function to estimate the latent variables}
 \usage{
-deriv2LagrangianLatentVars(x, data, distributions, offsets, paramEsts,
-  paramMats, numVars, latentVarsLower, n, m, Jac, numSets, meanVarTrends,
-  links, varPosts, indepModels, compositional, ...)
+deriv2LagrangianLatentVars(
+  x,
+  data,
+  distributions,
+  offsets,
+  paramEsts,
+  paramMats,
+  numVars,
+  latentVarsLower,
+  n,
+  m,
+  Jac,
+  numSets,
+  meanVarTrends,
+  links,
+  varPosts,
+  indepModels,
+  compositional,
+  ...
+)
 }
 \arguments{
 \item{x}{The current estimates of the latent variables}
