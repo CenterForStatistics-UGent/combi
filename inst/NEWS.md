@@ -24,3 +24,7 @@
 # 1.2.2
 
   - Updated roxygen documentation
+
+# 1.2.3
+
+  - Bug fix: allow for missing values in Gaussian data

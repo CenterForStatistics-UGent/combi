@@ -32,6 +32,11 @@ test_that("combi runs when NAs present in data matrix
                     compositional = TRUE, allowMissingness = TRUE, maxIt = 2L),
         "combi"
         )
+      expect_s3_class(
+              combi(list(tmpMat2), distributions = "gaussian",
+                    compositional = FALSE, allowMissingness = TRUE, maxIt = 2L),
+              "combi"
+      )
 })
 
 test_that("Polynomial mean-variance model works", {

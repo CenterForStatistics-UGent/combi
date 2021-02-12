@@ -369,7 +369,8 @@ switch(weights[[i]],
         rawResiduals = data[[i]]-offsets[[i]]
         out = switch(distributions[[i]],
                      "gaussian" = rowMultiply(rawResiduals,
-                                              1/apply(rawResiduals, 2, sd)),
+                                              1/apply(rawResiduals, 2, sd,
+                                                      na.rm = TRUE)),
                      "quasi" = rawResiduals/sqrt(meanVarTrends[[i]](
                          invLinks[[i]](marginModels[[i]]$colOff),
                          invLinks[[i]](marginModels[[i]]$rowOff))))
