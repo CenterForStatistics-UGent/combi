@@ -39,6 +39,18 @@ test_that("combi runs when NAs present in data matrix
       )
 })
 
+test_that("combi throws errors when gaussian distributions are mixed with
+          compositional data, or quasi likelihood with non-compositional data", {
+            expect_error(
+              combi(list(tmpMat2), distributions = "quasi",
+                    compositional = FALSE, allowMissingness = TRUE, maxIt = 2L)
+            )
+            expect_error(
+              combi(list(tmpMat2), distributions = "gaussian",
+                    compositional = TRUE, allowMissingness = TRUE, maxIt = 2L)
+            )
+          })
+
 test_that("Polynomial mean-variance model works", {
     expect_s3_class(combi(data = list("microbiome" = zhangMicrobio,
                                       "metabo" = zhangMetabo),

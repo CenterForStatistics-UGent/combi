@@ -97,6 +97,11 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    identical, length(compositional)))){
         stop("Make sure data, distribution, links and compositional have the same length")
     }
+    if(!all(compositional[distributions=="quasi"]) ||
+       any(compositional[distributions == "gaussian"])){
+      stop("Quasi likelihood currently only implemented for compositional data,
+           and gaussian estimation only for non compositional data")
+    }
     if(!meanVarFit %in% c("cubic", "spline"))
         stop("Mean-variance trend must be either 'cubic' or 'spline'!\n")
     if(length(data)==1){
