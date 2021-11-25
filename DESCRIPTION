@@ -2,12 +2,14 @@ Package: combi
 Type: Package
 Title: Compositional omics model based visual integration
 Version: 1.2.4
-Author: Stijn Hawinkel <stijn.hawinkel@ugent.be>
-Maintainer: Joris Meys <joris.meys@ugent.be>
-Description: Combine quasi-likelihood estimation, compositional regression models and latent variable models for integrative visualization of several omics datasets. Both unconstrained and constrained integration is available, the results are shown as interpretable multiplots.
+Authors@R: 
+    c(person(given = "Stijn", family = "Hawinkel", 
+    email = "stijn.hawinkel@psb.ugent.be", 
+    role=c("cre", "aut"), comment = c(ORCID = "0000-0002-4501-5180")))
+Description: This explorative ordination method combines quasi-likelihood estimation, compositional regression models and latent variable models for integrative visualization of several omics datasets. Both unconstrained and constrained integration are available. The results are shown as interpretable, compositional multiplots.
 License: GPL-2
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: ggplot2, nleqslv, phyloseq, tensor, stats, limma, Matrix, BB, reshape2, alabama, cobs, Biobase, vegan, grDevices, graphics, methods, SummarizedExperiment
 Suggests: 
     knitr,

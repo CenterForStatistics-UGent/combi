@@ -27,7 +27,8 @@ combi(
   dispFreq = 10L,
   allowMissingness = FALSE,
   biasReduction = TRUE,
-  maxItFeat = 20L
+  maxItFeat = 20L,
+  initPower = 1
 )
 }
 \arguments{
@@ -92,6 +93,9 @@ confounder correction in groups with all zeroes? Not guaranteed to work}
 
 \item{maxItFeat}{Integers, the maximum allowed number of iterations
 in the estimation of the feature parameters}
+
+\item{initPower}{The power to be applied to the residual matrix used to
+calculate the starting value. Must be positive; can be tweaked in case of numerical problems (i.e. infinite values returned by nleqslv)}
 }
 \value{
 An object of the "combi" class, containing all information on the

@@ -62,11 +62,11 @@ test_that("Polynomial mean-variance model works", {
 test_that("Initial value power tweaking works", {
   expect_s3_class(combi(data = list("microbiome" = zhangMicrobio,
                                     "metabo" = zhangMetabo),
-                        distributions = c("quasi", "gaussian"),
+                        distributions = c("quasi", "gaussian"), record = FALSE,
                         compositional = c(TRUE, FALSE), maxIt = 2L,
                         initPower = 0.75), "combi")
   expect_s3_class(combi(data = list("microbiome" = zhangMicrobio,
-                                    "metabo" = zhangMetabo),
+                                    "metabo" = zhangMetabo), record = FALSE,
                         distributions = c("quasi", "gaussian"),
                         compositional = c(TRUE, FALSE), maxIt = 2L,
                         initPower = 2), "combi")
