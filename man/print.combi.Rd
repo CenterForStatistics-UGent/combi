@@ -20,7 +20,7 @@ Print an overview of a fitted combi x
 }
 \examples{
 data(Zhang)
-\donttest{
+\dontrun{
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),

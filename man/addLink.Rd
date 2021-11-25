@@ -49,7 +49,7 @@ Add a link on a compositional plot
 }
 \examples{
 data(Zhang)
-\donttest{
+\dontrun{
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),

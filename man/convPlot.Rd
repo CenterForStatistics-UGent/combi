@@ -34,7 +34,7 @@ A ggplot object containing the convergence plot
 Plot the convegrence of the different parameter estimates in a line plot
 }
 \examples{
-\donttest{
+\dontrun{
 data(Zhang)
 #Unconstrained
 microMetaboInt = combi(

@@ -12,7 +12,7 @@
 #' @return A ggplot object containing the convergence plot
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' data(Zhang)
 #' #Unconstrained
 #' microMetaboInt = combi(

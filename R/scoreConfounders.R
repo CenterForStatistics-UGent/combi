@@ -1,6 +1,5 @@
 #' Score functions for confounder variables
 #'
-#' @inheritParams scoreConfoundersComp
 #' @param data,distribution,offSet,confMat,meanVarTrend
 #' Characteristics of the views
 #' @param x the parameter estimates

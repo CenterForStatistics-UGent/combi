@@ -22,7 +22,7 @@ Extract coordinates from fitted object
 }
 \examples{
 data(Zhang)
-\donttest{
+\dontrun{
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),

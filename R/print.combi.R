@@ -9,7 +9,7 @@
 #' @export
 #' @examples
 #' data(Zhang)
-#' \donttest{
+#' \dontrun{
 #' #Unconstrained
 #' microMetaboInt = combi(
 #' list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),

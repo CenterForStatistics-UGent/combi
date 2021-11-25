@@ -99,7 +99,7 @@ features as a point or density cloud, but without labels.
 }
 \examples{
 data(Zhang)
-\donttest{
+\dontrun{
 #Unconstrained
 microMetaboInt = combi(
 list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
