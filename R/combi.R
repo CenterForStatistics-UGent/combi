@@ -39,6 +39,8 @@
 #' confounder correction in groups with all zeroes? Not guaranteed to work
 #' @param maxItFeat Integers, the maximum allowed number of iterations
 #' in the estimation of the feature parameters
+#' @param initPower The power to be applied to the residual matrix used to
+#' calculate the starting value. Must be positive; can be tweaked in case of numerical problems (i.e. infinite values returned by nleqslv)
 #'
 #' @return An object of the "combi" class, containing all information on the
 #' data integration and fitting procedure
@@ -79,7 +81,7 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
                    record = TRUE, weights = NULL, fTol = 1e-5,
                    meanVarFit = "spline", maxFeats = 2e3, dispFreq = 10L,
                    allowMissingness = FALSE, biasReduction = TRUE,
-                maxItFeat = 2e1L){
+                maxItFeat = 2e1L, initPower = 1){
     #Perform checks
     stopifnot(is.numeric(M), is.logical(compositional),
               is.character(distributions), is.numeric(maxIt), is.numeric(tol),
@@ -91,6 +93,9 @@ combi = function(data, M = 2L, covariates = NULL, distributions,
               is.logical(biasReduction), is.numeric(maxItFeat))
     if(M %in% c(0L,1L) | (as.integer(M)!=M)){
         stop("Please supply non-negative integer dimension of at least 2!")
+    }
+    if(initPower<=0){
+      stop("Please provide strictly positive initPower for starting value calculation")
     }
     if(!all(vapply(FUN.VALUE = integer(1),
                    c(length(data), length(distributions), length(compositionalConf)),
@@ -384,6 +389,7 @@ switch(weights[[i]],
         }
         out
     }), f = cbind)
+    concat = abs(concat)^initPower*sign(concat)#shrink or increase residuals
     if(constrained){
         CCA = rda(X = concat, Y = covMat)$CCA
         # Redundancy analysis for starting values

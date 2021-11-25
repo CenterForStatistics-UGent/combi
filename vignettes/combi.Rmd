@@ -153,6 +153,28 @@ Influence of the different views can be investigated through
 inflPlot(microMetaboInt, samples = 1:20, plotType = "boxplot")
 ```
 
+# FAQ
+
+## Why are not all my samples shown in the constrained ordination?
+
+Confusion often arises as to why less distinct sample dots are shown than there are samples in the constrained ordination. This occurs when few, categorical constraining variables are supplied as below.
+
+```{r linFewVars, eval = FALSE}
+#Linear with only 2 variables
+microMetaboIntConstr2Vars = combi(
+     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+     logTransformGaussian = FALSE, covariates = zhangMetavars[, c("Sex", "ABX")])
+```
+
+Every constrained sample score is a linear combination of constraining variables, and in this case there are only 2x2=4 distinct sample scores possible, leading to the sample dots from the same gender and treatment to be plotted on top of each other.
+
+```{r plotFewVars}
+plot(microMetaboIntConstr2Vars, samDf = zhangMetavars, samCol = "ABX")
+```
+
+In general, it is best to include all measured sample variables in a constrained analysis, and let the combi-algorithm find out which ones are the most important drivers of variability.
+
 # Session info
 
 This vignette was generated with following version of R:
