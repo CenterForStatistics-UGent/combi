@@ -9,6 +9,7 @@ Authors@R:
 Description: This explorative ordination method combines quasi-likelihood estimation, compositional regression models and latent variable models for integrative visualization of several omics datasets. Both unconstrained and constrained integration are available. The results are shown as interpretable, compositional multiplots.
 License: GPL-2
 Encoding: UTF-8
+Depends: R (>= 4.0), DBI
 RoxygenNote: 7.1.2
 Imports: ggplot2, nleqslv, phyloseq, tensor, stats, limma, Matrix, BB, reshape2, alabama, cobs, Biobase, vegan, grDevices, graphics, methods, SummarizedExperiment
 Suggests: 
