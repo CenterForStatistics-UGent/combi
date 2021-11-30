@@ -182,7 +182,7 @@ The _combi_ method works by iteratively solving systems of non-linear equations 
  1) Tweaking the _prevCutOff_ and _minFraction_ parameters to remove more sparse features.
  2) Tweaking the _initPower_ parameter, which will lead to different starting values, and hopefully a solution path that is numerically more stable.
 
-```{r linFewVars, eval = FALSE}
+```{r Tweak, eval = FALSE}
 #Linear with only 2 variables
 microMetaboTweak = combi(
      list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
