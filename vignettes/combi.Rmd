@@ -175,6 +175,22 @@ plot(microMetaboIntConstr2Vars, samDf = zhangMetavars, samCol = "ABX")
 
 In general, it is best to include all measured sample variables in a constrained analysis, and let the combi-algorithm find out which ones are the most important drivers of variability.
 
+## The combi function crashes, what should I do
+
+The _combi_ method works by iteratively solving systems of non-linear equations through Newton-Raphson. This can lead to numerical instability, with errors like "infinite values returned by jacobian" in the _nleqslv_ function. This class of problems has no general solution, but is mainly a matter of trial and error. Following two things can be tried:
+
+ 1) Tweaking the _prevCutOff_ and _minFraction_ parameters to remove more sparse features.
+ 2) Tweaking the _initPower_ parameter, which will lead to different starting values, and hopefully a solution path that is numerically more stable.
+
+```{r linFewVars, eval = FALSE}
+#Linear with only 2 variables
+microMetaboTweak = combi(
+     list("microbiome" = zhangMicrobio, "metabolomics" = zhangMetabo),
+     distributions = c("quasi", "gaussian"), compositional = c(TRUE, FALSE),
+     logTransformGaussian = FALSE, initPower = 1.5, minFraction = 0.25, prevCutOff = 0.8)
+```
+
+
 # Session info
 
 This vignette was generated with following version of R:
