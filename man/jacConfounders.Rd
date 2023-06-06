@@ -17,15 +17,9 @@ jacConfounders(
 )
 }
 \arguments{
-\item{confMat}{Characteristics of the views}
-
-\item{data}{Characteristics of the views}
-
 \item{distribution, offSet}{distribution and offset of the view}
 
 \item{x}{the parameter estimates}
-
-\item{meanVarTrend}{Characteristics of the views}
 
 \item{libSizes, CompMat}{Library sizes and relative abunance}
 

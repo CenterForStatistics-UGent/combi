@@ -31,29 +31,19 @@ deriv2LagrangianLatentVarsConstr(
 \arguments{
 \item{x}{The current estimates of the latent variables}
 
-\item{data}{Lists of inforamtion on all the views}
-
 \item{distributions, links, compositional, meanVarTrends, offsets, numVars, paramMats, paramEsts}{Characteristics of the view}
 
 \item{latentVarsLower}{The parameter estimates of the lower dimensions}
 
 \item{nn}{number of samples}
 
-\item{m}{integeres, number of samples and dimensions}
-
 \item{Jac}{an empty jacobian matrix}
-
-\item{numSets}{Characteristics of the views}
 
 \item{numCov}{The number of covariates}
 
 \item{covMat}{the covariates matrix}
 
 \item{nLambda1s}{The number of centering restrictions}
-
-\item{varPosts}{Characteristics of the views}
-
-\item{indepModels}{Characteristics of the views}
 
 \item{...}{arguments to the jacobian function, currently ignored}
 }

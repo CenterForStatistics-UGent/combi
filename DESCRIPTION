@@ -10,7 +10,7 @@ Description: This explorative ordination method combines quasi-likelihood estima
 License: GPL-2
 Encoding: UTF-8
 Depends: R (>= 4.0), DBI
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Imports: ggplot2, nleqslv, phyloseq, tensor, stats, limma, Matrix, BB, reshape2, alabama, cobs, Biobase, vegan, grDevices, graphics, methods, SummarizedExperiment
 Suggests: 
     knitr,

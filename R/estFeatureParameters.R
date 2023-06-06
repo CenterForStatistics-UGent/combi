@@ -25,6 +25,7 @@
 #' @importFrom nleqslv nleqslv
 #' @importFrom BB BBsolve
 #' @importFrom stats rnorm
+#' @importFrom Matrix solve
 #'
 #' @return A vector with estimates of the feature parameters
 #'
@@ -38,8 +39,8 @@ estFeatureParameters = function(paramEsts, lambdasParams, seqSets, data,
             #Solve system of linear equations, variances still not needed
             diag(JacFeatures[[i]])[seq_len(numVars[[i]])] = sum(latentVars[,m]^2)
             x = c(colSums(na.rm = TRUE, latentVars[,m]*(data[[i]] - offsets[[i]])) ,integer(m))
-            sol = solve(JacFeatures[[i]], x)
-            return(list(x = sol@x, conv = 1))
+            sol = Matrix::solve(JacFeatures[[i]], x)
+            return(list(x = sol, conv = 1))
         } else {
         out = try(nleqslv(x = c(paramEsts[[i]][m,], lambdasParams[[i]][
             seqM(m, normal = compositional[[i]])]),

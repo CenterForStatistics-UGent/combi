@@ -25,13 +25,9 @@ jacLatentVars(
 \arguments{
 \item{latentVar}{the latent variable estimates}
 
-\item{data}{Characteristics of the views}
-
 \item{distribution, compositional, meanVarTrend, offSet, paramEsts, paramMats, indepModel}{Characteristics of each view}
 
 \item{n}{the number of samples}
-
-\item{varPosts}{Characteristics of the views}
 
 \item{mm}{the current dimension}
 

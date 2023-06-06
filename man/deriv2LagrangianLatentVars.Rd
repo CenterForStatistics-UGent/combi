@@ -28,8 +28,6 @@ deriv2LagrangianLatentVars(
 \arguments{
 \item{x}{The current estimates of the latent variables}
 
-\item{data}{Lists of inforamtion on all the views}
-
 \item{distributions, links, compositional, meanVarTrends, offsets, numVars, numSets, paramMats, paramEsts, varPosts, indepModels}{Characteristics of the views}
 
 \item{latentVarsLower}{The parameter estimates of the lower dimensions}
