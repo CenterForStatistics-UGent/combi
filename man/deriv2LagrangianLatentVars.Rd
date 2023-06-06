@@ -28,11 +28,11 @@ deriv2LagrangianLatentVars(
 \arguments{
 \item{x}{The current estimates of the latent variables}
 
-\item{distributions, links, compositional, meanVarTrends, offsets, numVars, numSets, paramMats, paramEsts, varPosts, indepModels}{Characteristics of the views}
+\item{distributions, links, compositional, data, meanVarTrends, offsets, numVars, numSets, paramMats, paramEsts, varPosts, indepModels}{Characteristics of the views}
 
 \item{latentVarsLower}{The parameter estimates of the lower dimensions}
 
-\item{n, m}{integeres, number of samples and dimensions}
+\item{n, m}{integers, number of samples and dimensions}
 
 \item{Jac}{an empty jacobian matrix}
 

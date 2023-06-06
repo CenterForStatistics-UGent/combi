@@ -18,6 +18,8 @@ jacConfoundersComp(
 \arguments{
 \item{x}{the parameter estimates}
 
+\item{confMat, data, meanVarTrend}{arguments belonging to views}
+
 \item{marginModel, biasReduction, subtractMax}{The marginal mode, and booleans
 indicating bias reduction and maximum subtraction}
 

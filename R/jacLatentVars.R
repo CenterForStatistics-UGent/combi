@@ -1,6 +1,6 @@
 #' Evaluate the jacobian for estimating the latent variable for one view
 #' @inheritParams scoreLatentVars
-#' @param distribution,compositional,meanVarTrend,offSet,paramEsts,paramMats,indepModel Characteristics of each view
+#' @param distribution,data,varPosts,compositional,meanVarTrend,offSet,paramEsts,paramMats,indepModel Characteristics of each view
 #' @return The diagonal of the jacobian matrix
 #' @param n the number of samples
 jacLatentVars = function(latentVar, data, distribution, paramEsts, paramMats, offSet,

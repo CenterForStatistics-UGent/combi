@@ -1,7 +1,6 @@
 #' Score functions for confounder variables
 #'
-#' @param data,distribution,offSet,confMat,meanVarTrend
-#' Characteristics of the views
+#' @param data,distribution,offSet,confMat,meanVarTrend Characteristics of the views
 #' @param x the parameter estimates
 #' @param libSizes,CompMat Library sizes and relative abunance
 #' @param allowMissingness a boolean, should missing values be allowed

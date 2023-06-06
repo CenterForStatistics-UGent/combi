@@ -17,6 +17,8 @@ jacConfounders(
 )
 }
 \arguments{
+\item{data, confMat, meanVarTrend}{Characteristics of the views}
+
 \item{distribution, offSet}{distribution and offset of the view}
 
 \item{x}{the parameter estimates}
