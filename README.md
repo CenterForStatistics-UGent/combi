@@ -29,8 +29,6 @@ cat("combi package version", as.character(packageVersion("combi")), "\n")
 
     ## combi package version 1.13.1
 
-<!-- Alternatively, the latest version can be installed directly from this GitHub repo as follows: -->
-
 ## Unconstrained integration
 
 For an unconstrained ordination, a named list of data matrices with
