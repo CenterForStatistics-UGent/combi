@@ -15,12 +15,6 @@ library(devtools)
 install_github("CenterForStatistics-UGent/combi")
 ```
 
-for R version 3.6 or lower use:
-
-```{r installcombipackage36, eval = FALSE}
-install_github("CenterForStatistics-UGent/combi", ref = ‘review’)
-```
-
 Alternatively, via BioConductor:
 
 ```{r installcombipackageBioc, eval = FALSE}
@@ -32,8 +26,6 @@ BiocManager::install("combi")
 suppressPackageStartupMessages(library(combi))
 cat("combi package version", as.character(packageVersion("combi")), "\n")
 ```
-
-<!-- Alternatively, the latest version can be installed directly from this GitHub repo as follows: -->
 
 ## Unconstrained integration
 
