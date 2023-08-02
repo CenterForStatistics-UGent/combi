@@ -1,7 +1,7 @@
 Package: combi
 Type: Package
 Title: Compositional omics model based visual integration
-Version: 1.13.1
+Version: 1.13.2
 Authors@R: 
     c(person(given = "Stijn", family = "Hawinkel", 
     email = "stijn.hawinkel@psb.ugent.be", 
